@@ -116,7 +116,7 @@ void set_OF_sub(uint32_t result, uint32_t src, uint32_t dest, size_t data_size){
 uint32_t alu_sub(uint32_t src, uint32_t dest, size_t data_size)
 {
     uint32_t res = 0; 
-    res = dest - src;
+    res = dest + ~src-1;
 
     set_CF_sub(dest, src, data_size); 
     set_PF(res); 
