@@ -16,7 +16,7 @@ void set_SF(uint32_t result, size_t data_size) {
 }
 void set_PF(uint32_t result) { // 简单暴力穷举也行
     uint32_t sum=0;
-    for(uint32_t i=1;i<256;i<<=2){
+    for(uint32_t i=1;i<256;i<<=1){
         		if(result & i)sum++;
 
     }
