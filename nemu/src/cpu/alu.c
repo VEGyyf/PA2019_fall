@@ -88,7 +88,7 @@ uint32_t alu_adc(uint32_t src, uint32_t dest, size_t data_size)
 void set_CF_sub(uint32_t dest, uint32_t src, size_t data_size) { 
     dest = sign_ext(dest & (0xFFFFFFFF >> (32 - data_size)), data_size); 
     src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size); 
-    cpu.eflags.CF = rdest<src; 
+    cpu.eflags.CF = dest<src; 
 }
 uint32_t alu_sub(uint32_t src, uint32_t dest, size_t data_size)
 {
