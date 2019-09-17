@@ -94,12 +94,12 @@ void set_OF_sub(uint32_t src, uint32_t dest, size_t data_size){
     uint32_t res=src+~dest+1;
     switch(data_size) { 
         case 8: 
-            result = sign_ext(result & 0xFF, 8); 
+            res= sign_ext(result & 0xFF, 8); 
             src = sign_ext(src & 0xFF, 8); 
             dest = sign_ext(dest & 0xFF, 8); 
             break; 
         case 16: 
-            result = sign_ext(result & 0xFFFF, 16); 
+            res= sign_ext(result & 0xFFFF, 16); 
             src = sign_ext(src & 0xFFFF, 16);   
             dest = sign_ext(dest & 0xFFFF, 16); 
             break; 
