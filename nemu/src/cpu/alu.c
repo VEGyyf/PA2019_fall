@@ -11,7 +11,7 @@ void set_ZF(uint32_t result, size_t data_size) {
 }
 // SF and OF contain information relevant to signed integers 
 void set_SF(uint32_t result, size_t data_size) { 
-    esult = sign_ext(result & (0xFFFFFFFF >> (32 - data_size)), data_size); 
+    result = sign_ext(result & (0xFFFFFFFF >> (32 - data_size)), data_size); 
     cpu.eflags.SF = sign(result); 
 }
 void set_PF(uint32_t result) { // 简单暴力穷举也行
