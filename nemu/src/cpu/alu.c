@@ -17,7 +17,8 @@ void set_SF(uint32_t result, size_t data_size) {
 void set_PF(uint32_t result) { // 简单暴力穷举也行
     uint32_t sum=0;
     for(uint32_t i=1;i<256;i<<=2){
-        sum+=result&i;
+        		if(result & i)sum++;
+
     }
     if(sum==0||sum==2||sum==4||sum==6||sum==8)
         cpu.eflags.PF=1;
