@@ -20,7 +20,7 @@ void set_PF(uint32_t result) { // 简单暴力穷举也行
         		if(result & i)sum++;
 
     }
-    if(sum==0||sum==2||sum==4||sum==6||sum==8)
+    if(sum==2||sum==4||sum==6||sum==8)
         cpu.eflags.PF=1;
     else
         cpu.eflags.PF=0;
