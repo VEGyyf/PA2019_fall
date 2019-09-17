@@ -15,16 +15,17 @@ void set_SF(uint32_t result, size_t data_size) {
     cpu.eflags.SF = sign(result); 
 }
 void set_PF(uint32_t result) { // 简单暴力穷举也行
-    result=result&0xFF;
-    uint32_t sum=0;
+    result = sign_ext(result & 0xFF, 8); 
+	uint32_t sum=0;
     for(uint32_t i=1;i<256;i<<=1){
         		if(result & i)sum++;
 
     }
-    if(sum==2||sum==4||sum==6||sum==8)
+    if(sum==0||sum==2||sum==4||sum==6||sum==8)
         cpu.eflags.PF=1;
     else
         cpu.eflags.PF=0;
+    
 }
 void set_OF_add(uint32_t result, uint32_t src, uint32_t dest, size_t data_size){
     switch(data_size) { 
