@@ -64,8 +64,9 @@ uint32_t alu_add(uint32_t src, uint32_t dest, size_t data_size)//pass
     return res & (0xFFFFFFFF >> (32 - data_size));
 }
 void set_CF_adc(uint32_t result, uint32_t src, size_t data_size) { 
+    uint32_t src_b=src;
     src+=cpu.eflags.CF;
-    if(src<(src-cpu.eflags.CF)){
+    if(src<src_b){
         cpu.eflags.CF=1;    
     }
     else{
