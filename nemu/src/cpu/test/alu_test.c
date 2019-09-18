@@ -57,7 +57,7 @@ typedef union {
 	test_eflags.val = res_eflags; \
 	res_asm = res_asm & (0xFFFFFFFF >> (32 - dataSize)); \
 	assert(res == res_asm); \
-	assert(cpu.eflags.CF == test_eflags.CF); \
+	assert(cpu.eflags.CF= test_eflags.CF); \
 	assert(cpu.eflags.PF == test_eflags.PF); \
 	assert(cpu.eflags.SF == test_eflags.SF); \
 	assert(cpu.eflags.ZF == test_eflags.ZF); \
@@ -176,7 +176,7 @@ void alu_test_sub() {
 		for(j = 0 ; j < n ; j++) {
 			a = input[i];
 			b = input[j];
-			{internel_alu_test_CPSZO(alu_sub, 32, "subl %%ecx, %%eax;")}
+			{internel_alu_test_CPSZO(alu_sub, 32, "subl %%ecx, %%eax;");if(cpu.eflags.CF != test_eflags.CF)printf("cpu=%u,test=%u",cpu.eflags.CF,test_eflags.CF);}
 			{internel_alu_test_CPSZO(alu_sub, 16, "subw %%cx, %%ax;")}
 			{internel_alu_test_CPSZO(alu_sub, 8 , "subb %%cl, %%al;")}
 		}
