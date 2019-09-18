@@ -57,7 +57,7 @@ typedef union {
 	test_eflags.val = res_eflags; \
 	res_asm = res_asm & (0xFFFFFFFF >> (32 - dataSize)); \
 	assert(res == res_asm); \
-	assert(cpu.eflags.CF= test_eflags.CF); \
+	assert(cpu.eflags.CF == test_eflags.CF); \
 	assert(cpu.eflags.PF == test_eflags.PF); \
 	assert(cpu.eflags.SF == test_eflags.SF); \
 	assert(cpu.eflags.ZF == test_eflags.ZF); \
@@ -757,3 +757,4 @@ void alu_test_div() {
 	printf("alu_test_div()  \e[0;32mpass\e[0m\n");
 	if( get_ref() ) printf("\e[0;31mYou have used reference implementations, DO NOT submit this version!\e[0m\n");
 }
+
