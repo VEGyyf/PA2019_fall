@@ -186,7 +186,7 @@ void set_OF_sbb( uint32_t res, uint32_t src, uint32_t dest, size_t data_size){
                cpu.eflags.OF = 0; 
             }
  }
-uint32_t alu_sbb(uint32_t src, uint32_t dest, size_t data_size)
+uint32_t alu_sbb(uint32_t src, uint32_t dest, size_t data_size)//pass
 {
     uint32_t res = 0; 
     res = dest - src-cpu.eflags.CF;
