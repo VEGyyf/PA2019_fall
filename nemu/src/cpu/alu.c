@@ -334,24 +334,7 @@ uint32_t alu_sar(uint32_t src, uint32_t dest, size_t data_size)
 #endif
 }
 
-// SF and OF contain information relevant to signed integers 
-void set_SF(uint32_t result, size_t data_size) { 
-    result = sign_ext(result & (0xFFFFFFFF >> (32 - data_size)), data_size); 
-    cpu.eflags.SF = sign(result); 
-}
-void set_PF(uint32_t result) { // 简单暴力穷举也行
-    result = sign_ext(result & 0xFF, 8); //保留低八位，符号拓展
-	uint32_t sum=0;
-    for(uint32_t i=1;i<256;i<<=1){
-        		if(result & i)sum++;
 
-    }
-    if(sum==0||sum==2||sum==4||sum==6||sum==8)
-        cpu.eflags.PF=1;
-    else
-        cpu.eflags.PF=0;
-    
-}
 void set_CF(uint32_t dest, uint32_t src, size_t data_size) { 
     dest = sign_ext(dest & (0xFFFFFFFF >> (32 - data_size)), data_size); 
     src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size); 
