@@ -343,16 +343,18 @@ uint32_t alu_sar(uint32_t src, uint32_t dest, size_t data_size)
 }
 
 
-void set_CF_sal(uint32_t result, uint32_t src, size_t data_size) { //overflow if 1 is moved
-    result = sign_ext(result & (0xFFFFFFFF >> (32 - data_size)), data_size); 
-    src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size); 
-    cpu.eflags.CF = dest< src; 
+void set_CF_sal(uint32_t dest, uint32_t src, size_t data_size) { //overflow if 1 is moved
+    //result = sign_ext(result & (0xFFFFFFFF >> (32 - data_size)), data_size); 
+    //src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size); 
+    //cpu.eflags.CF = dest< src; 
+    uint32_t cout=2^(datasize-src);
+    eflags.CPU.CF=((dest&cout)==0);
 }
 uint32_t alu_sal(uint32_t src, uint32_t dest, size_t data_size)
 {
     uint32_t res=0;
 	res=dest<<src;
-    set_CF_sal(res, src, data_size); 
+    set_CF_sal(dest, src, data_size); 
     set_PF(res); 
     set_ZF(res, data_size);    
     set_SF(res, data_size); 
