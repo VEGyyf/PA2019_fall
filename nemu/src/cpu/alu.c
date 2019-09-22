@@ -368,14 +368,12 @@ void set_CF(uint32_t result, uint32_t src, size_t data_size) {
 }
 uint32_t alu_sal(uint32_t src, uint32_t dest, size_t data_size)
 {
-#ifdef NEMU_REF_ALU
-	return __ref_alu_sal(src, dest, data_size);
-#else
+
     set_CF(res, src, data_size); 
     set_PF(res); 
     set_ZF(res, data_size);    
     set_SF(res, data_size); 
 	dest<<=src;
 	return dest& (0xFFFFFFFF >> (32 - data_size));
-#endif
+
 }
