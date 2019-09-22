@@ -95,7 +95,7 @@ void set_OF_adc(uint32_t result, uint32_t src, uint32_t dest, size_t data_size){
                cpu.eflags.OF = 0; 
             }
  }
-uint32_t alu_adc(uint32_t src, uint32_t dest, size_t data_size)
+uint32_t alu_adc(uint32_t src, uint32_t dest, size_t data_size)//pass
 {
     uint32_t res = 0; 
     res = dest + src+cpu.eflags.CF;
@@ -157,6 +157,31 @@ void set_CF_sbb(uint32_t result, uint32_t src, size_t data_size) {
     src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size); 
     cpu.eflags.CF = result < src; 
 }
+
+void set_OF_sbb( uint32_t res, uint32_t src, uint32_t dest, size_t data_size){
+
+    switch(data_size) { 
+        case 8: 
+            res= sign_ext(res & 0xFF, 8); 
+            src = sign_ext(src & 0xFF, 8); 
+            dest = sign_ext(dest & 0xFF, 8); 
+            break; 
+        case 16: 
+            res= sign_ext(res & 0xFFFF, 16); 
+            src = sign_ext(src & 0xFFFF, 16);   
+            dest = sign_ext(dest & 0xFFFF, 16); 
+            break; 
+            default: break;// do nothing 
+    } 
+    if(sign(src) != sign(dest)) { 
+               if(sign(src) == sign(res) )
+                            cpu.eflags.OF = 1; 
+               else 
+                            cpu.eflags.OF = 0;
+    } else { 
+               cpu.eflags.OF = 0; 
+            }
+ }
 uint32_t alu_sbb(uint32_t src, uint32_t dest, size_t data_size)
 {
     uint32_t res = 0; 
@@ -167,7 +192,7 @@ uint32_t alu_sbb(uint32_t src, uint32_t dest, size_t data_size)
     // set_AF();  我们不模拟AF 
     set_ZF(res, data_size);    
     set_SF(res, data_size); 
-    set_OF_sub(res,src, dest, data_size);
+    set_OF_sbb(res,src, dest, data_size);
     return res & (0xFFFFFFFF >> (32 - data_size));
 }
 
