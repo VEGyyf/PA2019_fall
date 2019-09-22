@@ -152,10 +152,14 @@ uint32_t alu_sub(uint32_t src, uint32_t dest, size_t data_size)//pass
     set_OF_sub(res,src, dest, data_size);
     return res & (0xFFFFFFFF >> (32 - data_size));
 }
-void set_CF_sbb(uint32_t result, uint32_t src, size_t data_size) { 
-    result = sign_ext(result & (0xFFFFFFFF >> (32 - data_size)), data_size); 
-    src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size); 
-    cpu.eflags.CF = result < src; 
+void set_CF_sbb(uint32_t dest, uint32_t src, size_t data_size) { 
+    uint32_t src_b=src;
+    src+=cpu.eflags.CF;
+    dest = sign_ext(dest& (0xFFFFFFFF>> (32 - data_size)), data_size); 
+    src = sign_ext(src & (0xFFFFFFFF>> (32 - data_size)), data_size); 
+    src_b = sign_ext(src_b & (0xFFFFFFFF>> (32 - data_size)), data_size); 
+    if(src_b>src){cpu.eflags.CF = 1;return;}//judge whether src+flag overflow.CAUTION!If so,return right away!
+    cpu.eflags.CF = dest < src; 
 }
 
 void set_OF_sbb( uint32_t res, uint32_t src, uint32_t dest, size_t data_size){
