@@ -348,7 +348,7 @@ void set_CF_sal(uint32_t dest, uint32_t src, size_t data_size) { //overflow if 1
     //src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size); 
     //cpu.eflags.CF = dest< src; 
     uint32_t cout=2^(datasize-src);
-    eflags.CPU.CF=((dest&cout)==0);
+    cpu.eflags.CF=((dest&cout)==0);
 }
 uint32_t alu_sal(uint32_t src, uint32_t dest, size_t data_size)
 {
