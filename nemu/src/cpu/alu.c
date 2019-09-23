@@ -319,14 +319,17 @@ uint32_t alu_shl(uint32_t src, uint32_t dest, size_t data_size)//pass
    	return res & (0xFFFFFFFF >> (32 - data_size));
 }
 void set_CF_shr(uint32_t dest, uint32_t src, size_t data_size) { 
-    dest = sign_ext(dest & (0xFFFFFFFF >> (32 - data_size)), data_size); 
-    src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size); 
-    cpu.eflags.CF = dest< src; 
+    uint32_t flag=1;
+    for(uint32_t i=0;i<src;i++)//count = 第src位（即移出到CF那一位）为1，其余为0
+        flag<<=1;
+    uint32_t judge=dest&flag;
+    judge>>=data_size-src; 
+    cpu.eflags.CF = judge; 
 }
 uint32_t alu_shr(uint32_t src, uint32_t dest, size_t data_size)
 {
     uint32_t res=dest>>src;
-    set_CF_shr(res, src, data_size); 
+    set_CF_shr(dest, src, data_size); 
     set_PF(res); 
     set_ZF(res, data_size);    
     set_SF(res, data_size); 
