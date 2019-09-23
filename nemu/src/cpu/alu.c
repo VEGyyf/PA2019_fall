@@ -339,7 +339,7 @@ uint32_t alu_shr(uint32_t src, uint32_t dest, size_t data_size)//pass
     return res & (0xFFFFFFFF >> (32 - data_size));
 }
 void set_CF_sar(uint32_t dest, uint32_t src, size_t data_size) { 
-    uint32_t flag=1;
+    int32_t flag=1;
     for(uint32_t i=0;i<src-1;i++)//count = 第src位（即移出到CF那一位）为1，其余为0
         flag<<=1;
     uint32_t judge=dest&flag;
