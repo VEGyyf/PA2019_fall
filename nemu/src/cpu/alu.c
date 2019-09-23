@@ -323,7 +323,7 @@ void set_CF_shr(uint32_t dest, uint32_t src, size_t data_size) {
     for(uint32_t i=0;i<src-1;i++)//count = 第src位（即移出到CF那一位）为1，其余为0
         flag<<=1;
     uint32_t judge=dest&flag;
-    judge>>=data_size-src; 
+    judge>>=src-1; 
     cpu.eflags.CF = judge; 
 }
 uint32_t alu_shr(uint32_t src, uint32_t dest, size_t data_size)
