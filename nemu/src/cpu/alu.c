@@ -271,7 +271,7 @@ int32_t alu_imod(int64_t src, int64_t dest)
 uint32_t alu_and(uint32_t src, uint32_t dest, size_t data_size)
 {
     uint32_t res=0;
-    res=dest&res;
+    res=dest&src;
     cpu.eflags.OF=0;
     cpu.eflags.CF=0;
     set_PF(res); 
