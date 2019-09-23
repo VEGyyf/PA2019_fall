@@ -330,7 +330,7 @@ uint32_t alu_shr(uint32_t src, uint32_t dest, size_t data_size)
 {
     uint32_t res=0;
     dest = sign_ext(dest & (0xFFFFFFFF >> (32 - data_size)), data_size); 
-    //src  = src &(0xFFFFFFFF >> (32 - data_size)); 
+    src  = src &(0xFFFFFFFF >> (32 - data_size)); 
     res=dest>>src;
     set_CF_shr(dest, src, data_size); 
     set_PF(res); 
