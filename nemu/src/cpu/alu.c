@@ -347,13 +347,13 @@ uint32_t alu_sar(uint32_t src, uint32_t dest, size_t data_size)
 }
 
 
-void set_CF_sal(uint32_t dest, uint32_t res, size_t data_size) { //overflow if 1 is moved
-    //result = sign_ext(result & (0xFFFFFFFF >> (32 - data_size)), data_size); 
-    //src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size); 
+void set_CF_sal(uint32_t dest, uint32_t src, size_t data_size) { //overflow if 1 is moved
+    result = sign_ext(result & (0xFFFFFFFF >> (32 - data_size)), data_size); 
+    src = sign_ext(src & (0xFFFFFFFF >> (32 - data_size)), data_size); 
     //cpu.eflags.CF = dest< src; 
     //uint32_t cout=2^(data_size-src);
     //uint32_t judge=sign(dest&cout);
-    cpu.eflags.CF=(sign(dest)!=sign(res));
+    cpu.eflags.CF=(sign(dest)!=sign(src));
 }
 uint32_t alu_sal(uint32_t src, uint32_t dest, size_t data_size)
 {
