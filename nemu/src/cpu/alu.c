@@ -230,6 +230,7 @@ void set_OF_mul(uint32_t result, uint32_t src, uint32_t dest, size_t data_size){
 uint64_t alu_mul(uint32_t src, uint32_t dest, size_t data_size)
 {
     uint64_t res=src*dest;
+    res = sign_ext(rers & 0xFFFF, 64); 
     set_OF_mul(res, src, dest, data_size);
     set_CF_mul(res, src, data_size); 
     return res;
