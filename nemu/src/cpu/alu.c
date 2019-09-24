@@ -199,7 +199,7 @@ uint32_t alu_sbb(uint32_t src, uint32_t dest, size_t data_size)//pass
     set_OF_sbb(res,src, dest, data_size);
     return res & (0xFFFFFFFF >> (32 - data_size));
 }
-void set_CF_mul(uint32_t result, uint32_t src, size_t data_size) { 
+void set_CF_mul(uint64_t result, uint32_t src, size_t data_size) { 
     switch(data_size){
         case 8:
             result>>=8;
@@ -207,9 +207,10 @@ void set_CF_mul(uint32_t result, uint32_t src, size_t data_size) {
         case 16:
             result>>=16;
             break;
-        default:
+        case 32:
             result>>=32;
-            break;    
+            break;
+        default:break;    
     }
     if(result==0)cpu.eflags.CF = 0;
     else cpu.eflags.CF = 1;  
