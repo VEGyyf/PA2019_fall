@@ -251,7 +251,7 @@ int64_t alu_imul(int32_t src, int32_t dest, size_t data_size)
 // need to implement alu_mod before testing
 uint32_t alu_div(uint64_t src, uint64_t dest, size_t data_size)
 {
-    if(src==0)return false;
+    if(!src)return false;
     uint32_t res=dest/src;
     return res & (0xFFFFFFFF >> (32 - data_size));
 }
