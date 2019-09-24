@@ -216,7 +216,7 @@ void set_CF_mul(uint64_t result, size_t data_size) {
     else cpu.eflags.CF = 1;  
 }
 
-uint64_t alu_mul(uint32_t src, uint32_t dest, size_t data_size)
+uint64_t alu_mul(uint32_t src, uint32_t dest, size_t data_size)//pass
 {   
     uint64_t dest_ext = (uint64_t)(dest& (0xFFFFFFFF >> (32 - data_size)));
     uint64_t src_ext = (uint64_t)(src& (0xFFFFFFFF >> (32 - data_size))); 
