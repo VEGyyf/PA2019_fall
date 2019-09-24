@@ -236,7 +236,7 @@ int64_t alu_imul(int32_t src, int32_t dest, size_t data_size)//pass
 }
 
 // need to implement alu_mod before testing
-uint32_t alu_div(uint64_t src, uint64_t dest, size_t data_size)
+uint32_t alu_div(uint64_t src, uint64_t dest, size_t data_size)//pass
 {
     if(!src)return false;
     uint32_t res=dest/src;
@@ -244,7 +244,7 @@ uint32_t alu_div(uint64_t src, uint64_t dest, size_t data_size)
 }
 
 // need to implement alu_imod before testing
-int32_t alu_idiv(int64_t src, int64_t dest, size_t data_size)
+int32_t alu_idiv(int64_t src, int64_t dest, size_t data_size)//pass
 {
     if(!src)return false;
     int32_t res=dest/src;
