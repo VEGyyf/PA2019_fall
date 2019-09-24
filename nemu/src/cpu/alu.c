@@ -231,7 +231,7 @@ uint64_t alu_mul(uint32_t src, uint32_t dest, size_t data_size)
 {   
     src=sign_ext_64(src&0xFFFFFFFF , 32); 
     dest=sign_ext_64(dest&0xFFFFFFF , 32); 
-    uint64_t res=dest_ext*src_ext;
+    uint64_t res=dest*src;
     //res = sign_ext_64(res & 0xFFFFFFFF, 32); 
     set_OF_mul(res, src, dest, data_size);
     set_CF_mul(res, src, data_size); 
