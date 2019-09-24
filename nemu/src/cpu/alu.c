@@ -244,9 +244,9 @@ void set_CF_imul(uint64_t result, size_t data_size) {
 }
 int64_t alu_imul(int32_t src, int32_t dest, size_t data_size)
 {
-    uint64_t dest_ext = (uint64_t)(dest& (0xFFFFFFFF >> (32 - data_size)));
-    uint64_t src_ext = (uint64_t)(src& (0xFFFFFFFF >> (32 - data_size))); 
-    uint64_t res=dest_ext*src_ext;
+    int64_t dest_ext = sign_ext_64(dest& (0xFFFFFFFF >> (32 - data_size)));
+    int64_t src_ext = sign_ext_64(src& (0xFFFFFFFF >> (32 - data_size))); 
+    int64_t res=dest_ext*src_ext;
     //set_OF_mul(res, src, dest, data_size);
     set_CF_imul(res, data_size); 
    cpu.eflags.OF=cpu.eflags.CF;
