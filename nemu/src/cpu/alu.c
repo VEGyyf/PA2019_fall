@@ -199,7 +199,7 @@ uint32_t alu_sbb(uint32_t src, uint32_t dest, size_t data_size)//pass
     set_OF_sbb(res,src, dest, data_size);
     return res & (0xFFFFFFFF >> (32 - data_size));
 }
-void set_CF_mul(uint64_t result, uint32_t src, size_t data_size) { 
+void set_CF_mul(uint64_t result, size_t data_size) { 
     switch(data_size){
         case 8:
             result>>=8;
@@ -215,37 +215,15 @@ void set_CF_mul(uint64_t result, uint32_t src, size_t data_size) {
     if(result==0)cpu.eflags.CF = 0;
     else cpu.eflags.CF = 1;  
 }
-void set_OF_mul(uint32_t result, uint32_t src, uint32_t dest, size_t data_size){
-    switch(data_size) { 
-        case 8: 
-            result = sign_ext(result & 0xFF, 8); 
-            src = sign_ext(src & 0xFF, 8); 
-            dest = sign_ext(dest & 0xFF, 8); 
-            break; 
-        case 16: 
-            result = sign_ext(result & 0xFFFF, 16); 
-            src = sign_ext(src & 0xFFFF, 16);   
-            dest = sign_ext(dest & 0xFFFF, 16); 
-            break; 
-            default: break;// do nothing 
-    } 
-    if(sign(src) == sign(dest)) { 
-               if(sign(src) != sign(result)) 
-                            cpu.eflags.OF = 1; 
-               else 
-                            cpu.eflags.OF = 0;
-    } else { 
-               cpu.eflags.OF = 0; 
-            }
- }
 
 uint64_t alu_mul(uint32_t src, uint32_t dest, size_t data_size)
 {   
     uint64_t dest_ext = (uint64_t)(dest& (0xFFFFFFFF >> (32 - data_size)));
     uint64_t src_ext = (uint64_t)(src& (0xFFFFFFFF >> (32 - data_size))); 
     uint64_t res=dest_ext*src_ext;
-    set_OF_mul(res, src, dest, data_size);
-    set_CF_mul(res, src, data_size); 
+    //set_OF_mul(res, src, dest, data_size);
+    set_CF_mul(res, data_size); 
+   cpu.eflags.OF=cpu.eflags.CF;
    return res;
 }
 
