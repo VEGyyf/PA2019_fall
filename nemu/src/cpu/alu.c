@@ -235,7 +235,8 @@ uint64_t alu_mul(uint32_t src, uint32_t dest, size_t data_size)
     //res = sign_ext_64(res & 0xFFFFFFFF, 32); 
     set_OF_mul(res, src, dest, data_size);
     set_CF_mul(res, src, data_size); 
-   return res & (0xFFFFFFFFFFFFFFFF >> (64- data_size));
+    return res & (0xFFFFFFFF >> (32 - data_size));
+   //return res & (0xFFFFFFFFFFFFFFFF >> (64- data_size));
 }
 
 int64_t alu_imul(int32_t src, int32_t dest, size_t data_size)
