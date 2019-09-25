@@ -111,11 +111,11 @@ uint32_t internal_float_add(uint32_t b, uint32_t a)
 		if (a == corner_add[i].a && b == corner_add[i].b)
 			return corner_add[i].res;
 	}
-	if (a == P_ZERO_F || a == N_ZERO_F)
+	if (a == P_ZERO_F || a == N_ZERO_F)//a==+-0
 	{
 		return b;
 	}
-	if (b == P_ZERO_F || b == N_ZERO_F)
+	if (b == P_ZERO_F || b == N_ZERO_F)//b==+-0
 	{
 		return a;
 	}
@@ -133,7 +133,7 @@ uint32_t internal_float_add(uint32_t b, uint32_t a)
 		return b;
 	}
 
-	if (fa.exponent > fb.exponent)
+	if (fa.exponent > fb.exponent)//对阶,默认b为大的
 	{
 		fa.val = b;
 		fb.val = a;
