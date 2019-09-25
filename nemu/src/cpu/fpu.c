@@ -28,7 +28,9 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 		if (exp >= 0xff)//阶码上溢
 		{
 			/* TODO: assign the number to infinity */
-			
+			if(sign)sig_grs=0;//n_inf.val;
+            else sig_grs=0;//p_inf.val;
+                exp=0xff;
 			overflow = true;
 		}
 		if (exp == 0)
