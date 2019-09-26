@@ -11,7 +11,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 
 	// normalization
 	bool overflow = false; // true if the result is INFINITY or 0 during normalize
-
+    uint32_t sticky = 0;
 	if ((sig_grs >> (23 + 3)) > 1 || exp < 0)
 	{
 		// normalize toward right
@@ -22,15 +22,18 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 		{
 
 			/* TODO: shift right, pay attention to sticky bit*/
-			sig_grs>>=1;
+  
+		    sticky = sticky | (sig_grs & 0x1);
+		    sig_grs = sig_grs >> 1;
+		    sig_grs |= sticky;              
+            exp++;
 		}
 
 		if (exp >= 0xff)//阶码上溢
 		{
 			/* TODO: assign the number to infinity */
-			if(sign)sig_grs=0;//n_inf.val;
-            else sig_grs=0;//p_inf.val;
-                exp=0xff;
+			sig_grs=0;
+            exp=0xff;
 			overflow = true;
 		}
 		if (exp == 0)
@@ -38,14 +41,16 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 			// we have a denormal here, the exponent is 0, but means 2^-126,
 			// as a result, the significand should shift right once more
 			/* TODO: shift right, pay attention to sticky bit*/
-			printf("\e[0;31mPlease implement me at fpu.c\e[0m\n");
-			assert(0);
+			sticky = sticky | (sig_grs & 0x1);
+		    sig_grs = sig_grs >> 1;
+		    sig_grs |= sticky;    
+            //exp++;//?
 		}
 		if (exp < 0)
 		{
 			/* TODO: assign the number to zero */
-			printf("\e[0;31mPlease implement me at fpu.c\e[0m\n");
-			assert(0);
+			sig_grs=0;
+            exp=0;
 			overflow = true;
 		}
 	}
@@ -55,15 +60,17 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 		while (((sig_grs >> (23 + 3)) == 0) && exp > 0)
 		{
 			/* TODO: shift left */
-			printf("\e[0;31mPlease implement me at fpu.c\e[0m\n");
-			assert(0);
+			sig_grs<<=1;
+            exp--;
 		}
 		if (exp == 0)
 		{
 			// denormal
 			/* TODO: shift right, pay attention to sticky bit*/
-			printf("\e[0;31mPlease implement me at fpu.c\e[0m\n");
-			assert(0);
+			sticky = sticky | (sig_grs & 0x1);
+		    sig_grs = sig_grs >> 1;
+		    sig_grs |= sticky;     
+            //exp++;//?
 		}
 	}
 	else if (exp == 0 && sig_grs >> (23 + 3) == 1)
@@ -75,8 +82,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 	if (!overflow)
 	{
 		/* TODO: round up and remove the GRS bits */
-		printf("\e[0;31mPlease implement me at fpu.c\e[0m\n");
-		assert(0);
+		
 	}
 
 	FLOAT f;
