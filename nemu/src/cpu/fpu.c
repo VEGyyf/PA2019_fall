@@ -82,7 +82,13 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
 	if (!overflow)
 	{
 		/* TODO: round up and remove the GRS bits */
-		
+		uint32_t grs=(uint32_t)(sig_grs&0x7);
+        uint32_t LSB=(uint32_t)(sig_grs&0x8); 
+        if(grs>4){sig_grs>>=3;sig_grs++;}
+        else if(grs<4){sig_grs>>=3;}
+        else if(grs==4){
+        
+        }
 	}
 
 	FLOAT f;
