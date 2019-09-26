@@ -87,6 +87,7 @@ inline uint32_t internal_normalize(uint32_t sign, int32_t exp, uint64_t sig_grs)
         LSB>>=3;
         sig_grs>>=3;
         if((grs>4)||(grs==4&&LSB==1)){sig_grs++;}
+        
 	}
 
 	FLOAT f;
