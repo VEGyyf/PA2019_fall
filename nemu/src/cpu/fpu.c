@@ -318,7 +318,7 @@ CORNER_CASE_RULE corner_div[] = {
 	{N_INF_F, N_INF_F, N_NAN_F},
 };
 // a / b
-uint32_t internal_float_div(uint32_t b, uint32_t a)
+uint32_t internal_float_div(uint32_t b, uint32_t a)//pass
 {
 
 	int i = 0;
