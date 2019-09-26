@@ -256,7 +256,7 @@ CORNER_CASE_RULE corner_mul[] = {
 };
 
 // a * b
-uint32_t internal_float_mul(uint32_t b, uint32_t a)
+uint32_t internal_float_mul(uint32_t b, uint32_t a)//pass
 {
 	int i = 0;
 	for (; i < sizeof(corner_mul) / sizeof(CORNER_CASE_RULE); i++)
