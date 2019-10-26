@@ -11,7 +11,7 @@ static void instr_execute_1op()
 	cpu.esp+=4;
 }
 
-make_instr_impl_1op(pop, rm, v)
+make_instr_impl_1op(pop, r, v)
 make_instr_impl_1op(pop, i, v)
 make_instr_impl_1op(pop, i, b)
 
