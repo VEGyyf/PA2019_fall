@@ -1,11 +1,11 @@
 #ifndef __INSTR_XOR_H__
 #define __INSTR_XOR_H__
 
-make_instr_func(xor, r, rm, b)
-make_instr_func(xor, r, rm, v)
-make_instr_func(xor, rm, r, b)
-make_instr_func(xor, rm, r, v)
-make_instr_func(xor,i,a,b)
-make_instr_func(xor,i,a,v)
+make_instr_func(xor_r2rm_b)
+make_instr_func(xor_r2rm_v)
+make_instr_func(xor_rm2r_b)
+make_instr_func(xor_rm2r_v)
+make_instr_func(xor_i2a_b)
+make_instr_func(xor_i2a_v)
 
 #endif
