@@ -2,7 +2,7 @@
 
 static void instr_execute_1op() 
 {
-    //OPERAND res;  
+   
 	operand_read(&opr_src);
 	cpu.esp-=4;
     opr_dest.type=OPR_MEM;
