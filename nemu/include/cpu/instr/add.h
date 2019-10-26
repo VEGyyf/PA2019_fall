@@ -1,11 +1,11 @@
 #ifndef __INSTR_ADD_H__
 #define __INSTR_ADD_H__
 
-make_instr_func(add, r, rm, b);
-make_instr_func(add, r, rm, v);
-make_instr_func(add, rm, r, b);
-make_instr_func(add, rm, r, v);
-make_instr_func(add, i, a, b);
-make_instr_func(add, i, a, v);
+make_instr_func(add_r2m_b);
+make_instr_func(add_r2rm_v);
+make_instr_func(add_rm2r_b);
+make_instr_func(add_rm2r_v);
+make_instr_func(add_i2a_b);
+make_instr_func(add_i2a_v);
 
 #endif
