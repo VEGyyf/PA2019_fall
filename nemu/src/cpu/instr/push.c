@@ -5,8 +5,8 @@ static void instr_execute_1op()
     //OPERAND res;  
 	operand_read(&opr_src);
 	cpu.esp-=4;
-    opr_desr.addr=esp;
-    opr_dest.val=opr.src.val;
+    opr_desr.addr=cpu.esp;
+    opr_dest.val=opr_src.val;
     operand_write(&opr_dest);
 }
 
