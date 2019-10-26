@@ -30,4 +30,5 @@ extern uint8_t data_size;
 #include "cpu/instr/and.h"
 #include "cpu/instr/sub.h"
 #include "cpu/instr/xor.h"
+#include "cpu/instr/push.h"
 #endif
