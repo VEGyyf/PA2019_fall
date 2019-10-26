@@ -3,7 +3,8 @@
 static void instr_execute_1op() 
 {
    //OPERAND src, res;  
-	//operand_read(&opr_src);
+	operand_read(&opr_src);
+    opr_dest.addr=opr_src.addr;
     opr_src.addr=esp;
     opr_dest.val=opr_rc.val;
     operand_write(&opr_dest);
