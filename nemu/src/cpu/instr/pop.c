@@ -3,11 +3,11 @@
 static void instr_execute_1op() 
 {
    //OPERAND src, res;  
-	operand_read(&opr_src);
-	cpu.esp-=4;
-    opr_dest.addr=esp;
+	//operand_read(&opr_src);
+    opr_src.addr=esp;
     opr.dest.val=opr.src.val;
     operand_write(&opr_dest);
+	cpu.esp+=4;
 }
 
 make_instr_impl_1op(pop, r, v)
