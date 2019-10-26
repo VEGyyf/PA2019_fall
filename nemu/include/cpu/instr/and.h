@@ -1,11 +1,11 @@
 #ifndef __INSTR_AND_H__
 #define __INSTR_AND_H__
 
-make_instr_func(and, r, rm, b);
-make_instr_func(and, r, rm, v);
-make_instr_func(and, rm, r, b);
-make_instr_func(and, rm, r, v);
-make_instr_func(and, i, a, b);
-make_instr_func(and, i, a, v);
+make_instr_func(and_r2rm_b);
+make_instr_func(and_r2rm_v);
+make_instr_func(and_rm2r_b);
+make_instr_func(and_rm2r_v);
+make_instr_func(and_i2a_b);
+make_instr_func(and_i2a_v);
 
 #endif
