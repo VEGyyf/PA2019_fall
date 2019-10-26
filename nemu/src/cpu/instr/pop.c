@@ -3,9 +3,10 @@
 static void instr_execute_1op() 
 {
    //OPERAND src, res;  
-	//operand_read(&opr_src);//zhidingdezhandanyuan
+
     opr_dest.type=OPR_MEM;
     opr_dest.addr=cpu.esp;
+	operand_read(&opr_dest);//zhidingdezhandanyuan
     opr_src.val=opr_de.val;
     operand_write(&opr_src);
 	cpu.esp+=4;
