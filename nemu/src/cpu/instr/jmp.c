@@ -29,11 +29,11 @@ make_instr_func(jmp_far_imm)//TODO:change CS
 
         operand_read(&rel);
 
-        int offset = sign_ext(rel.val, data_size);
+        //int offset = sign_ext(rel.val, data_size);
         // thank Ting Xu from CS'17 for finding this bug
         print_asm_1("jmp", "", 1 + data_size / 8, &rel);
 
-        cpu.eip += offset;
+        cpu.eip += rel.val;
 
         return 1 + data_size / 8;
 }
