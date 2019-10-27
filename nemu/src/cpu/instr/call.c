@@ -2,15 +2,11 @@
 
 make_instr_func(call_near)
 {
-        /*OPERAND ret_addr;
-        ret_addr.type=OPR_IMM;
-        ret_addr.addr=eip;
-        operand_read(&ret_addr);*/
         cpu.esp-=4;
         opr_dest.type=OPR_MEM;
         opr_dest.addr=cpu.esp;
         opr_dest.val=eip+5;
-        operand_write(&opr_dest);
+        operand_write(&opr_dest);//push ret_addr
 
         OPERAND rel;
         rel.type = OPR_IMM;
