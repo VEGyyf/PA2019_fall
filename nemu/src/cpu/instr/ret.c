@@ -10,7 +10,7 @@ make_instr_func(ret_near)
     opr_src.val=opr_dest.val;
     operand_write(&opr_src);
     cpu.esp+=4;
-    //cpu.eip=opr_dest.val;
+    cpu.eip=opr_dest.val;
     return 0 ;//the length of opr=0
 }
 
