@@ -24,7 +24,7 @@ make_instr_func(jmp_far_imm)//TODO:change CS
         OPERAND rel;
         rel.type = OPR_IMM;
         rel.sreg = SREG_CS;
-        rel.data_size = data_size;
+        rel.data_size = 8;
         rel.addr = eip + 1;
 
         operand_read(&rel);
