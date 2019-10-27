@@ -9,7 +9,7 @@ make_instr_func(call_near)
         cpu.esp-=4;
         opr_dest.type=OPR_MEM;
         opr_dest.addr=cpu.esp;
-        opr_dest.val=opr_ret_addr.val;
+        opr_dest.val=ret_addr.val;
         operand_write(&opr_dest);
 
         OPERAND rel;
