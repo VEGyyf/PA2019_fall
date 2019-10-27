@@ -5,6 +5,7 @@ static void instr_execute_1op()
    
 	operand_read(&opr_src);
 	cpu.esp-=4;
+    opr_dest.data_size=32;
     opr_dest.type=OPR_MEM;
     opr_dest.addr=cpu.esp;
     opr_dest.val=opr_src.val;
