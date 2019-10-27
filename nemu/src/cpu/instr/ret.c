@@ -23,4 +23,21 @@ make_instr_func(ret_near)
 
         return 1 + data_size / 8;//=jmp,跳转到指定地址
 }
+/*
+pop:
+static void instr_execute_1op() 
+{
+   //OPERAND src, res;  
 
+    opr_dest.type=OPR_MEM;
+    opr_dest.addr=cpu.esp;
+	operand_read(&opr_dest);//zhidingdezhandanyuan
+    opr_src.val=opr_dest.val;
+    operand_write(&opr_src);
+	cpu.esp+=4;
+}
+
+make_instr_impl_1op(pop, r, v)
+make_instr_impl_1op(pop, i, v)
+make_instr_impl_1op(pop, i, b)
+*/
