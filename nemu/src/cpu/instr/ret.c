@@ -11,7 +11,7 @@ make_instr_func(ret_near)
     operand_write(&opr_src);
     cpu.esp+=4;*/
     eip=opr_dest.val;
-    return 1 ;//the length of opr=1
+    return 0 ;//the length of opr=1
 }
 /*
 pop:
