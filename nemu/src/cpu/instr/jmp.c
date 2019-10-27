@@ -54,5 +54,5 @@ make_instr_func(jmp_short)
 
         cpu.eip += rel.val;
 
-        return 1 + data_size / 8;
+        return 2;
 }
