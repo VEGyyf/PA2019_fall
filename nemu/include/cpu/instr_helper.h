@@ -206,16 +206,16 @@ static inline bool inv_cc();
 	cpu.eflags.SF==0
 
 #define condition_g \
-	cpu.eflags.SF==cpu.eflags.OF&&cpu.eflags.cpu.eflags.ZF==0
+	cpu.eflags.SF==cpu.eflags.OF&&cpu.eflags.ZF==0
 
 #define condition_ge \
-	cpu.eflags.SF==cpu.eflags.OF||pu.eflags.cpu.eflags.ZF
+	cpu.eflags.SF==cpu.eflags.OF||cpu.eflags.ZF
 
 #define condition_l \
-	cpu.eflags.SF!=cpu.eflags.OF&&cpu.eflags.cpu.eflags.ZF==0
+	cpu.eflags.SF!=cpu.eflags.OF&&cpu.eflags.ZF==0
 
 #define condition_le \
-	cpu.eflags.SF!=cpu.eflags.OF||cpu.eflags.cpu.eflags.ZF
+	cpu.eflags.SF!=cpu.eflags.OF||cpu.eflags.ZF
 
 #define condition_ecxz \
 	cpu.ecx == 0
