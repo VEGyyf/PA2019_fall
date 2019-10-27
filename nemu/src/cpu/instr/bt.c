@@ -7,4 +7,4 @@ static void instr_execute_2op()
 	cpu.eflags.CF = (opr_dest.val >> opr_src.val) & 0x1;
 }
 
-make_instr_impl_2op(bt, r, rm, v);
+make_instr_impl_2op(bt, r, rm, v)
