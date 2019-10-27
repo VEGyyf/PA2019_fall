@@ -2,7 +2,7 @@
 
 static void instr_execute_1op() 
 {
-   opr_src.val=
+   opr_src.val=alu_add(1,opr_src.val,opr_dest.data_size);
 	
 }
 
