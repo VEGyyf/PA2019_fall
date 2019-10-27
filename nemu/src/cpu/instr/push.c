@@ -16,6 +16,4 @@ make_instr_impl_1op(push, r, v)
 make_instr_impl_1op(push, i, v)
 make_instr_impl_1op(push, i, b)
 make_instr_impl_1op(push, rm, v)
-/*#define decode_operand_r    \
-	opr_src.type = OPR_REG; \
-	opr_src.addr = opcode & 0x7;*/
+
