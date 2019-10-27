@@ -51,5 +51,9 @@ extern uint8_t data_size;
 #include "cpu/instr/setcc.h"
 #include "cpu/instr/stos.h"
 #include "cpu/instr/movs.h"
+#include "cpu/instr/bt.h"
+#include "cpu/instr/cbw.h"
+#include "cpu/instr/cmov.h"
+#include "cpu/instr/nop.h"
 
 #endif
