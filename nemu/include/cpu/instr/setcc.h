@@ -1,3 +1,6 @@
+#ifndef __INSTR_SETCC_H__
+#define __INSTR_SETCC_H__
+
 make_instr_impl_1op_cc(setne_b);
 make_instr_impl_1op_cc(seta_b);
 make_instr_impl_1op_cc(setae_b);
@@ -13,4 +16,6 @@ make_instr_impl_1op_cc(setnp_b);
 make_instr_impl_1op_cc(setns_b);
 make_instr_impl_1op_cc(seto_b);
 make_instr_impl_1op_cc(setp_b);
-make_instr_impl_1op_cc(sets_b));
+make_instr_impl_1op_cc(sets_b);
+
+#endif
