@@ -2,11 +2,12 @@
 
 make_instr_func(lea)
 {
-       opr_src.data_size = opr_dest.data_size = data_size; // 指定操作数长度 
+       OPERAND src,dest;
+       src.data_size = dest.data_size = data_size; // 指定操作数长度 
        int len = 1;
-       len += modrm_r_rm(eip + 1,  &opr_dest, &opr_src); // 操作数寻址
-       opr_dest.val = opr_src.addr; 
-       operand_write(&opr_dest);
+       len += modrm_r_rm(eip + 1,  &dest, &src); // 操作数寻址
+       dest.val = src.addr; 
+       operand_write(&dest);
        return len;
 }
 /* 
