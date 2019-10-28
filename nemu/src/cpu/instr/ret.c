@@ -27,4 +27,5 @@ make_instr_func(ret_near_imm16)
     cpu.eip=opr_dest.val;
     cpu.esp+=4;
     cpu.esp+=imm.val;
+    return imm.val;
 }
