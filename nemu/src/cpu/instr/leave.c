@@ -15,8 +15,8 @@ make_instr_func(leave)
 	dest.val = src.val;
 	operand_write(&dest);                                                                                                 
 	operand_read(&dest);
-    cpu.ebp=dest.val;
-    //operand_write(&src);
+    src.val=dest.val;
+    operand_write(&src);
 	cpu.esp+=4;    
      print_asm_0("leave","",len);                                                                                                     
     return len;     
