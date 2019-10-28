@@ -6,6 +6,7 @@ make_instr_func(leave)
     cpu.esp=cpu.ebp;//mov ebp, esp    
      
     OPERAND dest;
+    dest.data_size=data_size;
     dest.type=OPR_MEM;
     dest.addr=cpu.esp;
    
