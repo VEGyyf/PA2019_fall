@@ -16,7 +16,7 @@ make_instr_func(jmp_near)
 
         cpu.eip += offset;
 
-        return data_size / 8;//delete 1+
+        return 1 + data_size / 8;
 }
 
 make_instr_func(jmp_far_imm)//TODO:change CS
