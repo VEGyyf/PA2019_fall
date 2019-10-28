@@ -9,9 +9,9 @@ make_instr_func(leave)
     src.data_size=dest.data_size=data_size;
     src.addr=cpu.ebp;
     dest.addr=cpu.esp;
-    operand_read(src);
+    operand_read(&src);
 	dest.val = src.val;
-	operand_write(dest);                                                                                                 \
+	operand_write(&dest);                                                                                                 \
 	opr_dest.data_size=data_size;// pop ebp;
     opr_dest.type=OPR_MEM;
     opr_dest.addr=cpu.esp;
