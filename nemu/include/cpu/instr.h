@@ -57,5 +57,6 @@ extern uint8_t data_size;
 #include "cpu/instr/test.h"
 #include "cpu/instr/not.h"
 #include "cpu/instr/opcode_2_byte.h"
+#include "cpu/instr/leave.h"
 
 #endif
