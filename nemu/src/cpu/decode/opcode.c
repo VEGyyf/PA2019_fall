@@ -66,7 +66,6 @@ instr_func opcode_entry[256] = {
     /* 0xf8 - 0xfb*/ __ref_clc, inv, __ref_cli, __ref_sti,
     /* 0xfc - 0xff*/ __ref_cld, inv, inv, group_5_indirect,
 };
-
 /* 0x80 */
 instr_func group_1_b_entry[8] =
     {__ref_add_i2rm_b, __ref_or_i2rm_b, __ref_adc_i2rm_b, __ref_sbb_i2rm_b, __ref_and_i2rm_b, __ref_sub_i2rm_b, __ref_xor_i2rm_b, __ref_cmp_i2rm_b};
