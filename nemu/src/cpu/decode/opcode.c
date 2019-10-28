@@ -11,8 +11,8 @@ instr_func opcode_entry[256] = {
     /* 0x1c - 0x1f*/ sbb_i2a_b, sbb_i2a_v, inv, inv,
     /* 0x20 - 0x23*/ __ref_and_r2rm_b, __ref_and_r2rm_v, __ref_and_rm2r_b, __ref_and_rm2r_v,
     /* 0x24 - 0x27*/ __ref_and_i2a_b, __ref_and_i2a_v, inv, inv,
-    /* 0x28 - 0x2b*/ __ref_sub_r2rm_b, __ref_sub_r2rm_v, __ref_sub_rm2r_b, __ref_sub_rm2r_v,
-    /* 0x2c - 0x2f*/ __ref_sub_i2a_b, __ref_sub_i2a_v, inv, inv,
+    /* 0x28 - 0x2b*/ sub_r2rm_b, sub_r2rm_v, sub_rm2r_b, sub_rm2r_v,
+    /* 0x2c - 0x2f*/ sub_i2a_b, sub_i2a_v, inv, inv,
     /* 0x30 - 0x33*/ xor_r2rm_b, xor_r2rm_v, xor_rm2r_b, xor_rm2r_v,
     /* 0x34 - 0x37*/ xor_i2a_b, xor_i2a_v, inv, inv,
     /* 0x38 - 0x3b*/ __ref_cmp_r2rm_b, __ref_cmp_r2rm_v, __ref_cmp_rm2r_b, __ref_cmp_rm2r_v,
@@ -76,7 +76,7 @@ instr_func group_1_v_entry[8] =
 
 /* 0x83 */
 instr_func group_1_bv_entry[8] =
-    {add_i2rm_bv, or_i2rm_bv, adc_i2rm_bv, sbb_i2rm_bv,  __ref_and_i2rm_bv, __ref_sub_i2rm_bv, xor_i2rm_bv, cmp_i2rm_bv};
+    {add_i2rm_bv, or_i2rm_bv, adc_i2rm_bv, sbb_i2rm_bv,  __ref_and_i2rm_bv, sub_i2rm_bv, xor_i2rm_bv, cmp_i2rm_bv};
 
 /* 0xc0 */
 instr_func group_2_b_entry[8] =
