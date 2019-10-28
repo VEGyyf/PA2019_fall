@@ -12,12 +12,9 @@ make_instr_func(leave)
     operand_read(&src);
 	dest.val = src.val;
 	operand_write(&dest);                                                                                                 \
-	opr_dest.data_size=32;// pop ebp;
-    opr_dest.type=OPR_MEM;
-    opr_dest.addr=cpu.esp;
-	operand_read(&opr_dest);
-    src.val=opr_dest.val;
-    operand_write(&opr_src);
+	operand_read(&dest);
+    src.val=dest.val;
+    operand_write(&src);
 	cpu.esp+=4;                                                                                                          \
     return len;     
 }
