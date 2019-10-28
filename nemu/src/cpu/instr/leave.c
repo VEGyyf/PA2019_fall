@@ -15,7 +15,7 @@ make_instr_func(leave)
     operand_read(&src);
 	dest.val = src.val;
 	operand_write(&dest);                                                                                                 \
-	//operand_read(&tdest);
+	operand_read(&tdest);
     cpu.ebp=dest.val;
     //operand_write(&src);
 	cpu.esp+=4;    
