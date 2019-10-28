@@ -6,6 +6,7 @@ make_instr_func(ret_near)
     opr_dest.type=OPR_MEM;
     opr_dest.addr=cpu.esp;
 	operand_read(&opr_dest);//zhidingdezhandanyuan
+    printf("ret");
     cpu.eip=opr_dest.val;
     cpu.esp+=4;
     return 0 ;//the length of opr=0
