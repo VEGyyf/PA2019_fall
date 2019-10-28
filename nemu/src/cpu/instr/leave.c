@@ -4,10 +4,11 @@ make_instr_func(leave)
 {
     int len = 1;           //mov ebp, esp      
                                                                                                   \
-    OPERAND src,dest;
+    OPERAND src,dest,temp;
     src.type=OPR_REG;
-    dest.type=OPR_MEM;
-    src.data_size=dest.data_size=32;
+    dest.type=OPR_REG;
+    temp.type=OPR_MEM;
+    src.data_size=dest.data_size=temp.data_size=data_size;
     src.addr=cpu.ebp;
     dest.addr=cpu.esp;
     operand_read(&src);
