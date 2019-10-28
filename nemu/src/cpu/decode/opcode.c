@@ -9,8 +9,8 @@ instr_func opcode_entry[256] = {
     /* 0x14 - 0x17*/ adc_i2a_b, adc_i2a_v, inv, inv,
     /* 0x18 - 0x1b*/ sbb_r2rm_b, sbb_r2rm_v, sbb_rm2r_b, sbb_rm2r_v,
     /* 0x1c - 0x1f*/ sbb_i2a_b, sbb_i2a_v, inv, inv,
-    /* 0x20 - 0x23*/ __ref_and_r2rm_b, __ref_and_r2rm_v, __ref_and_rm2r_b, __ref_and_rm2r_v,
-    /* 0x24 - 0x27*/ __ref_and_i2a_b, __ref_and_i2a_v, inv, inv,
+    /* 0x20 - 0x23*/ and_r2rm_b, and_r2rm_v, and_rm2r_b, and_rm2r_v,
+    /* 0x24 - 0x27*/ and_i2a_b, and_i2a_v, inv, inv,
     /* 0x28 - 0x2b*/ sub_r2rm_b, sub_r2rm_v, sub_rm2r_b, sub_rm2r_v,
     /* 0x2c - 0x2f*/ sub_i2a_b, sub_i2a_v, inv, inv,
     /* 0x30 - 0x33*/ xor_r2rm_b, xor_r2rm_v, xor_rm2r_b, xor_rm2r_v,
@@ -35,22 +35,22 @@ instr_func opcode_entry[256] = {
     /* 0x7c - 0x7f*/ __ref_jl_short_, __ref_jge_short_, __ref_jle_short_, __ref_jg_short_,
     /* 0x80 - 0x83*/ group_1_b, group_1_v, nemu_trap, group_1_bv,
     /* 0x84 - 0x87*/ __ref_test_r2rm_b, __ref_test_r2rm_v, inv, inv,
-    /* 0x88 - 0x8b*/ __ref_mov_r2rm_b, __ref_mov_r2rm_v, __ref_mov_rm2r_b, __ref_mov_rm2r_v,
-    /* 0x8c - 0x8f*/ inv, __ref_lea, __ref_mov_rm2s_w, inv,
+    /* 0x88 - 0x8b*/ mov_r2rm_b, mov_r2rm_v, mov_rm2r_b, mov_rm2r_v,
+    /* 0x8c - 0x8f*/ inv, __ref_lea, mov_rm2s_w, inv,
     /* 0x90 - 0x93*/ nop, inv, inv, inv,
     /* 0x94 - 0x97*/ inv, inv, inv, inv,
     /* 0x98 - 0x9b*/ __ref_cbw_a_v, __ref_cltd, inv, inv,
     /* 0x9c - 0x9f*/ inv, inv, __ref_sahf, inv,
-    /* 0xa0 - 0xa3*/ __ref_mov_o2a_b, __ref_mov_o2a_v, __ref_mov_a2o_b, __ref_mov_a2o_v,
-    /* 0xa4 - 0xa7*/ __ref_movs_b, __ref_movs_v, __ref_cmps_b, __ref_cmps_v,
+    /* 0xa0 - 0xa3*/ mov_o2a_b, mov_o2a_v, mov_a2o_b, mov_a2o_v,
+    /* 0xa4 - 0xa7*/ movs_b, movs_v, __ref_cmps_b, __ref_cmps_v,
     /* 0xa8 - 0xab*/ __ref_test_i2a_b, __ref_test_i2a_v, __ref_stos_b, __ref_stos_v,
     /* 0xac - 0xaf*/ inv, inv, inv, inv,
-    /* 0xb0 - 0xb3*/ __ref_mov_i2r_b, __ref_mov_i2r_b, __ref_mov_i2r_b, __ref_mov_i2r_b,
-    /* 0xb4 - 0xb7*/ __ref_mov_i2r_b, __ref_mov_i2r_b, __ref_mov_i2r_b, __ref_mov_i2r_b,
-    /* 0xb8 - 0xbb*/ __ref_mov_i2r_v, __ref_mov_i2r_v, __ref_mov_i2r_v, __ref_mov_i2r_v,
-    /* 0xbc - 0xbf*/ __ref_mov_i2r_v, __ref_mov_i2r_v, __ref_mov_i2r_v, __ref_mov_i2r_v,
+    /* 0xb0 - 0xb3*/ mov_i2r_b, mov_i2r_b, mov_i2r_b, mov_i2r_b,
+    /* 0xb4 - 0xb7*/ mov_i2r_b, mov_i2r_b, mov_i2r_b, mov_i2r_b,
+    /* 0xb8 - 0xbb*/ mov_i2r_v, mov_i2r_v, mov_i2r_v, mov_i2r_v,
+    /* 0xbc - 0xbf*/ mov_i2r_v, mov_i2r_v, mov_i2r_v, mov_i2r_v,
     /* 0xc0 - 0xc3*/ group_2_b, group_2_v, __ref_ret_near_imm16, __ref_ret_near,
-    /* 0xc4 - 0xc7*/ inv, inv, __ref_mov_i2rm_b, __ref_mov_i2rm_v,
+    /* 0xc4 - 0xc7*/ inv, inv, mov_i2rm_b, mov_i2rm_v,
     /* 0xc8 - 0xcb*/ inv, __ref_leave, inv, inv,
     /* 0xcc - 0xcf*/ inv, __ref_int_, inv, __ref_iret,
     /* 0xd0 - 0xd3*/ group_2_1b, group_2_1v, group_2_cb, group_2_cv,
@@ -76,7 +76,7 @@ instr_func group_1_v_entry[8] =
 
 /* 0x83 */
 instr_func group_1_bv_entry[8] =
-    {add_i2rm_bv, or_i2rm_bv, adc_i2rm_bv, sbb_i2rm_bv,  __ref_and_i2rm_bv, sub_i2rm_bv, xor_i2rm_bv, cmp_i2rm_bv};
+    {add_i2rm_bv, or_i2rm_bv, adc_i2rm_bv, sbb_i2rm_bv,  and_i2rm_bv, sub_i2rm_bv, xor_i2rm_bv, cmp_i2rm_bv};
 
 /* 0xc0 */
 instr_func group_2_b_entry[8] =
