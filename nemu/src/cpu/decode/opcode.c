@@ -154,7 +154,7 @@ instr_func group_x87_df_entry[8] =
 // instr_func group_5_indirect_entry[8] =
 // {inv, inv, inv, inv, inv, inv, inv, inv};
 
-instr_func __ref_opcode_2_byte_entry[256] = {
+instr_func opcode_2_byte_entry[256] = {
     /* 0x00 - 0x03*/ inv, group_7, inv, inv,
     /* 0x04 - 0x07*/ inv, inv, inv, inv,
     /* 0x08 - 0x0b*/ inv, inv, inv, inv,
