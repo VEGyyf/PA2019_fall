@@ -6,13 +6,13 @@ make_instr_func(leave)
                                                                                                   \
     OPERAND src,dest;
     src.type=dest.type=OPR_REG;
-    src.data_size=dest.data_size=data_size;
+    src.data_size=dest.data_size=32;
     src.addr=cpu.ebp;
     dest.addr=cpu.esp;
     operand_read(&src);
 	dest.val = src.val;
 	operand_write(&dest);                                                                                                 \
-	opr_dest.data_size=data_size;// pop ebp;
+	opr_dest.data_size=32;// pop ebp;
     opr_dest.type=OPR_MEM;
     opr_dest.addr=cpu.esp;
 	operand_read(&opr_dest);
