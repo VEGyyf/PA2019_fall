@@ -117,6 +117,7 @@ instr_func group_5_indirect_entry[8] =
 instr_func group_7_entry[8] =
     {inv, inv, __ref_lgdt, __ref_lidt, inv, inv, inv, inv};
 
+
 /* 0xd8 */
 instr_func group_x87_d8_entry[8] =
     {x87_fadds, x87_fmuls, inv, inv, x87_fsubs, inv, x87_fdivs, inv};
@@ -148,11 +149,6 @@ instr_func group_x87_de_entry[8] =
 /* 0xdf */
 instr_func group_x87_df_entry[8] =
     {inv, inv, inv, inv, x87_fnstsw, x87_fucomip, inv, inv};
-
-/* 0x.. */
-// instr_func group_5_indirect_entry[8] =
-// {inv, inv, inv, inv, inv, inv, inv, inv};
-
 
 instr_func opcode_2_byte_entry[256] = {
      /* 0x00 - 0x03*/ inv, group_7, inv, inv,
