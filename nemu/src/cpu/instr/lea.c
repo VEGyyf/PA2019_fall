@@ -6,6 +6,7 @@ make_instr_func(lea)
        src.data_size = dest.data_size = data_size; // 指定操作数长度 
        int len = 1;
        len += modrm_r_rm(eip + 1,  &dest, &src); // 操作数寻址
+       print_asm_1("lea", opr_dest.data_size == 8 ? "b" : (opr_dest.data_size == 16 ? "w" : "l"), len, &opr_src); 
        dest.val = src.addr; 
        operand_write(&dest);
        return len;
