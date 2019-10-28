@@ -33,6 +33,7 @@ make_instr_func(jne_short_);
 make_instr_func(jno_short_);
 make_instr_func(jnp_short_);
 make_instr_func(jns_short_);
+make_instr_func(jecxz_short_);
 
 #endif
 
