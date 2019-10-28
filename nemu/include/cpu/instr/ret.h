@@ -2,6 +2,6 @@
 #define __INSTR_RET_H__
 
 make_instr_func(ret_near);
-//make_instr_func(ret_near_indirect);
+make_instr_func(ret_near_imm16);
 
 #endif
