@@ -5,7 +5,7 @@ make_instr_func(leave)
     int len = 1;           //mov ebp, esp      
                                                                                                   \
     OPERAND src,dest;
-    src.type=dest.type=OPR_REG;
+    src.type=dest.type=OPR_MEM;
     src.data_size=dest.data_size=32;
     src.addr=cpu.ebp;
     dest.addr=cpu.esp;
