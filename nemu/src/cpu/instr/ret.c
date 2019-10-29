@@ -9,7 +9,7 @@ make_instr_func(ret_near)
 	operand_read(&opr_dest);//zhidingdezhandanyuan
     print_asm_0("ret","",len);
     cpu.eip=opr_dest.val;
-    cpu.esp+=4;
+    cpu.esp+=data_size/8;
     return 0 ;//the length of opr=0
 }
 

@@ -9,7 +9,7 @@ static void instr_execute_1op()
 	operand_read(&opr_dest);//zhidingdezhandanyuan
     opr_src.val=opr_dest.val;
     operand_write(&opr_src);
-	cpu.esp+=4;
+	cpu.esp+=data_size/8;
 }
 
 make_instr_impl_1op(pop, r, v)
