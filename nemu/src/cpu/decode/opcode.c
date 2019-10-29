@@ -108,7 +108,7 @@ instr_func group_3_b_entry[8] =
 
 /* 0xf7 */
 instr_func group_3_v_entry[8] =
-    {__ref_test_i2rm_v, inv, __ref_not_rm_v, __ref_neg_rm_v, __ref_mul_rm2a_v, __ref_imul_rm2a_v, __ref_div_rm2a_v, __ref_idiv_rm2a_v};
+    {__ref_test_i2rm_v, inv, __ref_not_rm_v, __ref_neg_rm_v, mul_rm2a_v, imul_rm2a_v, div_rm2a_v, idiv_rm2a_v};
 
 
 /* 0xff */
