@@ -25,7 +25,7 @@ make_instr_func(ret_near_imm16)
     opr_dest.addr=cpu.esp;
     operand_read(&opr_dest);
     cpu.eip=opr_dest.val;
-    cpu.esp+=4;
+    cpu.esp+=data_size/8;
     cpu.esp+=imm.val;
     return 0;
 }
