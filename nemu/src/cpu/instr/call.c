@@ -43,9 +43,9 @@ make_instr_func(call_near_indirect)
         //int offset = sign_ext(rel.val, data_size);
         print_asm_1("call", "", len, &obj);
 
-        cpu.eip += offset;
+        cpu.eip =obj.val;
 
-        return 1 + data_size / 8;//=jmp,跳转到指定地址
+        return 0;//=jmp,跳转到指定地址
 }
 
 
