@@ -60,17 +60,18 @@ make_instr_func(jmp_short)
 make_instr_func(jmp_near_indirect)
 {
         OPERAND obj;
-        obj.type = OPR_MEM;
+        //obj.type = OPR_MEM;
         obj.sreg = SREG_CS;
         obj.data_size = data_size;
-        obj.addr = eip + 1;
-
+        int len=1;
+        len+=modrm_rm(eip+1,&obj);
+       // obj.addr = eip + 1;
         operand_read(&obj);
 
         //int ea = sign_ext(obj.val, data_size);
         // thank Ting Xu from CS'17 for finding this bug
-        print_asm_1("jmp", "", 0, &obj);
-
+        print_asm_1("jmp", "", len, &obj);
+        
         cpu.eip = obj.val;
 
         return 0;
