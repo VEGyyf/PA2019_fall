@@ -25,7 +25,7 @@ instr_func opcode_entry[256] = {
     /* 0x54 - 0x57*/ push_r_v, push_r_v, push_r_v, push_r_v,
     /* 0x58 - 0x5b*/ pop_r_v, pop_r_v, pop_r_v, pop_r_v,
     /* 0x5c - 0x5f*/ pop_r_v, pop_r_v, pop_r_v, pop_r_v,
-    /* 0x60 - 0x63*/ inv, inv,inv,inv,//__ref_pusha, __ref_popa, 
+    /* 0x60 - 0x63*/ inv, inv,inv,inv,//___pusha, ___popa, 
     /* 0x64 - 0x67*/ inv, inv, data_size_16, inv,
     /* 0x68 - 0x6b*/ push_i_v, imul_irm2r_v, push_i_b, imul_i8rm2r_v,
     /* 0x6c - 0x6f*/ inv, inv, inv, inv,
@@ -52,19 +52,19 @@ instr_func opcode_entry[256] = {
     /* 0xc0 - 0xc3*/ group_2_b, group_2_v, ret_near_imm16, ret_near,
     /* 0xc4 - 0xc7*/ inv, inv, mov_i2rm_b, mov_i2rm_v,
     /* 0xc8 - 0xcb*/ inv, leave, inv, inv,
-    /* 0xcc - 0xcf*/ inv,inv,inv,inv,//inv, __ref_int_, inv, __ref_iret,
+    /* 0xcc - 0xcf*/ inv,inv,inv,inv,//inv, ___int_, inv, ___iret,
     /* 0xd0 - 0xd3*/ group_2_1b, group_2_1v, group_2_cb, group_2_cv,
     /* 0xd4 - 0xd7*/ inv, inv, inv, inv,
     /* 0xd8 - 0xdb*/ group_x87_d8, group_x87_d9, group_x87_da, group_x87_db,
     /* 0xdc - 0xdf*/ group_x87_dc, group_x87_dd, group_x87_de, group_x87_df,
     /* 0xe0 - 0xe3*/ inv, inv, inv, jecxz_short_,
     /* 0xe4 - 0xe7*/ inv, inv, inv, inv,
-    /* 0xe8 - 0xeb*/ call_near, jmp_near, inv, jmp_short,//__ref_jmp_far_imm
+    /* 0xe8 - 0xeb*/ call_near, jmp_near, inv, jmp_short,//___jmp_far_imm
     /* 0xec - 0xef*/ inv,inv,inv,inv,
-    /* 0xf0 - 0xf3*/ inv, break_point, inv, __ref_rep_repe,
-    /* 0xf4 - 0xf7*/ inv,inv,group_3_b, group_3_v,//__ref_hlt, inv, group_3_b, group_3_v,
-    /* 0xf8 - 0xfb*/ inv,inv,inv,inv,//__ref_clc, inv, __ref_cli, __ref_sti,
-    /* 0xfc - 0xff*/ cld,inv,inv,group_5_indirect,//__ref_cld, inv, inv, group_5_indirect,
+    /* 0xf0 - 0xf3*/ inv, break_point, inv, ___rep_repe,
+    /* 0xf4 - 0xf7*/ inv,inv,group_3_b, group_3_v,//___hlt, inv, group_3_b, group_3_v,
+    /* 0xf8 - 0xfb*/ inv,inv,inv,inv,//___clc, inv, ___cli, ___sti,
+    /* 0xfc - 0xff*/ cld,inv,inv,group_5_indirect,//___cld, inv, inv, group_5_indirect,
 };
 /* 0x80 */
 instr_func group_1_b_entry[8] =
