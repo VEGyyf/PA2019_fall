@@ -73,5 +73,5 @@ make_instr_func(jmp_near_indirect)
 
         cpu.eip = ea;
 
-        return 1 + data_size / 8;
+        return 0;
 }
