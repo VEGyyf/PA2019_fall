@@ -59,13 +59,13 @@ make_instr_func(jmp_short)
 
 make_instr_func(jmp_near_indirect)
 {
-        OPERAND rel;
-        rel.type = OPR_MEM;
-        rel.sreg = SREG_CS;
-        rel.data_size = data_size;
-        rel.addr = eip + 1;
+        OPERAND obj;
+        obj.type = OPR_MEM;
+        //obj.sreg = SREG_CS;
+        obj.data_size = data_size;
+        obj.addr = eip + 1;
 
-        operand_read(&rel);
+        operand_read(&obj);
 
         int ea = sign_ext(rel.val, data_size);
         // thank Ting Xu from CS'17 for finding this bug
