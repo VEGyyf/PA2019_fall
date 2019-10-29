@@ -40,8 +40,8 @@ make_instr_func(call_near_indirect)
 
         operand_read(&obj);
 
-        int offset = sign_ext(rel.val, data_size);
-        print_asm_1("call", "", 1 + data_size / 8, &rel);
+        //int offset = sign_ext(rel.val, data_size);
+        print_asm_1("call", "", len, &obj);
 
         cpu.eip += offset;
 
