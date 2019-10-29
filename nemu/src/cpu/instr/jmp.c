@@ -63,7 +63,7 @@ make_instr_func(jmp_near_indirect)
         obj.type = OPR_MEM;
         //obj.sreg = SREG_CS;
         obj.data_size = data_size;
-        obj.addr = eip + 3;
+        obj.addr = eip + 1;
 
         operand_read(&obj);
 
