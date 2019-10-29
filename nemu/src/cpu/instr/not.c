@@ -2,7 +2,7 @@
 
 static void instr_execute_1op() 
 {
-   
+    opr_src.val=sign_ext(opr_src.val, opr_src.data_size); 
 	opr_src.val=~opr_src.val;
 }
 
