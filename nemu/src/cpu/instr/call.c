@@ -2,7 +2,7 @@
 
 make_instr_func(call_near)
 {
-        cpu.esp-=4;
+        cpu.esp-=data_size/8;
         opr_dest.type=OPR_MEM;
         opr_dest.addr=cpu.esp;
         opr_dest.val=eip+5;
@@ -26,7 +26,7 @@ make_instr_func(call_near)
 
 make_instr_func(call_near_indirect)
 {
-        cpu.esp-=4;
+        cpu.esp-=data_size/8;
         opr_dest.type=OPR_MEM;
         opr_dest.addr=cpu.esp;
         opr_dest.val=eip+5;
