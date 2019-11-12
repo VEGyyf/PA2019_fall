@@ -25,22 +25,23 @@ uint32_t loader()
 	elf = (void *)buf;
 	Log("ELF loading from hard disk.");
 #else
-	elf = (void *)0x0;
+	elf = (void *)0x0;// 模拟内存 0x0 处是 RAM Disk ，存放的就是 testcase ELF file
 	Log("ELF loading from ram disk.");
 #endif
 
 	/* Load each program segment */
-	ph = (void *)elf + elf->e_phoff;
+	ph = (void *)elf + elf->e_phoff;// 找到 ELF 文件中的程序头表
 	eph = ph + elf->e_phnum;
 	for (; ph < eph; ph++)
-	{
+	{// 扫描程序头表中的各个表项
 		if (ph->p_type == PT_LOAD)
-		{
+		{// 如果类型是 LOAD ，那么就去装载吧
 
 			// remove this panic!!!
 			//panic("Please implement the loader");
 
 /* TODO: copy the segment from the ELF file to its proper memory area */
+            
             
 /* TODO: zeror the memory area [vaddr + file_sz, vaddr + mem_sz) */
 
@@ -56,7 +57,7 @@ uint32_t loader()
 		}
 	}
 
-	volatile uint32_t entry = elf->e_entry;
+	volatile uint32_t entry = elf->e_entry;// 头文件中指出的 testcase 起始地址，应该是 0x60000
 
 #ifdef IA32_PAGE
 	mm_malloc(KOFFSET - STACK_SIZE, STACK_SIZE);
@@ -65,5 +66,5 @@ uint32_t loader()
 #endif
 	write_cr3(get_ucr3());
 #endif
-	return entry;
+	return entry;// 返回 testcase 起始地址，在 init_cond 后面执行 ((void(*)( eip
 }
