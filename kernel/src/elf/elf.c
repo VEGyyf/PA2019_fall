@@ -42,11 +42,10 @@ uint32_t loader()
             void* dest=(void*)p_vaddr;
             void* src=(void*)(p_paddr+p_offset);
 /* TODO: copy the segment from the ELF file to its proper memory area */
-            void *memcpy(void *destin, void *source, unsigned n);
-            memcpy(,,filesiz);
+            memcpy(dest, src, p_filesz);
 /* TODO: zero the memory area [vaddr + file_sz, vaddr + mem_sz) */
-            void *memset(void *s, int ch, size_t n);
-            memset(virtaddr+filesiz,'0',memsiz-filesiz);
+            void* dest_set=(void*)(p_vaddr+p_filesz);
+            memset(dest_set,'0',p_memsz-p_filesz);
 #ifdef IA32_PAGE
 			/* Record the program break for future use */
 			extern uint32_t brk;
