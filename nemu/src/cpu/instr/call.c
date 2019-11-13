@@ -49,22 +49,4 @@ make_instr_func(call_near_indirect)
         return 0;//=jmp,跳转到指定地址
 }
 
-/*make_instr_func(jmp_near_indirect)
-{
-        OPERAND obj;
-        //obj.type = OPR_MEM;
-        obj.sreg = SREG_CS;
-        obj.data_size = data_size;
-        int len=1;
-        len+=modrm_rm(eip+1,&obj);
-       // obj.addr = eip + 1;
-        operand_read(&obj);
 
-        //int ea = sign_ext(obj.val, data_size);
-        // thank Ting Xu from CS'17 for finding this bug
-        print_asm_1("jmp", "", len, &obj);
-        
-        cpu.eip = obj.val;
-
-        return 0;
-}*/
