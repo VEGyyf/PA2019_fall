@@ -1,6 +1,6 @@
 #include "cpu/instr.h"
 
- void instr_execute_2op() //static
+ static void instr_execute_2op() 
 {
    
 	operand_read(&opr_src);
