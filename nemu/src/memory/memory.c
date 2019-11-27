@@ -22,6 +22,7 @@ void hw_mem_write(paddr_t paddr, size_t len, uint32_t data)
 
 uint32_t paddr_read(paddr_t paddr, size_t len)
 {
+    /*TODO*/cache_read();
 	uint32_t ret = 0;
 	ret = hw_mem_read(paddr, len);
 	return ret;
@@ -29,6 +30,7 @@ uint32_t paddr_read(paddr_t paddr, size_t len)
 
 void paddr_write(paddr_t paddr, size_t len, uint32_t data)
 {
+     /*TODO*/cache_write();
 	hw_mem_write(paddr, len, data);
 }
 
