@@ -1,4 +1,4 @@
-init_cache();
+void init_cache();
 //初始化 cache ，核心就是把 valid bit 都清 0
 
 uint32_t cache_read paddr_t paddr , size_t len , CacheLine *cache);
