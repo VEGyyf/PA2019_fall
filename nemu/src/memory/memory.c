@@ -22,10 +22,18 @@ void hw_mem_write(paddr_t paddr, size_t len, uint32_t data)
 
 uint32_t paddr_read(paddr_t paddr, size_t len)
 {
-    /*TODO*/cache_read();
-	uint32_t ret = 0;
-	ret = hw_mem_read(paddr, len);
-	return ret;
+    uint32_t ret=0;
+#ifdef CACHE_ENABLED
+             ret=cache_read(paddr,len,&L1_dcache);
+#else
+             ret=hw_mem_read(paddr,len);
+#endif
+    return ret;
+
+    ///*TODO*/cache_read();
+	//uint32_t ret = 0;
+	//ret = hw_mem_read(paddr, len);
+	//return ret;*/
 }
 
 void paddr_write(paddr_t paddr, size_t len, uint32_t data)
@@ -78,3 +86,7 @@ uint8_t *get_mem_addr()
 {
 	return hw_mem;
 }
+/*可以设置一个简单的模拟计时器，如果 cache 命中则时间 +10
+cache 缺失则时间 +100 ，比较一下模拟的时间消耗有什么变化
+
+也可以加入对 cache 命中率的统计*/
