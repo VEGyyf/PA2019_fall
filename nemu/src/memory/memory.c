@@ -2,6 +2,7 @@
 #include "cpu/cpu.h"
 #include "memory/memory.h"
 #include "device/mm_io.h"
+#include "cache.h"
 #include <memory.h>
 #include <stdio.h>
 
@@ -56,6 +57,7 @@ void vaddr_write(vaddr_t vaddr, uint8_t sreg, size_t len, uint32_t data)
 void init_mem()
 {
 	// clear the memory on initiation
+    init_cache();//加入条件编译选项以便日后通过修改 include/ config.h 来跳过 cache 相关代码.具体仿照教程中（或后页）针对 paddr_read 和 paddr_write 的修改方法
 	memset(hw_mem, 0, MEM_SIZE_B);
 
 #ifdef TLB_ENABLED
