@@ -1,6 +1,6 @@
 #include "nemu.h"
 #include "cpu/cpu.h"
-#include "cache.h"
+#include "memory/cache.h"
 //#include<cache.h>
 #include <stdio.h>
 
