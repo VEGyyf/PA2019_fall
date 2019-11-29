@@ -9,7 +9,7 @@ CacheLine L1_dcache[1024];
 
 void init_cache(){
     for(int i=0;i<1024;i++){
-        cache[i].valid_bit=0;
+        L1_dcache[i].valid_bit=0;
     }
 
 }
@@ -25,24 +25,24 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         bool shot=0;//命中与否
         //bool full=1;//是否组满
         for(uint32_t i=(group<<3);i<8;i++){
-            if(cache[i].mark==mark_paddr&&cache[i].valid_bit){//命中
+            if(L1_dcache[i].mark==mark_paddr&&L1_dcache[i].valid_bit){//命中
                shot=1;
                if(addrinblock+len-1<64){//不用跨行读写
                   
-                    void* src=(void*)((&cache[i].data)+addrinblock);
+                    void* src=(void*)((&L1_dcache[i].data)+addrinblock);
                     memcpy(&res, src, len);
                    
                 }
                else{//跨行读写
                     uint32_t part1=0;
                     uint32_t len1=64-addrinblock;
-                    //void* src1=(void*)((&cache[i].data)+addrinblock);
-                    memcpy(&part1,(&cache[i].data)+addrinblock,len1);
+                    //void* src1=(void*)((&L1_dcache[i].data)+addrinblock);
+                    memcpy(&part1,(&L1_dcache[i].data)+addrinblock,len1);
                     uint32_t part2=0;
                     uint32_t len2=len-len1;
                     uint32_t j=i+1;
-                    //void* src2=(void*)(&cache[j].data);
-                    memcpy(&part2,&cache[j].data,len2);
+                    //void* src2=(void*)(&L1_dcache[j].data);
+                    memcpy(&part2,&L1_dcache[j].data,len2);
                     part2<<=len2;
                     res=part2|part1;
                }
@@ -52,20 +52,20 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         if(!shot){//不命中，读内存
                uint32_t ptr=(group<<3);
                for(;ptr<8;ptr++){
-                    if(!cache[ptr].valid_bit){//找到空闲行
+                    if(!L1_dcache[ptr].valid_bit){//找到空闲行
                         uint32_t pos=(mark_paddr<<7)|group;
-                        memcpy(&cache[ptr].data,&pos,len);
-                        cache[ptr].valid_bit=1;
-                        memcpy(&cache[ptr].mark,&mark_paddr,len);
+                        memcpy(&L1_dcache[ptr].data,&pos,len);
+                        L1_dcache[ptr].valid_bit=1;
+                        memcpy(&L1_dcache[ptr].mark,&mark_paddr,len);
                         break;
                     }
                 } 
                 if(ptr==8){//组满随机替换
                     uint32_t m=rand()%8;
                     uint32_t pos=(mark_paddr<<7)|group;
-                        memcpy(&cache[m].data,&pos,len);
-                        cache[ptr].valid_bit=1;
-                        memcpy(&cache[m].mark,&mark_paddr,len);
+                        memcpy(&L1_dcache[m].data,&pos,len);
+                        L1_dcache[ptr].valid_bit=1;
+                        memcpy(&L1_dcache[m].mark,&mark_paddr,len);
                 }  
             res=cache_read (paddr , len , cache);             
         }
@@ -90,24 +90,24 @@ void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
         bool shot=0;//命中与否
         //bool full=1;//是否组满
         for(uint32_t i=(group<<3);i<8;i++){
-            if(cache[i].mark==mark_paddr&&cache[i].valid_bit){//命中
+            if(L1_dcache[i].mark==mark_paddr&&L1_dcache[i].valid_bit){//命中
                shot=1;
                if(addrinblock+len-1<64){//不用跨行读写
       
-                    memcpy(&cache[i].data, &data, len);
+                    memcpy(&L1_dcache[i].data, &data, len);
                     memcpy(&paddr, &data, len);
                    
                 }
                else{//跨行读写
                     
                     uint32_t len1=64-addrinblock;
-                    //void* src1=(void*)((&cache[i].data)+addrinblock);
-                    memcpy((&cache[i].data)+addrinblock,&data,len1);
+                    //void* src1=(void*)((&L1_dcache[i].data)+addrinblock);
+                    memcpy((&L1_dcache[i].data)+addrinblock,&data,len1);
                     
                     uint32_t len2=len-len1;
                     uint32_t j=i+1;
-                    //void* src2=(void*)(&cache[j].data);
-                    memcpy(&cache[j].data,&data+len1,len2);
+                    //void* src2=(void*)(&L1_dcache[j].data);
+                    memcpy(&L1_dcache[j].data,&data+len1,len2);
                    
                     memcpy(&paddr, &data, len);
                }
