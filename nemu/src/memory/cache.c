@@ -32,13 +32,13 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
                else{//跨行读写
                     uint32_t part1=0;
                     uint32_t len1=64-addrinblock;
-                    void* src1=(void*)((&cache[i].data)+addrinblock);
-                    memcpy(&part1,src1,len1);
+                    //void* src1=(void*)((&cache[i].data)+addrinblock);
+                    memcpy(&part1,(&cache[i].data)+addrinblock,len1);
                     uint32_t part2=0;
                     uint32_t len2=len-len1;
                     uint32_t j=i+1;
-                    void* src2=(void*)(&cache[j].data);
-                    memcpy(&part2,src2,len2);
+                    //void* src2=(void*)(&cache[j].data);
+                    memcpy(&part2,&cache[j].data,len2);
                     part2<<=len2;
                     res=part2|part1;
                }
@@ -89,23 +89,23 @@ void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
             if(cache[i].mark==mark_paddr&&cache[i].valid_bit){//命中
                shot=1;
                if(addrinblock+len-1<64){//不用跨行读写
-                  
-                    void* src=(void*)((&cache[i].data)+addrinblock);
-                    memcpy(&res, src, len);
+      
+                    memcpy(&cache[i].data, &data, len);
+                    memcpy(hw_mem + paddr, &data, len);
                    
                 }
                else{//跨行读写
-                    uint32_t part1=0;
+                    
                     uint32_t len1=64-addrinblock;
-                    void* src1=(void*)((&cache[i].data)+addrinblock);
-                    memcpy(&part1,src1,len1);
-                    uint32_t part2=0;
+                    //void* src1=(void*)((&cache[i].data)+addrinblock);
+                    memcpy((&cache[i].data)+addrinblock,&data,len1);
+                    
                     uint32_t len2=len-len1;
                     uint32_t j=i+1;
-                    void* src2=(void*)(&cache[j].data);
-                    memcpy(&part2,src2,len2);
-                    part2<<=len2;
-                    res=part2|part1;
+                    //void* src2=(void*)(&cache[j].data);
+                    memcpy(&cache[j].data,&data+len1,len2);
+                   
+                    memcpy(hw_mem + paddr, &data, len);
                }
             }
             
