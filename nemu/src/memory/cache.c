@@ -110,28 +110,12 @@ void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
             }
             
         }
-        if(!shot){//不命中，读内存
-               uint32_t ptr=(group<<3);
-               for(;ptr<8;ptr++){
-                    if(!cache[ptr].valid_bit){//找到空闲行
-                        uint32_t pos=(mark<<7)|group;
-                        memcpy(&cache[ptr].data,hw_mem + pos,len);
-                        cache[ptr].valid_bit=1;
-                        memcpy(&cache[ptr].mark,hw_mem + mark_paddr,len);
-                        break;
-                    }
-                } 
-                if(ptr==8){//组满随机替换
-                    uint32_t m=rand()%8;
-                    uint32_t pos=(mark<<7)|group;
-                        memcpy(&cache[m].data,hw_mem + pos,len);
-                        cache[ptr].valid_bit=1;
-                        memcpy(&cache[m].mark,hw_mem + mark_paddr,len);
-                } 
-                          
+        if(!shot){//不命中，非写分配法
+               
+                  memcpy(hw_mem + paddr, &data, len);        
         }
 
-    return res;
+ 
 }
 //写 cache
 //和 cache_read 采用同样过程根据 paddr 定位 CacheLine
