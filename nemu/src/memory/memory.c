@@ -2,9 +2,10 @@
 #include "cpu/cpu.h"
 #include "memory/memory.h"
 #include "device/mm_io.h"
-#include "cache.h"
+#include "memory/cache.h"
 #include <memory.h>
 #include <stdio.h>
+
 
 uint8_t hw_mem[MEM_SIZE_B];
 
