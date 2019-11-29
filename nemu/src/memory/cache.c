@@ -109,7 +109,7 @@ void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
                     //void* src2=(void*)(&cache[j].data);
                     memcpy(&cache[j].data,&data+len1,len2);
                    
-                    memcpy(hw_mem + paddr, &data, len);
+                    memcpy(&paddr, &data, len);
                }
             }
             
