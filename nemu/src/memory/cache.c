@@ -1,4 +1,12 @@
-void init_cache();
+#include "memory/cache.h"
+#include <stdio.h>
+
+CacheLine cache[1024];
+
+void init_cache(){
+
+
+}
 //初始化 cache ，核心就是把 valid bit 都清 0
 
 uint32_t cache_read paddr_t paddr , size_t len , CacheLine *cache);
