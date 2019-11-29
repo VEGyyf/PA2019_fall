@@ -21,7 +21,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         for(uint32_t i=(group<<3);i<8;i++){
             if(cache[i].mark==mark_paddr&&cache[i].valid_bit){//命中
                if(addrinblock+len-1<64){//不用跨行读写
-                    memset();
+                    memcpy(res, cache[i].data+addrinblock, len);
                 }
                else{//跨行读写
                 
