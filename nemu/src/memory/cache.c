@@ -116,7 +116,7 @@ void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
         }
         if(!shot){//不命中，非写分配法
                
-                  memcpy(hw_mem + paddr, &data, len);        
+                  memcpy(&paddr, &data, len);        
         }
 
  
