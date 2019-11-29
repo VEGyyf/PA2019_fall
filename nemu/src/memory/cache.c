@@ -3,6 +3,7 @@
 #include "memory/cache.h"
 //#include<cache.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 CacheLine cache[1024];
 
@@ -52,7 +53,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
                uint32_t ptr=(group<<3);
                for(;ptr<8;ptr++){
                     if(!cache[ptr].valid_bit){//找到空闲行
-                        uint32_t pos=(mark<<7)|group;
+                        uint32_t pos=(mark_paddr<<7)|group;
                         memcpy(&cache[ptr].data,hw_mem + pos,len);
                         cache[ptr].valid_bit=1;
                         memcpy(&cache[ptr].mark,hw_mem + mark_paddr,len);
