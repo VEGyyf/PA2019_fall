@@ -1,3 +1,5 @@
+#include "nemu.h"
+#include "cpu/cpu.h"
 #include "memory/cache.h"
 #include <stdio.h>
 
