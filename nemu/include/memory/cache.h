@@ -1,7 +1,7 @@
 struct CacheLine{
-       int valid_bit;
-       int mark[19];
-       int data[6];
+       uint8_t valid_bit;
+       uint32_t mark;
+       uint32_t data[6];
 
 };
 
