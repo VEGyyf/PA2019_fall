@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-CacheLine L1_dcache[1024];
+extern CacheLine L1_dcache[1024];
 
 void init_cache(){
     for(int i=0;i<1024;i++){
