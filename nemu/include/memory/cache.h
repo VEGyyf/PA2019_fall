@@ -1,9 +1,9 @@
-struct CacheLine{
+typedef struct{
        uint8_t valid_bit;
        uint32_t mark;
        uint32_t data;
 
-};
+}CacheLine;
 
 void init_cache();//初始化 cache ，核心就是把 valid bit 都清 0
 
