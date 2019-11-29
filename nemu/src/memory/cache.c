@@ -57,7 +57,11 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
                     }
                 } 
                 if(ptr==8){//组满随机替换
-                    
+                    uint32_t m=rand()%8;
+                    uint32_t pos=(mark<<7)|group;
+                        memcpy(&cache[m].data,hw_mem + pos,len);
+                        cache[ptr].valid_bit=1;
+                        memcpy(&cache[m].mark,hw_mem + mark_paddr,len);
                 }               
         }
 
