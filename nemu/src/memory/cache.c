@@ -67,7 +67,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
                         cache[ptr].valid_bit=1;
                         memcpy(&cache[m].mark,&mark_paddr,len);
                 }  
-            res=cache_write (paddr , len , data, cache);             
+            res=cache_read (paddr , len , cache);             
         }
 
 
