@@ -19,10 +19,8 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         group>>=6;
         uint32_t addrinblock=(0x0000003F&paddr);
         for(uint32_t i=(group<<3);i<8;i++){
-            if(cache[i].mark==mark_paddr){
-                if(cache[i].valid_bit){
-                    
-                }
+            if(cache[i].mark==mark_paddr&&cache[i].valid_bit){
+               if(addrinblock+len-1<64)
             }
             else{//duneicun
                 
@@ -34,7 +32,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
 //根据组号去定位相应的组（起始 Cache 行号）
 //与组内的 CacheLine 比较标记和有效位
 //命中怎样？不命中（缺失）又怎样？
-//组满了怎办？（ 随机替换算法)
+//组满了怎办？（随机替换算法)
 
 void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
 
