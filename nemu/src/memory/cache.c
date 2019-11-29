@@ -18,15 +18,16 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         uint32_t group=(0x00001FC0&paddr);
         group>>=6;
         uint32_t addrinblock=(0x0000003F&paddr);
-        bool flag=0;//命中与否
+        bool shot=0;//命中与否
+        //bool full=1;//是否组满
         for(uint32_t i=(group<<3);i<8;i++){
             if(cache[i].mark==mark_paddr&&cache[i].valid_bit){//命中
-               flag=1;
+               shot=1;
                if(addrinblock+len-1<64){//不用跨行读写
-                    //void* res;
+                  
                     void* src=(void*)((&cache[i].data)+addrinblock);
                     memcpy(&res, src, len);
-                    //res=(uint32_t)res;
+                   
                 }
                else{//跨行读写
                     uint32_t part1=0;
@@ -38,13 +39,23 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
                     uint32_t j=i+1;
                     void* src2=(void*)(&cache[j].data);
                     memcpy(&part2,src2,len2);
-                    
+                    part2<<=len2;
+                    res=part2|part1;
                }
             }
             
         }
-        if(!flag){//不命中，读内存
-                
+        if(!shot){//不命中，读内存
+               uint32_t ptr=(group<<3);
+               for(;ptr<8;ptr++){
+                    if(!cache[ptr].valid_bit){//找到空闲行
+                        
+                        break;
+                    }
+                } 
+                if(ptr==8){//组满随机替换
+                    
+                }               
         }
 
     return res;
@@ -57,30 +68,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
 //组满了怎办？（随机替换算法)
 
 void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
-        uint32_t mark_paddr=(0xFFFFE000&paddr);
-        mark_paddr>>=13;
-        uint32_t group=(0x00001FC0&paddr);
-        group>>=6;
-        uint32_t addrinblock=(0x0000003F&paddr);
-        bool flag=0;//命中与否
-        for(uint32_t i=(group<<3);i<8;i++){
-            if(cache[i].mark==mark_paddr&&cache[i].valid_bit){//命中
-               flag=1;
-               if(addrinblock+len-1<64){//不用跨行读写
-                    void* res;
-                    void* src=(void*)(cache[i].data+addrinblock);
-                    memcpy(res, src, len);
-                    res=(uint32_t)res;
-                }
-               else{//跨行读写
-                
-               }
-            }
-            
-        }
-        if(!flag){//不命中，读内存
-                
-        }
+        
 }
 //写 cache
 //和 cache_read 采用同样过程根据 paddr 定位 CacheLine
