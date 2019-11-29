@@ -9,7 +9,7 @@
 
 void init_cache(){
     for(int i=0;i<1024;i++){
-        cache[i].valid_bit=0;
+        L1_dcache[i].valid_bit=0;
     }
 
 }
