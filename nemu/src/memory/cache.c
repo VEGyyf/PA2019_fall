@@ -12,7 +12,7 @@ void init_cache(){
 //初始化 cache ，核心就是把 valid bit 都清 0
 
 uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
-        uint32_t res;
+        //uint32_t res;
         uint32_t mark_paddr=(0xFFFFE000&paddr);
         mark_paddr>>=13;
         uint32_t group=(0x00001FC0&paddr);
@@ -21,9 +21,10 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         for(uint32_t i=(group<<3);i<8;i++){
             if(cache[i].mark==mark_paddr&&cache[i].valid_bit){//命中
                if(addrinblock+len-1<64){//不用跨行读写
-                    void* dest=(void*)ph->p_vaddr;
+                    void* res;
                     void* src=(void*)(cache[i].data+addrinblock);
-                    memcpy(res, , len);
+                    memcpy(res, src, len);
+                    res=(uint32_t)res;
                 }
                else{//跨行读写
                 
