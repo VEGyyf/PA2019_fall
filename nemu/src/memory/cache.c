@@ -29,14 +29,14 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         bool shot=false;//命中与否
         int  line=0;//组内第几行
 
-        /*for(int i=0;i<8;i++){
+        for(int i=0;i<8;i++){
             if(cache[index+i].tag==tag_paddr&&cache[index+i].valid_bit==1){//命中
                shot=true;
                line=i;
                break;
                 }
                
-            }*/
+            }
             
         
         if(!shot){//不命中，读内存
