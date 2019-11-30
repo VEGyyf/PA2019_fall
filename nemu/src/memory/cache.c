@@ -55,7 +55,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
                         uint32_t pos=(mark_paddr<<7)|group;
                         memcpy(&cache[ptr].data,&pos,len);
                         cache[ptr].valid_bit=1;
-                        memcpy(&cache[ptr].mark,&mark_paddr,len);
+                        memcpy(&cache[ptr].mark,&mark_paddr,19);
                         break;
                     }
                 } 
