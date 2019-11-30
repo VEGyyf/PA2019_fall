@@ -96,7 +96,7 @@ void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
                if(addrinblock+len-1<64){//不用跨行读写
       
                     memcpy(&cache[i].data, &data, len);
-                    memcpy(&paddr, &data, len);
+                    hw_mem_write(paddr, len, data);
                    
                 }
                else{//跨行读写
@@ -110,14 +110,14 @@ void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
                     //void* src2=(void*)(&cache[j].data);
                     memcpy(&cache[j].data,&data+len1,len2);
                    
-                    memcpy(&paddr, &data, len);
+                    hw_mem_write(paddr, len, data);
                }
             }
             
         }
         if(!shot){//不命中，非写分配法
                
-                  memcpy(&paddr, &data, len);        
+                  hw_mem_write(paddr, len, data);       
         }
 
  
