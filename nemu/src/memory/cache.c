@@ -29,7 +29,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         bool shot=0;//命中与否
         //int  line=0;
         //bool full=1;//是否组满
-        for(;index<((group+1)<<3);i++){
+        for(;index<((group+1)<<3);index++){
             if(cache[index].tag==tag_paddr&&cache[index].valid_bit){//命中
                shot=1;
                break;
@@ -47,7 +47,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
                     }
                 } 
                 if(ptr==((group+1)<<3)){//组满随机替换
-                    ptr=rand()%8+(group+1<<3);                  
+                    ptr=rand()%8+(group<<3);                  
                 }  
                 index=ptr;
                 cache[index].valid_bit=1;
