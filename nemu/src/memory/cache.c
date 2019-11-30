@@ -24,7 +24,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         uint32_t group=(paddr>>6)&(0xffffffff>>25);
         //group>>=6;
         uint32_t addrinblock=paddr&(0xffffffff>>26);
-        uint32_t index=(group<<3);
+        uint32_t index=group*8;
         uint8_t alldata[128];//待读取的一/两整行
         bool shot=0;//命中与否
         int  line=0;//组内第几行
