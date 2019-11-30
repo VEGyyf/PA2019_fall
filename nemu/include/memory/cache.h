@@ -1,7 +1,4 @@
-#include "nemu.h"
-#include "cpu/cpu.h"
-#include "device/mm_io.h"
-#include <stdlib.h>
+
 
 typedef struct{
        bool valid_bit;
