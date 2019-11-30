@@ -75,18 +75,6 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
                    
                 }
                else{//跨行读写
-                    
-                    uint32_t len1=64-addrinblock;
-                    //void* src1=(void*)((&cache[i].data)+addrinblock);
-                    memcpy((&cache[i].data)+addrinblock,&data,len1);
-                    
-                    uint32_t len2=len-len1;
-                    uint32_t j=i+1;
-                    //void* src2=(void*)(&cache[j].data);
-                    memcpy(&cache[j].data,&data+len1,len2);
-                   
-                    hw_mem_write(paddr, len, data);
-
                     uint32_t part1=0;
                     uint32_t len1=64-addrinblock;
                     //void* src1=(void*)((&cache[i].data)+addrinblock);
@@ -104,8 +92,23 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         }
         if(!shot){//不命中，非写分配法
                
-                  hw_mem_write(paddr, len, data);       
-        }
+                uint32_t ptr=(group<<3);
+               for(;ptr<8;ptr++){
+                    if(!cache[ptr].valid_bit){//找到空闲行
+
+                    
+                        break;
+                    }
+                } 
+                if(ptr==8){//组满随机替换
+                    ptr =rand()%8;
+
+                       
+                }  
+                    cache[ptr].data=hw_mem_read(paddr,len);
+                        cache[ptr].valid_bit=1;
+                        cache[ptr].tag=tag_paddr;
+            res=cache_read (paddr , len , cache);   
     return res;
         
 /*uint32_t res=0;
