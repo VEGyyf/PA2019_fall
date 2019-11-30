@@ -106,7 +106,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         }  
     return res;*/
         
-/*uint32_t res=0;
+uint32_t res=0;
         uint32_t tag_paddr=(0xFFFFE000&paddr);
         tag_paddr>>=13;
         uint32_t group=(0x00001FC0&paddr);
@@ -160,7 +160,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         }
 
 
-    return res;*/
+    return res;
 
 }
 //读 cache
