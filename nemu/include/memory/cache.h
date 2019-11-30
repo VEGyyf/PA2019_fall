@@ -4,7 +4,7 @@ typedef struct{
        uint32_t data;
 
 }CacheLine;
-extern CacheLine L1_dcache[];
+CacheLine L1_dcache[1024];//extern CacheLine L1_dcache[];
 void init_cache();//初始化 cache ，核心就是把 valid bit 都清 0
 
 uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache);//读 cache
