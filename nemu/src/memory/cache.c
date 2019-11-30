@@ -86,6 +86,18 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
                     memcpy(&cache[j].data,&data+len1,len2);
                    
                     hw_mem_write(paddr, len, data);
+
+                    uint32_t part1=0;
+                    uint32_t len1=64-addrinblock;
+                    //void* src1=(void*)((&cache[i].data)+addrinblock);
+                    memcpy(&part1,(&cache[i].data)+addrinblock,len1);
+                    uint32_t part2=0;
+                    uint32_t len2=len-len1;
+                    uint32_t j=i+1;
+                    //void* src2=(void*)(&cache[j].data);
+                    memcpy(&part2,&cache[j].data,len2);
+                    part2<<=len1;
+                    res=part2|part1;
                }
             }
             
