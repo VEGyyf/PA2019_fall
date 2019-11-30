@@ -30,7 +30,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         int  line=0;//组内第几行
 
         for(int i=0;i<8;i++){
-            if(cache[index+i].tag==tag_paddr&&cache[index+i].valid_bit){//命中
+            if(cache[index+i].tag==tag_paddr&&cache[index+i].valid_bit==1){//命中
                shot=1;
                line=i;
                break;
