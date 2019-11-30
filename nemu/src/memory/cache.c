@@ -24,15 +24,14 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         uint32_t group=(0x00001FC0&paddr);
         group>>=6;
         uint32_t addrinblock=(0x0000003F&paddr);
-        uint32_t index=(group<<3);
+        //uint32_t index=(group<<3);
         uint8_t alldata[128];//待读取的一/两整行
         bool shot=false;//命中与否
-        int  line=0;//组内第几行
+        //int  line=0;//组内第几行
 
-        for(int i=0;i<8;i++){
-            if(cache[index+i].tag==tag_paddr&&cache[index+i].valid_bit==1){//命中
+        for(int i=(group<<3);i<((group+1)<<3);i++){
+            if(cache[i].tag==tag_paddr&&cache[i].valid_bit==1){//命中
                shot=true;
-               line=i;
                break;
                 }
                
@@ -40,15 +39,14 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
             
         
         if(!shot){//不命中，读内存
-               int ptr=0;
-               for(;ptr<8;ptr++){
+               int ptr=(group<<3);
+               for(;ptr<((group+1)<<3);ptr++){
                     if(!cache[ptr].valid_bit){//找到空闲行
-                        line=ptr;
                         break;
                     }
                 } 
                 if(ptr==8){//组满随机替换
-                    line=rand()%8;                  
+                    ptr=rand()%8;                  
                 }  
                 cache[index+line].valid_bit=1;
                 cache[index+line].tag=tag_paddr;
