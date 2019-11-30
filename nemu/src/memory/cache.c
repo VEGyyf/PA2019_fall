@@ -58,7 +58,44 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         if(addrinblock+len>64)*(uint32_t*)(alldata+64)=cache_read(paddr-addrinblock+64,64,cache);//跨行
         memcpy(&res,alldata+addrinblock,len);
     return res;*/
-
+    uint32_t res=0;
+    uint32_t tag_paddr=(0xFFFFE000&paddr);
+        tag_paddr>>=13;
+        uint32_t group=(0x00001FC0&paddr);
+        group>>=6;
+        uint32_t addrinblock=(0x0000003F&paddr);
+        bool shot=0;//命中与否
+        //bool full=1;//是否组满
+        for(uint32_t i=(group<<3);i<((group+1)<<3);i++){
+            if(cache[i].tag==tag_paddr&&cache[i].valid_bit){//命中
+               shot=1;
+               if(addrinblock+len-1<64){//不用跨行读写
+      
+                    memcpy(&res,&cache[i].data+addrinblock,len);
+                   
+                }
+               else{//跨行读写
+                    
+                    uint32_t len1=64-addrinblock;
+                    //void* src1=(void*)((&cache[i].data)+addrinblock);
+                    memcpy((&cache[i].data)+addrinblock,&data,len1);
+                    
+                    uint32_t len2=len-len1;
+                    uint32_t j=i+1;
+                    //void* src2=(void*)(&cache[j].data);
+                    memcpy(&cache[j].data,&data+len1,len2);
+                   
+                    hw_mem_write(paddr, len, data);
+               }
+            }
+            
+        }
+        if(!shot){//不命中，非写分配法
+               
+                  hw_mem_write(paddr, len, data);       
+        }
+    return res;
+        
 /*uint32_t res=0;
         uint32_t tag_paddr=(0xFFFFE000&paddr);
         tag_paddr>>=13;
