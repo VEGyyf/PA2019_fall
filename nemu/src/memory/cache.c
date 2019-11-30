@@ -18,14 +18,14 @@ void init_cache(){
 //初始化 cache ，核心就是把 valid bit 都清 0
 
 uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
-        /*uint32_t res=0;
+        uint32_t res=0;
         uint32_t tag_paddr=(0xFFFFE000&paddr);
         tag_paddr>>=13;
         uint32_t group=(0x00001FC0&paddr);
         group>>=6;
         uint32_t addrinblock=(0x0000003F&paddr);
         uint32_t index=(group<<3);
-        uint8_t alldata[128];//待读取的一/两整行
+        uint32_t alldata[2];//待读取的一/两整行
         bool shot=false;//命中与否
         int  line=0;//组内第几行
 
@@ -52,12 +52,12 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
                 }  
                 cache[index+line].valid_bit=1;
                 cache[index+line].tag=tag_paddr;
-                memcpy(cache[index+line].data,hw_mem+paddr-addrinblock,64);//把主存块搬到cache
+                memcpy(&cache[index+line].data,hw_mem+paddr-addrinblock,64);//把主存块搬到cache
         }
-        memcpy(alldata,cache[index+line].data,64);
-        if(addrinblock+len>64)*(uint32_t*)(alldata+64)=cache_read(paddr-addrinblock+64,64,cache);//跨行
+        memcpy(alldata,&cache[index+line].data,64);
+        if(addrinblock+len>64)*(alldata+1)=cache_read(paddr-addrinblock+64,64,cache);//跨行
         memcpy(&res,alldata+addrinblock,len);
-    return res;*/
+    return res;
 
         
         /*uint32_t res=0;
@@ -137,7 +137,7 @@ void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
                shot=1;
                if(addrinblock+len-1<64){//不用跨行读写
       
-                    memcpy(cache[i].data+addrinblock, &data, len);
+                    memcpy(&cache[i].data+addrinblock, &data, len);
                     hw_mem_write(paddr, len, data);
                    
                 }
@@ -145,12 +145,12 @@ void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
                     
                     uint32_t len1=64-addrinblock;
                     //void* src1=(void*)((&cache[i].data)+addrinblock);
-                    memcpy((cache[i].data)+addrinblock,&data,len1);
+                    memcpy((&cache[i].data)+addrinblock,&data,len1);
                     
                     uint32_t len2=len-len1;
                     uint32_t j=i+1;
                     //void* src2=(void*)(&cache[j].data);
-                    memcpy(cache[j].data,&data+len1,len2);
+                    memcpy(&cache[j].data,&data+len1,len2);
                    
                     hw_mem_write(paddr, len, data);
                }
