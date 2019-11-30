@@ -1,6 +1,6 @@
 typedef struct{
        uint8_t valid_bit;
-       uint32_t mark;
+       uint32_t tag;
        uint32_t data;
 
 }CacheLine;
