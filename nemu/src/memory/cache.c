@@ -27,12 +27,11 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         uint32_t index=(group<<3);
         uint32_t expand[2];
         bool shot=0;//命中与否
-        int  line=0;
+        //int  line=0;
         //bool full=1;//是否组满
-        for(int i=0;i<8;i++){
-            if(cache[index+i].tag==tag_paddr&&cache[index+i].valid_bit){//命中
+        for(;index<((group+1)<<3);i++){
+            if(cache[index].tag==tag_paddr&&cache[index].valid_bit){//命中
                shot=1;
-               line=i;
                break;
                 }
                
@@ -40,14 +39,14 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
             
         
         if(!shot){//不命中，读内存
-               int ptr=0;
-               for(;ptr<8;ptr++){
+               int ptr=(group<<3);
+               for(;ptr<((group+1)<<3);ptr++){
                     if(!cache[ptr].valid_bit){//找到空闲行
-                        line=ptr;
+                        index=ptr;
                         break;
                     }
                 } 
-                if(ptr==8){//组满随机替换
+                if(ptr==((group+1)<<3)){//组满随机替换
                     line=rand()%8;                  
                 }  
                 cache[index+line].valid_bit=1;
