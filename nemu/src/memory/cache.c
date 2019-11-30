@@ -104,41 +104,7 @@ void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
                
                   hw_mem_write(paddr, len, data);       
         }
-        /*uint32_t tag_paddr=(0xFFFFE000&paddr);
-        tag_paddr>>=13;
-        uint32_t group=(0x00001FC0&paddr);
-        group>>=6;
-        uint32_t addrinblock=(0x0000003F&paddr);
-        uint32_t index=(group<<3);
-        //uint8_t alldata[128];//待写入的一/两整行
-        bool shot=0;//命中与否
-        int  line=0;//组内第几行
-      
-        for(int i=0;i<8;i++){
-            if(cache[index+i].tag==tag_paddr&&cache[index+i].valid_bit){//命中
-               shot=1;
-               line=i;
-               break;
-                }
-               
-            }
-            
         
-        if(shot){//命中,write through
-           
-               if(addrinblock+len>64){//跨行
-                    uint32_t len1=64-len;
-                    memcpy(&cache[index+line].data+addrinblock,&data,len1);
-                    uint32_t len2=len-len1;
-                    memcpy(&cache[index+line+1].data,&data+len1,len2);
-                }
-                else{
-                     memcpy(&cache[index+line].data+addrinblock,&data,len);
-                }
-
-        }
-        memcpy(hw_mem+paddr-addrinblock,&data,len);//写主存
-        //memcpy(alldata,cache[index+line].data,64);*/
         
         
 
