@@ -1,7 +1,12 @@
+#include "nemu.h"
+#include "cpu/cpu.h"
+#include "device/mm_io.h"
+#include <stdlib.h>
+
 typedef struct{
        uint8_t valid_bit;
        uint32_t tag;
-       uint8_t data[64];
+       uint32_t data;
 
 }CacheLine;
 CacheLine L1_dcache[1024];
