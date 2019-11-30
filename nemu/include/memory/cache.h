@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 typedef struct{
-       uint8_t valid_bit;
+       bool valid_bit;
        uint32_t tag;
        uint8_t data[64];
 
