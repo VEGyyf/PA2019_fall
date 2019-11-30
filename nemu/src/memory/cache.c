@@ -67,7 +67,6 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         group>>=6;
         uint32_t addrinblock=(0x0000003F&paddr);
         bool shot=0;//命中与否
-        //bool full=1;//是否组满
         for(uint32_t i=(group<<3);i<((group+1)<<3);i++){
             if(cache[i].tag==tag_paddr&&cache[i].valid_bit){//命中
                shot=1;
