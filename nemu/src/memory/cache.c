@@ -114,7 +114,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         uint32_t addrinblock=(0x0000003F&paddr);
         bool shot=0;//命中与否
         //bool full=1;//是否组满
-        for(uint32_t i=(group<<3);i<8;i++){
+        for(uint32_t i=(group<<3);i<((group+1)<<3);i++){
             if(cache[i].tag==tag_paddr&&cache[i].valid_bit){//命中
                shot=1;
                if(addrinblock+len-1<64){//不用跨行读写
@@ -141,14 +141,14 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         }
         if(!shot){//不命中，读内存
                uint32_t ptr=(group<<3);
-               for(;ptr<8;ptr++){
+               for(;ptr<((group+1)<<3);ptr++){
                     if(!cache[ptr].valid_bit){//找到空闲行
 
                     
                         break;
                     }
                 } 
-                if(ptr==8){//组满随机替换
+                if(ptr==((group+1)<<3)){//组满随机替换
                     ptr =rand()%8;
 
                        
