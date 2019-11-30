@@ -73,7 +73,7 @@ void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
         group>>=6;
         uint32_t addrinblock=(0x0000003F&paddr);
         uint32_t index=(group<<3);
-        uint8_t alldata[128];//待写入的一/两整行
+        //uint8_t alldata[128];//待写入的一/两整行
         bool shot=0;//命中与否
         int  line=0;//组内第几行
       
@@ -88,8 +88,14 @@ void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
             
         
         if(shot){//命中,write through
-            memcpy(cache[index+line].data,&data,len);
-               if(addrinblock+len>64)*(uint32_t*)(alldata+64)=cache_read(paddr-addrinblock+64,64,cache);//跨行
+           
+               if(addrinblock+len>64){//跨行
+                    
+                }
+                else{
+                     memcpy(cache[index+line].data,&data,len);
+                }
+
         }
         memcpy(hw_mem+paddr-addrinblock,&data,len);//写主存
         //memcpy(alldata,cache[index+line].data,64);
