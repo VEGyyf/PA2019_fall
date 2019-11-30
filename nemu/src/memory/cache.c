@@ -62,7 +62,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
                 } 
                 if(ptr==((group+1)<<3)){//组满随机替换
                     uint32_t m=rand()%8;
-                    m=(group)<<3+m;
+                    m+=((group)<<3);
                     //uint32_t pos=(mark_paddr<<7)|group;
                         //memcpy(&cache[m].data,&pos,len);
                         cache[m].data=hw_mem_read(paddr,len);
