@@ -31,10 +31,6 @@ uint32_t paddr_read(paddr_t paddr, size_t len)
 #endif
     return ret;
 
-    ///*TODO*/cache_read();
-	//uint32_t ret = 0;
-	//ret = hw_mem_read(paddr, len);
-	//return ret;*/
 }
 
 void paddr_write(paddr_t paddr, size_t len, uint32_t data)
