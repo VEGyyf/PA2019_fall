@@ -47,15 +47,15 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
                         break;
                     }
                 } 
-                if(ptr==8){//组满随机替换
+                /*if(ptr==8){//组满随机替换
                     line=rand()%8;                  
                 }  
                 cache[index+line].valid_bit=1;
                 cache[index+line].tag=tag_paddr;
-                memcpy(&cache[index+line].data,hw_mem+paddr-addrinblock,64);//把主存块搬到cache
+                memcpy(&cache[index+line].data,hw_mem+paddr-addrinblock,64);//把主存块搬到cache*/
         }
         memcpy(alldata,&cache[index+line].data,64);
-        /*if(addrinblock+len>64)*(uint32_t*)(alldata+64)=cache_read(paddr-addrinblock+64,64,cache);//跨行*/
+        if(addrinblock+len>64)*(uint32_t*)(alldata+64)=cache_read(paddr-addrinblock+64,64,cache);//跨行
         memcpy(&res,alldata+addrinblock,len);
     return res;
 }
