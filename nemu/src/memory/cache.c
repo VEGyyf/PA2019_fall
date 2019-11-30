@@ -90,10 +90,10 @@ void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
         if(shot){//命中,write through
            
                if(addrinblock+len>64){//跨行
-                    
+                    uint32_t len1=64-len;
                 }
                 else{
-                     memcpy(cache[index+line].data,&data,len);
+                     memcpy(cache[index+line].data+addrinblock,&data,len);
                 }
 
         }
