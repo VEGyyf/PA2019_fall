@@ -92,22 +92,16 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         }
         if(!shot){//不命中，非写分配法
                
-                uint32_t ptr=(group<<3);
+               uint32_t ptr=(group<<3);
                for(;ptr<8;ptr++){
-                    if(!cache[ptr].valid_bit){//找到空闲行
-
-                    
+                    if(!cache[ptr].valid_bit)//找到空闲行
                         break;
-                    }
                 } 
-                if(ptr==8){//组满随机替换
+                if(ptr==8)//组满随机替换
                     ptr =rand()%8;
-
-                       
-                }  
-                    cache[ptr].data=hw_mem_read(paddr,len);
-                        cache[ptr].valid_bit=1;
-                        cache[ptr].tag=tag_paddr;
+            cache[ptr].data=hw_mem_read(paddr,len);
+            cache[ptr].valid_bit=1;
+            cache[ptr].tag=tag_paddr;
             res=cache_read (paddr , len , cache);   
     return res;
         
