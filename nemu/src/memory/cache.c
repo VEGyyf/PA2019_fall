@@ -42,13 +42,14 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
                int ptr=(group<<3);
                for(;ptr<((group+1)<<3);ptr++){
                     if(!cache[ptr].valid_bit){//找到空闲行
-                        index=ptr;
+                        
                         break;
                     }
                 } 
                 if(ptr==((group+1)<<3)){//组满随机替换
-                    line=rand()%8;                  
+                    ptr=rand()%8+(group+1<<3);                  
                 }  
+                index=ptr;
                 cache[index].valid_bit=1;
                 cache[index].tag=tag_paddr;
                 memcpy(cache[index].data,hw_mem+paddr-addrinblock,64);
