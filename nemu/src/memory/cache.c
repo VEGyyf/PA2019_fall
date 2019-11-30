@@ -54,7 +54,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
                 cache[index+line].tag=tag_paddr;
                 memcpy(cache[index+line],.data,hw_mem+paddr-offset,64);
         }
-
+        memcpy(expand,cache[index+line].data,hw_mem+paddr-offset,64);
 
     return res;
 }
