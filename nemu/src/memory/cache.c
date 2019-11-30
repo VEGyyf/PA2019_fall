@@ -137,7 +137,7 @@ void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
                shot=1;
                if(addrinblock+len-1<64){//不用跨行读写
       
-                    memcpy(&cache[i].data, &data, len);
+                    memcpy(&cache[i].data+addrinblock, &data, len);
                     hw_mem_write(paddr, len, data);
                    
                 }
