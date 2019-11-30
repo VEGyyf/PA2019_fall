@@ -4,7 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
+uint32_t hw_mem_read(paddr_t paddr, size_t len);
+void hw_mem_write(paddr_t paddr, size_t len, uint32_t data);
 
 void init_cache(){
     for(int i=0;i<1024;i++){
