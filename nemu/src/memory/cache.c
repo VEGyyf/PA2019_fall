@@ -50,7 +50,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         }
         if(!shot){//不命中，读内存
                uint32_t ptr=(group<<3);
-               for(;ptr<8;ptr++){
+               for(;ptr<((group+1)<<3);ptr++){
                     if(!cache[ptr].valid_bit){//找到空闲行
                         //uint32_t pos=(mark_paddr<<7)|group;
                         //memcpy(&cache[ptr].data,&pos,len);
@@ -60,8 +60,9 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
                         break;
                     }
                 } 
-                if(ptr==8){//组满随机替换
+                if(ptr==((group+1)<<3)){//组满随机替换
                     uint32_t m=rand()%8;
+                    m=(group)<<3+m;
                     //uint32_t pos=(mark_paddr<<7)|group;
                         //memcpy(&cache[m].data,&pos,len);
                         cache[m].data=hw_mem_read(paddr,len);
