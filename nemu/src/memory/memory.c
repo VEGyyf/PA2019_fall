@@ -42,7 +42,7 @@ void paddr_write(paddr_t paddr, size_t len, uint32_t data)
 //#ifdef CACHE_ENABLED     
 ///*TODO*/cache_write(paddr,len,data,L1_dcache);
 //#else
-	//hw_mem_write(paddr, len, data);
+	hw_mem_write(paddr, len, data);
 //#endif
 }
 
