@@ -91,6 +91,9 @@ void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
            
                if(addrinblock+len>64){//跨行
                     uint32_t len1=64-len;
+                    memcpy(cache[index+line].data+addrinblock,&data,len1);
+                    uint32_t len2=len-len1;
+                    memcpy(cache[index+line+1].data,&data,len2);
                 }
                 else{
                      memcpy(cache[index+line].data+addrinblock,&data,len);
