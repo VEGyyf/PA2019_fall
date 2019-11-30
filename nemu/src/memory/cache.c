@@ -27,7 +27,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         uint32_t index=(group<<3);
         uint8_t alldata[128];//待读取的一/两整行
         bool shot=0;//命中与否
-        int  line=0;
+        int  line=0;//组内第几行
 
         for(int i=0;i<8;i++){
             if(cache[index+i].tag==tag_paddr&&cache[index+i].valid_bit){//命中
@@ -73,9 +73,9 @@ void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
         group>>=6;
         uint32_t addrinblock=(0x0000003F&paddr);
         uint32_t index=(group<<3);
-        uint8_t alldata[128];//待读取的一/两整行
+        uint8_t alldata[128];//待写入的一/两整行
         bool shot=0;//命中与否
-        int  line=0;
+        int  line=0;//组内第几行
       
         for(int i=0;i<8;i++){
             if(cache[index+i].tag==tag_paddr&&cache[index+i].valid_bit){//命中
