@@ -56,6 +56,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         }
         memcpy(alldata,&cache[index+line].data,64);
         if(addrinblock+len>64)*(alldata+1)=cache_read(paddr-addrinblock+64,64,cache);//跨行
+        alldata=*(uint8_t*)alldata;
         memcpy(&res,alldata+addrinblock,len);
     return res;
 
