@@ -52,9 +52,9 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
                 }  
                 cache[index+line].valid_bit=1;
                 cache[index+line].tag=tag_paddr;
-                memcpy(&cache[index+line].data,hw_mem+paddr-addrinblock,64);//把主存块搬到cache
+                memcpy(cache[index+line].data,hw_mem+paddr-addrinblock,64);//把主存块搬到cache
         }
-        memcpy(alldata,&cache[index+line].data,64);
+        memcpy(alldata,cache[index+line].data,64);
         if(addrinblock+len>64)*(uint32_t*)(alldata+64)=cache_read(paddr-addrinblock+64,64,cache);//跨行
         memcpy(&res,alldata+addrinblock,len);
     return res;
@@ -91,12 +91,12 @@ void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
            
                if(addrinblock+len>64){//跨行
                     uint32_t len1=64-len;
-                    memcpy(&cache[index+line].data+addrinblock,&data,len1);
+                    memcpy(cache[index+line].data+addrinblock,&data,len1);
                     uint32_t len2=len-len1;
-                    memcpy(&cache[index+line+1].data,&data+len1,len2);
+                    memcpy(cache[index+line+1].data,&data+len1,len2);
                 }
                 else{
-                     memcpy(&cache[index+line].data+addrinblock,&data,len);
+                     memcpy(cache[index+line].data+addrinblock,&data,len);
                 }
 
         }
