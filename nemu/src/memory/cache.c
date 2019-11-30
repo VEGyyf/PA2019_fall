@@ -18,14 +18,14 @@ void init_cache(){
 //初始化 cache ，核心就是把 valid bit 都清 0
 
 uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
-           uint32_t res=0;
+        uint32_t res=0;
         uint32_t tag_paddr=(0xFFFFE000&paddr);
         tag_paddr>>=13;
         uint32_t group=(0x00001FC0&paddr);
         group>>=6;
         uint32_t addrinblock=(0x0000003F&paddr);
         uint32_t index=(group<<3);
-        uint8_t expand[128];
+        uint32_t expand[2];
         bool shot=0;//命中与否
         int  line=0;
         //bool full=1;//是否组满
