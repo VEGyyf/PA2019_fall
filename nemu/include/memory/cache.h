@@ -3,7 +3,7 @@
 typedef struct{
        bool valid_bit;
        uint32_t tag;
-       uint8_t data[64];
+       uint32_t data;
 
 }CacheLine;
 CacheLine L1_dcache[1024];

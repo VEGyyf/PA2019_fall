@@ -25,7 +25,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         group>>=6;
         uint32_t addrinblock=(0x0000003F&paddr);
         uint32_t index=(group<<3);
-        uint32_t alldata[2];//待读取的一/两整行
+        uint32_t alldata[32];//待读取的一/两整行
         bool shot=false;//命中与否
         int  line=0;//组内第几行
 
@@ -56,7 +56,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         }
         memcpy(alldata,&cache[index+line].data,64);
         if(addrinblock+len>64)*(alldata+1)=cache_read(paddr-addrinblock+64,64,cache);//跨行
-        //alldata=*(uint8_t*)alldata;
+        alldata=*(uint8_t*)alldata;
         memcpy(&res,alldata+addrinblock,len);
     return res;
 
