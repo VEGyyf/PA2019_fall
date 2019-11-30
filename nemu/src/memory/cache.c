@@ -45,7 +45,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
                         break;
                     }
                 } 
-                if(ptr==8){//组满随机替换
+                if(ptr==(group<<3)){//组满随机替换
                     ptr=rand()%8;                  
                 }  
                 index=ptr;
