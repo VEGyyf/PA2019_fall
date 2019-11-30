@@ -104,7 +104,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
             cache[ptr].tag=tag_paddr;
             res=cache_read (paddr , len , cache); 
         }  
-    return res;
+    return res;*/
         
 /*uint32_t res=0;
         uint32_t tag_paddr=(0xFFFFE000&paddr);
