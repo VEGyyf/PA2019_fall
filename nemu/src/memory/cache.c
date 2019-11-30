@@ -86,7 +86,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
                     uint32_t j=i+1;
                     //void* src2=(void*)(&cache[j].data);
                     memcpy(&part2,&cache[j].data,len2);
-                    part2<<=len1;
+                    part1<<=len2;
                     res=part2|part1;
                }
             }
