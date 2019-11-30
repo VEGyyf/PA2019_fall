@@ -18,7 +18,7 @@ void init_cache(){
 //初始化 cache ，核心就是把 valid bit 都清 0
 
 uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
-        /*uint32_t res=0;
+        uint32_t res=0;
         uint32_t tag_paddr=(0xFFFFE000&paddr);
         tag_paddr>>=13;
         uint32_t group=(0x00001FC0&paddr);
@@ -55,10 +55,10 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         memcpy(alldata,cache[index+line].data,64);
         if(addrinblock+len>64)*(uint32_t*)(alldata+64)=cache_read(paddr-addrinblock+64,64,cache);//跨行
         memcpy(&res,alldata+addrinblock,len);
-    return res;*/
+    return res;
 
         
-        uint32_t res=0;
+        /*uint32_t res=0;
         uint32_t tag_paddr=(0xFFFFE000&paddr);
         tag_paddr>>=13;
         uint32_t group=(0x00001FC0&paddr);
@@ -111,7 +111,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         }
 
 
-    return res;
+    return res;*/
 
 }
 //读 cache
@@ -135,7 +135,7 @@ void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
                shot=1;
                if(addrinblock+len-1<64){//不用跨行读写
       
-                    memcpy(&cache[i].data+addrinblock, &data, len);
+                    memcpy(cache[i].data+addrinblock, &data, len);
                     hw_mem_write(paddr, len, data);
                    
                 }
@@ -143,12 +143,12 @@ void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
                     
                     uint32_t len1=64-addrinblock;
                     //void* src1=(void*)((&cache[i].data)+addrinblock);
-                    memcpy((&cache[i].data)+addrinblock,&data,len1);
+                    memcpy((cache[i].data)+addrinblock,&data,len1);
                     
                     uint32_t len2=len-len1;
                     uint32_t j=i+1;
                     //void* src2=(void*)(&cache[j].data);
-                    memcpy(&cache[j].data,&data+len1,len2);
+                    memcpy(cache[j].data,&data+len1,len2);
                    
                     hw_mem_write(paddr, len, data);
                }
