@@ -39,11 +39,11 @@ uint32_t paddr_read(paddr_t paddr, size_t len)
 
 void paddr_write(paddr_t paddr, size_t len, uint32_t data)
 {
-#ifdef CACHE_ENABLED     
-/*TODO*/cache_write(paddr,len,data,L1_dcache);
-#else
-	hw_mem_write(paddr, len, data);
-#endif
+//#ifdef CACHE_ENABLED     
+///*TODO*/cache_write(paddr,len,data,L1_dcache);
+//#else
+	//hw_mem_write(paddr, len, data);
+//#endif
 }
 
 uint32_t laddr_read(laddr_t laddr, size_t len)
