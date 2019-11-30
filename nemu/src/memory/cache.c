@@ -25,7 +25,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         group>>=6;
         uint32_t addrinblock=(0x0000003F&paddr);
         uint32_t index=(group<<3);
-        uint32_t expand[2];
+        uint64_t expand[2];
         bool shot=0;//命中与否
         //int  line=0;
         //bool full=1;//是否组满
@@ -49,12 +49,12 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
                 if(ptr==((group+1)<<3)){//组满随机替换
                     line=rand()%8;                  
                 }  
-                cache[index+line].valid_bit=1;
-                cache[index+line].tag=tag_paddr;
-                memcpy(cache[index+line].data,hw_mem+paddr-addrinblock,64);
+                cache[index].valid_bit=1;
+                cache[index].tag=tag_paddr;
+                memcpy(cache[index].data,hw_mem+paddr-addrinblock,64);
         }
-        memcpy(expand,cache[index+line].data,64);
-        if(addrinblock+len>64)*(expand+1)=cache_read(paddr-addrinblock+64,64,cache);
+        memcpy(expand,cache[index].data,64);
+        if(addrinblock+len>64)expand[1]=cache_read(paddr-addrinblock+64,64,cache);
         memcpy(&res,expand+addrinblock,len);
     return res;
 
