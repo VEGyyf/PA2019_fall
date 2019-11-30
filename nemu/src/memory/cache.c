@@ -18,20 +18,21 @@ void init_cache(){
 //初始化 cache ，核心就是把 valid bit 都清 0
 
 uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
-        uint32_t res=0;
+           uint32_t res=0;
         uint32_t tag_paddr=(0xFFFFE000&paddr);
         tag_paddr>>=13;
         uint32_t group=(0x00001FC0&paddr);
         group>>=6;
         uint32_t addrinblock=(0x0000003F&paddr);
         uint32_t index=(group<<3);
-        uint8_t alldata[128];//待读取的一/两整行
-        bool shot=false;//命中与否
-        //int  line=0;//组内第几行
-
-        for(;index<((group+1)<<3);index++){
-            if(cache[index].tag==tag_paddr&&cache[index].valid_bit==1){//命中
-               shot=true;
+        uint8_t expand[128];
+        bool shot=0;//命中与否
+        int  line=0;
+        //bool full=1;//是否组满
+        for(int i=0;i<8;i++){
+            if(cache[index+i].tag==tag_paddr&&cache[index+i].valid_bit){//命中
+               shot=1;
+               line=i;
                break;
                 }
                
@@ -39,23 +40,23 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
             
         
         if(!shot){//不命中，读内存
-               int ptr=(group<<3);
-               for(;ptr<((group+1)<<3);ptr++){
+               int ptr=0;
+               for(;ptr<8;ptr++){
                     if(!cache[ptr].valid_bit){//找到空闲行
+                        line=i;
                         break;
                     }
                 } 
-                if(ptr==(group<<3)){//组满随机替换
-                    ptr=rand()%8;                  
+                if(ptr==8){//组满随机替换
+                    line=rand()%8;                  
                 }  
-                index=ptr;
-                cache[index].valid_bit=1;
-                cache[index].tag=tag_paddr;
-                memcpy(cache[index].data,hw_mem+paddr-addrinblock,64);//把主存块搬到cache
+                cache[index+line].valid_bit=1;
+                cache[index+line].tag=tag_paddr;
+                memcpy(cache[index+line].data,hw_mem+paddr-addrinblock,64);
         }
-        memcpy(alldata,cache[index].data,64);
-        if(addrinblock+len>64)*(uint32_t*)(alldata+64)=cache_read(paddr-addrinblock+64,64,cache);//跨行
-        memcpy(&res,alldata+addrinblock,len);
+        memcpy(expand,cache[index+line].data,64);
+        if(addrinblock+len>64)*(uint32_t*)(expand+64)=cache_read(paddr-addrinblock+64,64,cache);
+        memcpy(&res,expand+addrinblock,len);
     return res;
 
         
