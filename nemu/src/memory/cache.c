@@ -93,7 +93,7 @@ void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
                     uint32_t len1=64-len;
                     memcpy(&cache[index+line].data+addrinblock,&data,len1);
                     uint32_t len2=len-len1;
-                    cache_write(paddr-addrinblock+64,len2,&data+len1,cache);//memcpy(&cache[index+line+1].data,&data,len2);
+                    memcpy(&cache[index+line+1].data,&data+len1,len2);
                 }
                 else{
                      memcpy(&cache[index+line].data+addrinblock,&data,len);
