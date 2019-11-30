@@ -57,7 +57,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
                         //memcpy(&cache[ptr].data,&pos,len);
                         cache[ptr].data=hw_mem_read(paddr,len);
                         cache[ptr].valid_bit=1;
-                        memcpy(&cache[ptr].mark,&mark_paddr,19);
+                        memcpy(&cache[ptr].mark,&mark_paddr,mark_paddr.size());
                         break;
                     }
                 } 
@@ -67,7 +67,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
                         //memcpy(&cache[m].data,&pos,len);
                         cache[m].data=hw_mem_read(paddr,len);
                         cache[m].valid_bit=1;
-                        memcpy(&cache[m].mark,&mark_paddr,19);
+                        memcpy(&cache[m].mark,&mark_paddr,mark_paddr.size());
                 }  
             res=cache_read (paddr , len , cache);             
         }
