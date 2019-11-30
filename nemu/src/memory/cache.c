@@ -41,12 +41,12 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         
         if(!shot){//不命中，读内存
                int ptr=0;
-               /*for(;ptr<8;ptr++){
+               for(;ptr<8;ptr++){
                     if(!cache[ptr].valid_bit){//找到空闲行
                         line=ptr;
                         break;
                     }
-                } */
+                } 
                 if(ptr==8){//组满随机替换
                     line=rand()%8;                  
                 }  
