@@ -28,8 +28,8 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
                shot=1;
                if(addrinblock+len-1<64){//不用跨行读写
                   
-                    void* src=(void*)((&cache[i].data)+addrinblock);
-                    memcpy(&res, src, len);
+                    //void* src=(void*)((&cache[i].data)+addrinblock);
+                    memcpy(&res, (&cache[i].data)+addrinblock, len);
                    
                 }
                else{//跨行读写
