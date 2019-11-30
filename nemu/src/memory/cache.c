@@ -153,7 +153,7 @@ uint32_t res=0;
 
                        
                 }  
-                    cache[ptr].data=hw_mem_read(paddr,len);
+                    memcpy(&cache[ptr].data,hw_mem+paddr,len);//cache[ptr].data=hw_mem_read(paddr,len);
                         cache[ptr].valid_bit=1;
                         cache[ptr].tag=tag_paddr;
             res=cache_read (paddr , len , cache);             
