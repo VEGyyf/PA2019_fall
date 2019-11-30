@@ -100,7 +100,7 @@ void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
                 }
 
         }
-        memcpy(hw_mem+paddr-addrinblock,&data,len);//写主存
+        memcpy(hw_mem+paddr-addrinblock,&data,64);//写主存
         //memcpy(alldata,cache[index+line].data,64);
         
         
