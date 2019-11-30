@@ -88,12 +88,13 @@ void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
             
         
         if(shot){//命中,write through
-               
+            memcpy(cache[index+line].data,&data,len);
+               if(addrinblock+len>64)*(uint32_t*)(alldata+64)=cache_read(paddr-addrinblock+64,64,cache);//跨行
         }
-        memcpy(hw_mem+paddr-addrinblock,&data,64);//写主存
-        memcpy(alldata,cache[index+line].data,64);
-        if(addrinblock+len>64)*(uint32_t*)(alldata+64)=cache_read(paddr-addrinblock+64,64,cache);//跨行
-        memcpy(&res,alldata+addrinblock,len);
+        memcpy(hw_mem+paddr-addrinblock,&data,len);//写主存
+        //memcpy(alldata,cache[index+line].data,64);
+        
+        
 
 }
 //写 cache
