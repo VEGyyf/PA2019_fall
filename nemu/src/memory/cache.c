@@ -87,21 +87,10 @@ void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
             }
             
         
-        if(!shot){//不命中，读内存
-               int ptr=0;
-               for(;ptr<8;ptr++){
-                    if(!cache[ptr].valid_bit){//找到空闲行
-                        line=i;
-                        break;
-                    }
-                } 
-                if(ptr==8){//组满随机替换
-                    line=rand()%8;                  
-                }  
-                cache[index+line].valid_bit=1;
-                cache[index+line].tag=tag_paddr;
-                memcpy(cache[index+line].data,hw_mem+paddr-addrinblock,64);//把主存块搬到cache
+        if(shot){//命中,write through
+               
         }
+        memcpy(hw_mem+paddr-addrinblock,&data,64);//写主存
         memcpy(alldata,cache[index+line].data,64);
         if(addrinblock+len>64)*(uint32_t*)(alldata+64)=cache_read(paddr-addrinblock+64,64,cache);//跨行
         memcpy(&res,alldata+addrinblock,len);
