@@ -102,7 +102,8 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
             cache[ptr].data=hw_mem_read(paddr,len);
             cache[ptr].valid_bit=1;
             cache[ptr].tag=tag_paddr;
-            res=cache_read (paddr , len , cache);   
+            res=cache_read (paddr , len , cache); 
+        }  
     return res;
         
 /*uint32_t res=0;
