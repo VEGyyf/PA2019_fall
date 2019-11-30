@@ -25,11 +25,11 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         group>>=6;
         uint32_t addrinblock=(0x0000003F&paddr);
         uint32_t index=(group<<3);
-        uint64_t expand[2];
+        uint32_t expand[2];
         bool shot=0;//命中与否
         //int  line=0;
         //bool full=1;//是否组满
-        for(;index<((group+1)<<3);index++){
+        for(;index<((group+1)<<3);i++){
             if(cache[index].tag==tag_paddr&&cache[index].valid_bit){//命中
                shot=1;
                break;
