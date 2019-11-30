@@ -6,7 +6,7 @@
 
 uint32_t hw_mem_read(paddr_t paddr, size_t len);
 void hw_mem_write(paddr_t paddr, size_t len, uint32_t data);
-CacheLine L1_dcache[1024];
+//CacheLine L1_dcache[1024];
 
 void init_cache(){
     for(int i=0;i<1024;i++){
@@ -18,60 +18,40 @@ void init_cache(){
 
 uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
         uint32_t res=0;
-        uint32_t mark_paddr=(0xFFFFE000&paddr);
-        mark_paddr>>=13;
+        uint32_t tag_paddr=(0xFFFFE000&paddr);
+        tag_paddr>>=13;
         uint32_t group=(0x00001FC0&paddr);
         group>>=6;
         uint32_t addrinblock=(0x0000003F&paddr);
+        uint32_t index=(group<<3);
+        uint8_t expand[128];
         bool shot=0;//命中与否
+        int  line=0;
         //bool full=1;//是否组满
-        for(uint32_t i=(group<<3);i<((group+1)<<3);i++){
-            if(cache[i].mark==mark_paddr&&cache[i].valid_bit){//命中
+        for(int i=0;i<8;i++){
+            if(cache[index+i].tag==tag_paddr&&cache[index+i].valid_bit){//命中
                shot=1;
-               if(addrinblock+len-1<64){//不用跨行读写
-                    //void* src=(void*)((&cache[i].data)+addrinblock);
-                    memcpy(&res, (&cache[i].data)+addrinblock, len);
-                   
+               line=i;
+               break;
                 }
-               else{//跨行读写
-                    uint32_t part1=0;
-                    uint32_t len1=64-addrinblock;
-                    //void* src1=(void*)((&cache[i].data)+addrinblock);
-                    memcpy(&part1,(&cache[i].data)+addrinblock,len1);
-                    uint32_t part2=0;
-                    uint32_t len2=len-len1;
-                    uint32_t j=i+1;
-                    //void* src2=(void*)(&cache[j].data);
-                    memcpy(&part2,&cache[j].data,len2);
-                    part2<<=len1;
-                    res=part2|part1;
-               }
+               
             }
             
-        }
+        
         if(!shot){//不命中，读内存
-               uint32_t ptr=(group<<3);
-               for(;ptr<((group+1)<<3);ptr++){
+               int ptr=0;
+               for(;ptr<8;ptr++){
                     if(!cache[ptr].valid_bit){//找到空闲行
-                        //uint32_t pos=(mark_paddr<<7)|group;
-                        //memcpy(&cache[ptr].data,&pos,len);
-                        cache[ptr].data=hw_mem_read(paddr,len);
-                        cache[ptr].valid_bit=1;
-                        cache[ptr].mark=mark_paddr;//memcpy(&cache[ptr].mark,&mark_paddr,mark_paddr.size());
+                        line=i;
                         break;
                     }
                 } 
-                if(ptr==((group+1)<<3)){//组满随机替换
-                    uint32_t m=rand()%8;
-                    m+=((group)<<3);
-                    //uint32_t pos=(mark_paddr<<7)|group;
-                        //memcpy(&cache[m].data,&pos,len);
-                        cache[m].data=hw_mem_read(paddr,len);
-                        cache[m].valid_bit=1;
-                        cache[m].mark=mark_paddr;
-                        //memcpy(&cache[m].mark,&mark_paddr,mark_paddr.size());
+                if(ptr==8){//组满随机替换
+                    line=rand()%8;                  
                 }  
-            res=cache_read (paddr , len , cache);             
+                cache[index+line].valid_bit=1;
+                cache[index+line].tag=tag_paddr;
+                memcpy(cache[index+line],.data,hw_mem+paddr-offset,64);
         }
 
 
@@ -86,15 +66,15 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
 
 void cache_write (paddr_t paddr , size_t len , uint32_t data, CacheLine *cache){
        
-        uint32_t mark_paddr=(0xFFFFE000&paddr);
-        mark_paddr>>=13;
+        uint32_t tag_paddr=(0xFFFFE000&paddr);
+        tag_paddr>>=13;
         uint32_t group=(0x00001FC0&paddr);
         group>>=6;
         uint32_t addrinblock=(0x0000003F&paddr);
         bool shot=0;//命中与否
         //bool full=1;//是否组满
         for(uint32_t i=(group<<3);i<((group+1)<<3);i++){
-            if(cache[i].mark==mark_paddr&&cache[i].valid_bit){//命中
+            if(cache[i].tag==tag_paddr&&cache[i].valid_bit){//命中
                shot=1;
                if(addrinblock+len-1<64){//不用跨行读写
       
