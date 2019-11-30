@@ -106,7 +106,7 @@ uint32_t cache_read (paddr_t paddr , size_t len , CacheLine *cache){
 
                        
                 }  
-                    memcpy(&cache[ptr].data,hw_mem+paddr,len);//cache[ptr].data=hw_mem_read(paddr,len);
+                    memcpy(&cache[ptr].data+addrinblock,hw_mem+paddr,len);//cache[ptr].data=hw_mem_read(paddr,len);
                         cache[ptr].valid_bit=1;
                         cache[ptr].tag=tag_paddr;
             res=cache_read (paddr , len , cache);             
