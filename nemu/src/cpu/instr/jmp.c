@@ -24,19 +24,18 @@ make_instr_func(jmp_far_imm)//TODO:change CS,段间绝对转移
         OPERAND obj;
         obj.sreg = SREG_CS;
         obj.data_size = data_size;
-        obj.addr=&cpu.cs;
-        //int len=1;
-        //len+=modrm_rm(eip+1,&obj);
+        int len=1;
+        len+=modrm_rm(eip+1,&obj);
         operand_read(&obj);
         /*uint32_t csval=(obj.val>>5);
         uint32_t ipval=(obj.val&(0xffffffff));
         cpu.eip = ipval;
         cpu.cs.val=csval;*/
-        /*memcpy((&cpu.eip),m.val,4);
+        memcpy((&cpu.eip),m.val,4);
         memcpy((&cpu.cs.val),m.val+4,2);   
         uint8_t idx=obj.addr&0xf;     
         load_sreg(idx);
-        print_asm_1("ljmp", "", len, &obj);*/
+        print_asm_1("ljmp", "", len, &obj);
         
 
 
