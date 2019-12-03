@@ -85,28 +85,63 @@ typedef struct
 #endif
 } CPU_STATE;
 
-enum
-{
-	REG_AL,
-	REG_CL,
-	REG_DL,
-	REG_BL,
-	REG_AH,
-	REG_CH,
-	REG_DH,
-	REG_BH
-};
-enum
-{
-	REG_AX,
-	REG_CX,
-	REG_DX,
-	REG_BX,
-	REG_SP,
-	REG_BP,
-	REG_SI,
-	REG_DI
-};
+typedef struct {
+    uint32_t limit :16;
+    uint32_t base :32;
+   }GDTR;
+typedef union {
+    struct {
+        uint32_t pe :1;
+        uint32_t mp :1;
+        uint32_t em :1;
+        uint32_t ts :1;
+        uint32_t et :1;
+        uint32_t reserve :26;
+        uint32_t pg :1;
+    };
+    uint32_t val;
+ }CR0;
+typedef struct {
+// the 16 16-bit visible part, i.e., the selector
+    union {
+            uint16_t val;
+            struct {
+                    uint32_t rpl :2;
+                    uint32_t ti :1;
+                    uint32_t index :13;
+            };
+     };
+// the invisible part, i.e., cache part
+    struct {
+            uint32_t base;
+            uint32_t limit;
+            uint32_t type :5;
+            uint32_t privilege_level :2;
+            uint32_t soft_use :1;
+    };
+  }SegReg;
+ enum
+            {
+	        REG_AL,
+	        REG_CL,
+	        REG_DL,
+	        REG_BL,
+	        REG_AH,
+	        REG_CH,
+	        REG_DH,
+	        REG_BH
+        };
+        enum
+            {
+	        REG_AX,
+	        REG_CX,
+	        REG_DX,
+	        REG_BX,
+	        REG_SP,
+	        REG_BP,
+	        REG_SI,
+	        REG_DI
+        };
 enum
 {
 	REG_EAX,
