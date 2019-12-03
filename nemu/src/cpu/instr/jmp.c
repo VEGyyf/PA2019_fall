@@ -19,7 +19,7 @@ make_instr_func(jmp_near)
         return 1 + data_size / 8;
 }
 
-make_instr_func(jmp_far_imm)//TODO:change CS
+make_instr_func(jmp_far_imm)//TODO:change CS,段间绝对转移
 {
         OPERAND rel;
         rel.type = OPR_IMM;
@@ -35,7 +35,7 @@ make_instr_func(jmp_far_imm)//TODO:change CS
 
         cpu.eip += offset;
 
-        return 1 + data_size / 8;
+        return 0;
 }
 
 make_instr_func(jmp_short)
