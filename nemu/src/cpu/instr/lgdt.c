@@ -10,6 +10,7 @@ make_instr_func(lgdt)
     m.addr=eip+3;
     m.type=OPR_IMM;
 	operand_read(&m);
+    print_asm_1("lgdt", "", 6, &m);
     uint32_t lmt=0;
     memcpy(&lmt,hw_mem+m.val,2);
     cpu.gdtr.limit=lmt;
@@ -21,7 +22,7 @@ make_instr_func(lgdt)
     else if(data_size==32)memcpy(&bs,hw_mem+m.val+16,4);
     cpu.gdtr.base=bs;   
     assert(lmt==0xfffff);
-	print_asm_1("lgdt", "", 6, &m);
+	
 	return 6;
 }
 
