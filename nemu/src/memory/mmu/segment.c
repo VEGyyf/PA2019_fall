@@ -29,6 +29,11 @@ void load_sreg(uint8_t sreg)
     uint32_t base_31_24 =addr.base_31_24;
     uint32_t base_23_16 =addr.base_23_16 ;
     uint32_t base_15_0=addr.base_15_0;
+    base_31_24<<=24;
+    base_23_16<<=16;
+    uint32_t bs=base_15_0|base_23_16;
+    bs=bs|base_31_24;
+    temp.base=bs;
     temp.privilege_level=addr.privilege_level;
     temp.type=addr.type;
     temp.soft_use=addr.soft_use;
