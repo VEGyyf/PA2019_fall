@@ -78,7 +78,7 @@ make_instr_func(mov_srm162r_l) {
         return len;
 }
 
-make_instr_func(cmove_c2r_l){
+make_instr_func(mov_c2r_l){
         int len = 1;
         OPERAND src, dst;
         src.data_size = data_size;
@@ -94,7 +94,7 @@ make_instr_func(cmove_c2r_l){
         print_asm_2("mov", "", len, &src, &dst);
         return len;
 }
-make_instr_func(cmove_r2c_l){
+make_instr_func(mov_r2c_l){
         int len = 1;
         OPERAND src, dst;
         src.data_size = data_size;
@@ -110,7 +110,7 @@ make_instr_func(cmove_r2c_l){
         print_asm_2("mov", "", len, &src, &dst);
         return len;
 }
-make_instr_func(cmove_rm2s_w){
+make_instr_func(mov_rm2s_w){
         int len = 1;
         OPERAND src, dst;
         src.data_size = data_size;
