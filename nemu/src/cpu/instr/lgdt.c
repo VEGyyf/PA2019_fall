@@ -16,10 +16,10 @@ make_instr_func(lgdt)
     cpu.gdtr.limit=lmt;
     uint32_t bs=0;
     if(data_size==16){
-        memcpy(&bs,addr+2,3);
+        memcpy(&bs,addr+16,3);
         //memset(&bs+3,0,1);
     }
-    else if(data_size==32)memcpy(&bs,addr+2,4);
+    else if(data_size==32)memcpy(&bs,addr+16,4);
     cpu.gdtr.base=bs;   
     assert(lmt==0xfffff);
 	print_asm_1("lgdt", "", len, &m);
