@@ -4,6 +4,7 @@ make_instr_func(lgdt)
 {
     OPERAND m;
 	m.data_size = data_size;
+    m.sreg=SREG_ES;
 	int len=1;
     len+=modrm_rm(eip+1,&m);
 	operand_read(&m);
