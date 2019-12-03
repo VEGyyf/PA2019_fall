@@ -11,7 +11,7 @@ make_instr_func(lgdt)
     memcpy((&cpu.gdtr.limit),m.val,2);
     if(data_size==16){
         memcpy((&cpu.gdtr.limit),m.val+2,3);
-        memset((&cpu.gdtr.limit)+3,,1);
+        memset((&cpu.gdtr.limit)+3,0,1);
     }
     else if(data_size==32)memcpy((&cpu.gdtr.limit),m.val+2,4);
     /*uint32_t lmt=(m.val&0xffff);//2 个低位字节
