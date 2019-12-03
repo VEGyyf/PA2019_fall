@@ -27,10 +27,14 @@ make_instr_func(jmp_far_imm)//TODO:change CS,段间绝对转移
         int len=1;
         len+=modrm_rm(eip+1,&obj);
         operand_read(&obj);
-
-        print_asm_1("jmp", "", len, &obj);
+        uint32_t csval=(obj.val>>5);
+        uint32_t ipval=(obj.val&(0xffffffff));
+        cpu.eip = ipval;
+        cpu.cs.val=csval;
         
-        cpu.eip = obj.val;
+        print_asm_1("ljmp", "", len, &obj);
+        
+
 
         return 0;
 }
