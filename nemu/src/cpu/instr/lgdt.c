@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "cpu/instr.h"
 
 make_instr_func(lgdt)
