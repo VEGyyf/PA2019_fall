@@ -31,7 +31,7 @@ make_instr_func(jmp_far_imm)//TODO:change CS,段间绝对转移
         uint32_t csval=0;
         uint32_t ipval=0;
         memcpy(&ipval,hw_mem+obj.val,4);
-        cpu.eip=ipval;
+        cpu.eip=obj.val;
         memcpy(&csval,hw_mem+obj.val+32,2);  
         cpu.cs.val =csval;
 
