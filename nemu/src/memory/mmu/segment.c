@@ -41,7 +41,7 @@ void load_sreg(uint8_t sreg)
     limit_19_16<<=16;
     uint32_t lmt=limit_19_16|limit_15_0;
 
-    assert(bs==0);
+    //assert(bs==0);
     //assert(lmt==0xfffff);
     //assert(temp.granularity==1);
 
