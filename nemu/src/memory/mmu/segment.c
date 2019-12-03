@@ -43,7 +43,7 @@ void load_sreg(uint8_t sreg)
 
     assert(bs==0);
     //assert(lmt==0xfffff);
-    assert(temp.granularity==1);
+    //assert(temp.granularity==1);
 
     cpu.segReg[sreg].base=bs;
     cpu.segReg[sreg].limit=lmt;
