@@ -7,8 +7,8 @@ make_instr_func(lgdt)
     OPERAND m;
 	m.data_size = data_size;
     m.sreg=SREG_ES;
-	int len=1;
-    len+=modrm_rm(eip+1,&m);
+    m.addr=eip+3;
+    m.type=OPR_IMM;
 	operand_read(&m);
     uint32_t lmt=0;
     memcpy(&lmt,hw_mem+m.val,2);
@@ -22,7 +22,7 @@ make_instr_func(lgdt)
     cpu.gdtr.base=bs;   
     assert(lmt==0xfffff);
 	print_asm_1("lgdt", "", len, &m);
-	return len;
+	return 7;
 }
 
 
