@@ -88,7 +88,8 @@ make_instr_func(cmove_c2r_l){
         len += modrm_r_rm(eip + 1, &dst, &src);
         operand_read(&src);
         dst.val=src.val;//?
-        load_sreg();
+        uint8_t idx=(dst.addr&0xf);
+        load_sreg(idx);//void load_sreg(uint8_t sreg);
         operand_write(&dst);
         print_asm_2("mov", "", len, &src, &dst);
         return len;
