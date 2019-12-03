@@ -21,7 +21,7 @@ make_instr_func(lgdt)
     else if(data_size==32)memcpy(&bs,hw_mem+m.val+16,4);
     cpu.gdtr.base=bs;   
     assert(lmt==0xfffff);
-	print_asm_1("lgdt", "", len, &m);
+	print_asm_1("lgdt", "", 7, &m);
 	return 7;
 }
 
