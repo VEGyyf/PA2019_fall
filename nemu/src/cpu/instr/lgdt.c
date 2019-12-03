@@ -22,7 +22,7 @@ make_instr_func(lgdt)
     cpu.gdtr.base=bs;   
     assert(lmt==0xfffff);
 	print_asm_1("lgdt", "", 6, &m);
-	return 7;
+	return 6;
 }
 
 
