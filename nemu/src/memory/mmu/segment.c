@@ -20,35 +20,28 @@ void load_sreg(uint8_t sreg)
 	 */
     uint32_t* addr=cpu.gdtr.base+(cpu.segReg[sreg].index*8);
     SegDesc temp;//memcpy?
-    //memcpy((&temp.limit),addr,2);
+    memcpy(&temp,addr,8);
     //memcpy((&temp.limit)+2,addr+6,2);
     //memcpy((&temp.limit),addr,2);
     //memcpy((&temp.limit),addr,2);
     //memcpy((&temp.limit),addr,2);
     //memcpy((&temp.limit),addr,2);
-    uint32_t base_31_24 =addr.base_31_24;
-    uint32_t base_23_16 =addr.base_23_16 ;
-    uint32_t base_15_0=addr.base_15_0;
+    uint32_t base_31_24 =temp.base_31_24;
+    uint32_t base_23_16 =temp.base_23_16 ;
+    uint32_t base_15_0=temp.base_15_0;
     base_31_24<<=24;
     base_23_16<<=16;
     uint32_t bs=base_15_0|base_23_16;
     bs=bs|base_31_24;
-    temp.base=bs;
+    
 
-    uint32_t limit_15_0=addr.limit_15_0;
-    uint32_t limit_19_16=addr.limit_19_16;
+    uint32_t limit_15_0=temp.limit_15_0;
+    uint32_t limit_19_16=temp.limit_19_16;
     limit_19_16<<=16;
     uint32_t lmt=limit_19_16|limit_15_0;
-    temp.limit=lmt;    
 
-    temp.privilege_level=addr.privilege_level;
-    temp.type=addr.type;
-    temp.soft_use=addr.soft_use;
-    
-    
-
-    cpu.segReg[sreg].base=temp.base;
-    cpu.segReg[sreg].limit=temp.limit;
+    cpu.segReg[sreg].base=bs;
+    cpu.segReg[sreg].limit=lmt;
     cpu.segReg[sreg].type=temp.type;
     cpu.segReg[sreg].privilege_level=temp.privilege_level;
     cpu.segReg[sreg].soft_use=temp.soft_use;
