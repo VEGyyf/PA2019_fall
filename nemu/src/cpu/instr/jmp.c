@@ -32,8 +32,9 @@ make_instr_func(jmp_far_imm)//TODO:change CS,段间绝对转移
         cpu.eip = ipval;
         cpu.cs.val=csval;*/
         memcpy((&cpu.eip),m.val,4);
-        memcpy((&cpu.cs.val),m.val+4,2);        
-        load_sreg(obj.addr);
+        memcpy((&cpu.cs.val),m.val+4,2);   
+        uint8_t idx=obj.addr&0xf;     
+        load_sreg(idx);
         print_asm_1("ljmp", "", len, &obj);
         
 
