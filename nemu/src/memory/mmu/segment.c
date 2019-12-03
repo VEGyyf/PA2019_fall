@@ -35,14 +35,15 @@ void load_sreg(uint8_t sreg)
     base_23_16<<=16;
     uint32_t bs=base_15_0|base_23_16;
     bs=bs|base_31_24;
-    assert(temp.base==0);
-    assert(temp.limit==0xfffff);
-    assert(temp.granularity==1);
 
     uint32_t limit_15_0=temp.limit_15_0;
     uint32_t limit_19_16=temp.limit_19_16;
     limit_19_16<<=16;
     uint32_t lmt=limit_19_16|limit_15_0;
+
+    assert(bs==0);
+    assert(lmt==0xfffff);
+    assert(temp.granularity==1);
 
     cpu.segReg[sreg].base=bs;
     cpu.segReg[sreg].limit=lmt;
