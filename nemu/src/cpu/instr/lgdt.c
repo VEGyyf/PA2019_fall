@@ -14,8 +14,9 @@ make_instr_func(lgdt)
         bs=((m.val>>4)&0xffffff);
     }
     else if(data_size==32){
-    
+        bs=((m.val>>4)&0xffffffff);
     }
+    cpu.gdtr.limit=lmt;
 	print_asm_0("lgdt", "", len, &m);
 	return len;
 }
