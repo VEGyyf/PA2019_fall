@@ -19,9 +19,9 @@ void load_sreg(uint8_t sreg)
 	 * The visible part of 'sreg' should be assigned by mov or ljmp already.
 	 */
     uint32_t addr=cpu.gdtr.base+(cpu.segReg[sreg].index*8);
-    addr=(void* )addr;
+    void* start=(void* )addr;
     SegDesc temp;//memcpy?
-    memcpy(&temp,addr,8);
+    memcpy(&temp,start,8);
     //memcpy((&temp.limit)+2,addr+6,2);
     //memcpy((&temp.limit),addr,2);
     //memcpy((&temp.limit),addr,2);
