@@ -27,6 +27,8 @@ make_instr_func(jmp_far_imm)//TODO:change CS,段间绝对转移
         obj.addr=eip+1;
         obj.type=OPR_IMM;
         
+        print_asm_1("ljmp", "", 6, &obj);
+    
         operand_read(&obj);
         uint32_t csval=0;
         uint32_t ipval=0;
@@ -37,7 +39,7 @@ make_instr_func(jmp_far_imm)//TODO:change CS,段间绝对转移
 
         uint8_t idx=obj.addr&0xf;     
         load_sreg(idx);
-        print_asm_1("ljmp", "", 6, &obj);
+        
         
 
 
