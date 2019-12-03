@@ -20,7 +20,8 @@ void load_sreg(uint8_t sreg)
 	 */
     void * addr=gdtr.base+(cpu.segReg[sreg].index*8);
     SegDesc temp;//memcpy?
-    memcpy((&temp.limit),);
+    memcpy((&temp.limit),addr,2);
+    
     cpu.segReg[sreg].base=temp.base;
     cpu.segReg[sreg].limit=temp.limit;
     cpu.segReg[sreg].type=temp.type;
