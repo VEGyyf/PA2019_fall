@@ -11,7 +11,7 @@ make_instr_func(lgdt)
     cpu.gdtr.limit=lmt;
     uint32_t bs;
     if(data_size==16){
-
+        bs=((m.val>>4)&0xffffff);
     }
     else if(data_size==32){
     
