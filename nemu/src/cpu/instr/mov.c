@@ -1,4 +1,5 @@
 #include "cpu/instr.h"
+#include "segment.h"
 
 static void instr_execute_2op() 
 {
