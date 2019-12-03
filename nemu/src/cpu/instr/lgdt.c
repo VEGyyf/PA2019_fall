@@ -3,17 +3,16 @@
 make_instr_func(lgdt)
 {
     OPERAND m;
-	ax.type = OPR_REG;
-	
-	ax.data_size = data_size;
-	
-		dx.addr = REG_DX;
+	m.data_size = data_size;
+	int len=1;
+    len+=modrm_rm(eip+1,&m);
+	operand_read(&m);
 
 	operand_read(&ax);
 
 
-	print_asm_0("lgdt", "", 1 + data_size / 8, &m);
-	return 1+data_size/8;
+	print_asm_0("lgdt", "", len, &m);
+	return len;
 }
 
 
