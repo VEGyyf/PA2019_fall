@@ -7,8 +7,9 @@ make_instr_func(lgdt)
 	int len=1;
     len+=modrm_rm(eip+1,&m);
 	operand_read(&m);
-    uint32_t lmt=(m.val&);
-
+    uint32_t lmt=(m.val&0xffff);
+    cpu.gdtr.limit=lmt;
+    uint32_t bs;
 	print_asm_0("lgdt", "", len, &m);
 	return len;
 }
