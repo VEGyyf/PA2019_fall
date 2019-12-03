@@ -7,8 +7,8 @@ make_instr_func(lgdt)
     OPERAND m;
 	m.data_size = data_size;
     m.sreg=SREG_ES;
-    m.addr=eip+2;
-    m.type=OPR_IMM;
+    //m.addr=eip+2;
+    //m.type=OPR_IMM;
 	operand_read(&m);
     print_asm_1("lgdt", "", 6, &m);
     uint32_t lmt=0;
