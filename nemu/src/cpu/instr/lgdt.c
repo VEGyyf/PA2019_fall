@@ -14,16 +14,7 @@ make_instr_func(lgdt)
         memset((&cpu.gdtr.limit)+3,0,1);
     }
     else if(data_size==32)memcpy((&cpu.gdtr.limit),m.val+2,4);
-    /*uint32_t lmt=(m.val&0xffff);//2 个低位字节
-    cpu.gdtr.limit=lmt;
-    uint32_t bs;
-    if(data_size==16){
-        bs=((m.val>>4)&0xffffff);
-    }
-    else if(data_size==32){
-        bs=((m.val>>4)&0xffffffff);
-    }
-    cpu.gdtr.limit=lmt;*/
+   
 	print_asm_0("lgdt", "", len, &m);
 	return len;
 }
