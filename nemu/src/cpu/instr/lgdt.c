@@ -8,7 +8,10 @@ make_instr_func(lgdt)
 	int len=1;
     len+=modrm_rm(eip+1,&m);
 	operand_read(&m);
-    uint32_t lmt=(m.val&0xffff);//2 个低位字节
+    memcpy((&cpu.gdtr.limit),m.val,2);
+    if(data_size==16)memcpy((&cpu.gdtr.limit),m.val+2,3);
+    else if(data_size==32)memcpy((&cpu.gdtr.limit),m.val+2,4);
+    /*uint32_t lmt=(m.val&0xffff);//2 个低位字节
     cpu.gdtr.limit=lmt;
     uint32_t bs;
     if(data_size==16){
@@ -17,7 +20,7 @@ make_instr_func(lgdt)
     else if(data_size==32){
         bs=((m.val>>4)&0xffffffff);
     }
-    cpu.gdtr.limit=lmt;
+    cpu.gdtr.limit=lmt;*/
 	print_asm_0("lgdt", "", len, &m);
 	return len;
 }
