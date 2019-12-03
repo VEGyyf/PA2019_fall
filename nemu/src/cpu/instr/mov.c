@@ -84,9 +84,9 @@ make_instr_func(cmove_c2r_l){
         dst.data_size = data_size;
         src.sreg=SREG_CS;
         dst.sreg=SREG_CS;
-        len += modrm_r_rm(eip + 1, &r, &rm);
+        //len += modrm_r_rm(eip + 1, &r, &rm);
         operand_read(&src);
-        r.val = sign_ext(rm.val, 16);
+        //r.val = sign_ext(rm.val, 16);
         operand_write(&dst);
         print_asm_2("mov", "", len, &src, &dst);
         return len;
