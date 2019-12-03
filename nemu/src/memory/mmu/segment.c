@@ -19,11 +19,13 @@ void load_sreg(uint8_t sreg)
 	 * The visible part of 'sreg' should be assigned by mov or ljmp already.
 	 */
     gdtr.base+cpu.segReg[sreg].index;
-    cpu.segReg[sreg].base=;
-    cpu.segReg[sreg].limit
-    cpu.segReg[sreg].type
-    cpu.segReg[sreg].privilege_level=
-    cpu.segReg[sreg].soft_use=
+    SegDesc temp;//memcpy?
+    
+    cpu.segReg[sreg].base=temp.base;
+    cpu.segReg[sreg].limit=temp.limit;
+    cpu.segReg[sreg].type=temp.type;
+    cpu.segReg[sreg].privilege_level=temp.privilege_level;
+    cpu.segReg[sreg].soft_use=temp.soft_use;
 /*
             uint32_t base;
             uint32_t limit;
