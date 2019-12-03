@@ -8,10 +8,10 @@ make_instr_func(lgdt)
 	int len=1;
     len+=modrm_rm(eip+1,&m);
 	operand_read(&m);
-    memcpy((&cpu.gdtr.limit),m.val,2);
+    memcpy((&(cpu.gdtr.limit)),m.val,2);
     if(data_size==16){
-        memcpy((&cpu.gdtr.base),m.val+16,3);
-        memset((&cpu.gdtr.base)+24,0,1);
+        memcpy((&(cpu.gdtr.base)),m.val+16,3);
+        memset((&(cpu.gdtr.base))+24,0,1);
     }
     else if(data_size==32)memcpy((&cpu.gdtr.base),m.val+16,4);
    
