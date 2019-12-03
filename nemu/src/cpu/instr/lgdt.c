@@ -10,10 +10,10 @@ make_instr_func(lgdt)
 	operand_read(&m);
     memcpy((&cpu.gdtr.limit),m.val,2);
     if(data_size==16){
-        memcpy((&cpu.gdtr.limit),m.val+2,3);
-        memset((&cpu.gdtr.limit)+3,0,1);
+        memcpy((&cpu.gdtr.base),m.val+2,3);
+        memset((&cpu.gdtr.base)+3,0,1);
     }
-    else if(data_size==32)memcpy((&cpu.gdtr.limit),m.val+2,4);
+    else if(data_size==32)memcpy((&cpu.gdtr.base),m.val+2,4);
    
 	print_asm_0("lgdt", "", len, &m);
 	return len;
