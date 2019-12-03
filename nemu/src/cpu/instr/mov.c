@@ -119,7 +119,7 @@ make_instr_func(mov_rm2s_w){
         dst.sreg=SREG_CS;
         len += modrm_r_rm(eip + 1, &dst, &src);
         operand_read(&src);
-        dst.val=src.val;//?
+        dst.val=sign_ext(src.val,32);//?
         uint8_t idx=(dst.addr&0xf);
         load_sreg(idx);//void load_sreg(uint8_t sreg);
         operand_write(&dst);
