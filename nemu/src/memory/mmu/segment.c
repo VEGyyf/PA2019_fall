@@ -37,6 +37,7 @@ void load_sreg(uint8_t sreg)
     bs=bs|base_31_24;
     assert(temp.base==0);
     assert(temp.limit==0xfffff);
+    assert(temp.granularity==1);
 
     uint32_t limit_15_0=temp.limit_15_0;
     uint32_t limit_19_16=temp.limit_19_16;
