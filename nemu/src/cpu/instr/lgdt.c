@@ -16,7 +16,7 @@ make_instr_func(lgdt)
     uint32_t bs=0;
     if(data_size==16){
         memcpy(&bs,&m.val+2,3);
-        memset(&bs+3,0,1);
+        //memset(&bs+3,0,1);
     }
     else if(data_size==32)memcpy(&bs,&m.val+2,4);
     cpu.gdtr.base=bs;   
