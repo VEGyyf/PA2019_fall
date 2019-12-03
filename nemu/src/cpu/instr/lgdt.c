@@ -11,12 +11,11 @@ make_instr_func(lgdt)
     len+=modrm_rm(eip+1,&m);
 	operand_read(&m);
     uint32_t lmt=0;
-    void *addr=(void *)m.val;
-    memcpy(&lmt,hw_mem+addr,2);
+    memcpy(&lmt,hw_mem+m.val,2);
     cpu.gdtr.limit=lmt;
     uint32_t bs=0;
     if(data_size==16){
-        memcpy(&bs,hw_mem+addr+16,3);
+        memcpy(&bs,hw_mem+m.val+16,3);
         //memset(&bs+3,0,1);
     }
     else if(data_size==32)memcpy(&bs,hw_mem+addr+16,4);
