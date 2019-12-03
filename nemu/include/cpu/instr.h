@@ -60,7 +60,7 @@ extern uint8_t data_size;
 #include "cpu/instr/leave.h"
 #include "cpu/instr/rep_repe.h"
 #include "cpu/instr/lgdt.h"
-#include "cpu/instr/ljmp.h"
+//#include "cpu/instr/ljmp.h"
 
 
 #endif
