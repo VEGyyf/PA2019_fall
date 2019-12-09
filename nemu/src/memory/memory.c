@@ -6,6 +6,7 @@
 #include <memory.h>
 #include <stdio.h>
 
+#define SIZE 4096
 
 uint8_t hw_mem[MEM_SIZE_B];
 
@@ -46,7 +47,7 @@ uint32_t laddr_read(laddr_t laddr, size_t len)
 {
 	assert(len == 1 || len == 2 || len == 4);
     if(cpu.cr0.pg==1&&cpu.cr0.pe==1 ){//CR0 什么状态
-        if (data cross the page boundary) {
+        if (laddr%SIZE+len>SIZE) {//data cross the page boundary
                 /* this is a special case, you can handle it later. */
                            assert(0);
         } else {
@@ -62,7 +63,7 @@ void laddr_write(laddr_t laddr, size_t len, uint32_t data)
 {
     assert(len == 1 || len == 2 || len == 4);
     if(cpu.cr0.pg==1&&cpu.cr0.pe==1 ){//CR0 什么状态
-        if (data cross the page boundary) {
+        if (laddr%SIZE+len>SIZE) {//data cross the page boundary
                 /* this is a special case, you can handle it later. */
                            assert(0);
         } else {
