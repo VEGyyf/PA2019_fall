@@ -54,13 +54,25 @@ uint32_t laddr_read(laddr_t laddr, size_t len)
         return paddr_read(paddr,len);
         }
     }else {
-         …
+         paddr_read(laddr,len);
     }
 }
 
 void laddr_write(laddr_t laddr, size_t len, uint32_t data)
 {
-	paddr_write(laddr, len, data);
+    assert(len == 1 || len == 2 || len == 4);
+    if(cpu.cr0.pg==1&&cpu.cr0.pe==1 ){//CR0 什么状态
+        if (data cross the page boundary) {
+                /* this is a special case, you can handle it later. */
+                           assert(0);
+        } else {
+        paddr_t paddr = page_translate(laddr);
+        return paddr_read(paddr,len,data);
+        }
+    }else {
+         paddr_read(laddr,len,data);
+    }
+	//paddr_write(laddr, len, data);
 }
 
 uint32_t vaddr_read(vaddr_t vaddr, uint8_t sreg, size_t len)
