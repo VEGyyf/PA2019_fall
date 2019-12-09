@@ -54,7 +54,7 @@ uint32_t laddr_read(laddr_t laddr, size_t len)
         return paddr_read(paddr,len);
         }
     }else {
-         paddr_read(laddr,len);
+         return paddr_read(laddr,len);
     }
 }
 
@@ -67,10 +67,10 @@ void laddr_write(laddr_t laddr, size_t len, uint32_t data)
                            assert(0);
         } else {
         paddr_t paddr = page_translate(laddr);
-        return paddr_read(paddr,len,data);
+        paddr_write(paddr,len,data);
         }
     }else {
-         paddr_read(laddr,len,data);
+         paddr_write(laddr,len,data);
     }
 	//paddr_write(laddr, len, data);
 }
