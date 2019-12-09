@@ -29,6 +29,14 @@ uint32_t loader()
 	Log("ELF loading from ram disk.");
 #endif
 
+     uint32_t addr=ph->p_vaddr;    
+    
+#ifdef IA32_PAGE
+	uint32_t paddr=mm_malloc(KOFFSET - STACK_SIZE, STACK_SIZE);
+    addr=paddr;
+#endif
+
+   
 	/* Load each program segment */
 	ph = (void *)elf + elf->e_phoff;// 找到 ELF 文件中的程序头表
 	eph = ph + elf->e_phnum;
@@ -63,7 +71,7 @@ uint32_t loader()
 	volatile uint32_t entry = elf->e_entry;// 头文件中指出的 testcase 起始地址，应该是 0x60000
 
 #ifdef IA32_PAGE
-	uint32_t paddr=mm_malloc(KOFFSET - STACK_SIZE, STACK_SIZE);
+	mm_malloc(KOFFSET - STACK_SIZE, STACK_SIZE);
 #ifdef HAS_DEVICE_VGA
 	create_video_mapping();
 #endif
