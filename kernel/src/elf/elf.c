@@ -38,7 +38,7 @@ uint32_t loader()
     uint32_t addr=ph->p_vaddr;    
     
 #ifdef IA32_PAGE
-	uint32_t paddr=mm_malloc(KOFFSET - STACK_SIZE, STACK_SIZE);
+	uint32_t paddr=mm_malloc(ph->vaddr,ph->p_memsz);
     addr=paddr;
 #endif
 	for (; ph < eph; ph++)
