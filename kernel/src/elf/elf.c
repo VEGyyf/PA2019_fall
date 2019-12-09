@@ -29,17 +29,18 @@ uint32_t loader()
 	Log("ELF loading from ram disk.");
 #endif
 
-     uint32_t addr=ph->p_vaddr;    
-    
-#ifdef IA32_PAGE
-	uint32_t paddr=mm_malloc(KOFFSET - STACK_SIZE, STACK_SIZE);
-    addr=paddr;
-#endif
+
 
    
 	/* Load each program segment */
 	ph = (void *)elf + elf->e_phoff;// 找到 ELF 文件中的程序头表
 	eph = ph + elf->e_phnum;
+    uint32_t addr=ph->p_vaddr;    
+    
+#ifdef IA32_PAGE
+	uint32_t paddr=mm_malloc(KOFFSET - STACK_SIZE, STACK_SIZE);
+    addr=paddr;
+#endif
 	for (; ph < eph; ph++)
 	{// 扫描程序头表中的各个表项
 		if (ph->p_type == PT_LOAD)
