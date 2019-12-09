@@ -55,7 +55,7 @@ uint32_t loader()
 			{
 				brk = new_brk;
 			}
-            uint32_t mm_malloc(ph->p_vaddr, ph->p_memsz);
+            ph->p_paddr = mm_malloc(ph->p_vaddr, ph->p_memsz);
 #endif
 		}
 	}
