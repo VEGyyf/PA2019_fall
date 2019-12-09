@@ -45,13 +45,13 @@ void paddr_write(paddr_t paddr, size_t len, uint32_t data)
 uint32_t laddr_read(laddr_t laddr, size_t len)
 {
 	assert(len == 1 || len == 2 || len == 4);
-    if(CR0 什么状态 ){
+    if(cpu.cr0.pg==1&&cpu.cr0.pe==1 ){//CR0 什么状态
         if (data cross the page boundary) {
                 /* this is a special case, you can handle it later. */
                            assert(0);
         } else {
-        hwaddr_t hwaddr = page_translate(addr);
-        return paddr_read(hwaddr,len);
+        paddr_t paddr = page_translate(laddr);
+        return paddr_read(paddr,len);
         }
     }else {
          …
