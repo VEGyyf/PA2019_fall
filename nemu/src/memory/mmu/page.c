@@ -9,7 +9,7 @@ paddr_t page_translate(laddr_t laddr)
     uint32_t dir_offset=dir<<2;
     uint32_t dir_bs=cpu.cr3.pdbr<<12;
     PDE temp_dir;//memcpy?
-    memcpy(&temp_dir,hw_mem+dir_bs+dir_offset,4);//uint32_t?4B?
+    temp_dir=paddr_read(dir_bs+dir_offset,4);//memcpy(&temp_dir,hw_mem+dir_bs+dir_offset,4);//uint32_t?4B?
 
     uint32_t page_frame=temp_dir.page_frame;
     uint32_t pg_bs=page_frame<<12;
@@ -17,7 +17,7 @@ paddr_t page_translate(laddr_t laddr)
     uint32_t page=((laddr>>12)&0xffffffff>>(32-10));
     uint32_t pg_offset=page<<2;
     PTE temp_pg;//memcpy?
-    memcpy(&temp_pg,hw_mem+pg_bs+pg_offset,4);//uint32_t?4B?
+    temp_pg=(pg_bs+pg_offset,4);//memcpy(&temp_pg,hw_mem+pg_bs+pg_offset,4);//uint32_t?4B?
 
     assert(temp_pg.present==1);
     uint32_t paddr_bs=temp_pg.page_frame;
