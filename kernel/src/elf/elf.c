@@ -41,21 +41,19 @@ uint32_t loader()
 	{// 扫描程序头表中的各个表项
 		if (ph->p_type == PT_LOAD)
 		{// 如果类型是 LOAD ，那么就去装载吧
-            //uint32_t addr=ph->p_vaddr;    
     
-//#ifdef IA32_PAGE
-	//uint32_t paddr=mm_malloc(ph->p_vaddr,ph->p_memsz);
-    //addr=paddr;
-//#endif
-            ph->p_vaddr=mm_malloc(ph->p_vaddr,ph->p_memsz);
+#ifdef IA32_PAGE
+	uint32_t paddr=mm_malloc(ph->p_vaddr,ph->p_memsz);
+    addr=paddr;
+#endif
 			// remove this panic!!!
 			//panic("Please implement the loader");
-            void* dest=(void*)ph->p_vaddr;//addr;//
+            void* dest=(void*)addr;//ph->p_vaddr;
             void* src=(void*)(ph->p_offset);
 /* TODO: copy the segment from the ELF file to its proper memory area */
             memcpy(dest, src, ph->p_filesz);
 /* TODO: zero the memory area [vaddr + file_sz, vaddr + mem_sz) */
-            void* dest_set=(void*)(ph->p_vaddr+ph->p_filesz);//(addr+ph->p_filesz);//
+            void* dest_set=(void*)(addr+ph->p_filesz);//(ph->p_vaddr+ph->p_filesz);
             memset(dest_set,0,ph->p_memsz-ph->p_filesz);
 #ifdef IA32_PAGE
 			/* Record the program break for future use */
