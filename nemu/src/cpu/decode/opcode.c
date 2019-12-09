@@ -137,7 +137,6 @@ instr_func group_x87_da_entry[8] =
 instr_func group_x87_db_entry[8] =
     {x87_fildl, inv, inv, x87_fistpl, inv, x87_fucomi, inv, inv};
 
-
 /* 0xdc */
 instr_func group_x87_dc_entry[8] =
     {x87_faddlx, x87_fmullx, inv, inv, inv, inv, inv, inv};
@@ -153,7 +152,6 @@ instr_func group_x87_de_entry[8] =
 /* 0xdf */
 instr_func group_x87_df_entry[8] =
     {inv, inv, inv, inv, x87_fnstsw, x87_fucomip, inv, inv};
-
 instr_func opcode_2_byte_entry[256] = {
     /* 0x00 - 0x03*/ inv, group_7, inv, inv,
     /* 0x04 - 0x07*/ inv, inv, inv, inv,
