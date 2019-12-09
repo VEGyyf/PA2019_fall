@@ -63,7 +63,7 @@ uint32_t loader()
 	volatile uint32_t entry = elf->e_entry;// 头文件中指出的 testcase 起始地址，应该是 0x60000
 
 #ifdef IA32_PAGE
-	mm_malloc(KOFFSET - STACK_SIZE, STACK_SIZE);
+	uint32_t paddr=mm_malloc(KOFFSET - STACK_SIZE, STACK_SIZE);
 #ifdef HAS_DEVICE_VGA
 	create_video_mapping();
 #endif
