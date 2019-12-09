@@ -12,16 +12,16 @@ make_instr_func(lgdt)
 	//int len=2;
     //len+=modrm_rm(eip+2,&m);
 	operand_read(&m);
-    uint32_t lmt=0;
-    memcpy(&lmt,hw_mem+m.val,2);
-    cpu.gdtr.limit=lmt;
+    //uint32_t lmt=0;
+    //memcpy(&lmt,hw_mem+m.val,2);
+    cpu.gdtr.limit=paddr_read(m.val,2);//lmt;
     uint32_t bs=0;
     if(data_size==16){
-        memcpy(&bs,hw_mem+m.val+16,3);
+        cpu.gdtr.base=paddr_read(m.val+16,3);//memcpy(&bs,hw_mem+m.val+16,3);
         memset(&bs+3,0,1);
     }
-    else if(data_size==32)memcpy(&bs,hw_mem+16,4);
-    cpu.gdtr.base=bs;   
+    else if(data_size==32)//memcpy(&bs,hw_mem+16,4);
+    cpu.gdtr.base=paddr_read(m.val+16,4);//bs;   
     //assert(lmt==0xfffff);
 	print_asm_1("lgdt", "", 2+data_size/8, &m);
 	return 2+data_size/8;
