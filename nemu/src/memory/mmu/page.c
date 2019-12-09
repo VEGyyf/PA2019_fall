@@ -22,7 +22,7 @@ paddr_t page_translate(laddr_t laddr)
     assert(temp_pg.present==1);
     uint32_t paddr_bs=temp_pg.page_frame;
     paddr_bs<<=12;
-    uint32_t offset=laddr&0xfff;//(0xffffffff>>(32-11))
+    uint32_t offset=laddr&0xfff;//12!!
 	uint32_t res=paddr_bs|offset;//printf("\nPlease implement page_translate()\n");
 	return res;//assert(0);
 #else
