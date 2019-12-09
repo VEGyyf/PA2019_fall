@@ -41,12 +41,11 @@ uint32_t loader()
 	{// 扫描程序头表中的各个表项
 		if (ph->p_type == PT_LOAD)
 		{// 如果类型是 LOAD ，那么就去装载吧
-              
-    uint32_t addr;
+            uint32_t addr=ph->p_vaddr;    
+    
 #ifdef IA32_PAGE
-	addr=mm_malloc(ph->p_vaddr,ph->p_memsz);
-#else
-     addr=ph->p_vaddr; 
+	uint32_t paddr=mm_malloc(ph->p_vaddr,ph->p_memsz);
+    addr=paddr;
 #endif
 			// remove this panic!!!
 			//panic("Please implement the loader");
