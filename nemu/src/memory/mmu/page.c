@@ -18,7 +18,7 @@ paddr_t page_translate(laddr_t laddr)
     PTE temp_pg;//memcpy?
     memcpy(&temp_pg,hw_mem+pg_bs+pg_offset,4);//uint32_t?4B?
 
-    assert(temp_pg.present==1);
+    //assert(temp_pg.present==1);
     uint32_t paddr_bs=temp_pg.page_frame;
     paddr_bs<<=12;
     uint32_t offset=laddr&0x7ff;//(0xffffffff>>(32-11))
