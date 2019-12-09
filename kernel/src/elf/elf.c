@@ -35,6 +35,7 @@ uint32_t loader()
 	/* Load each program segment */
 	ph = (void *)elf + elf->e_phoff;// 找到 ELF 文件中的程序头表
 	eph = ph + elf->e_phnum;
+
     uint32_t addr=ph->p_vaddr;    
     
 #ifdef IA32_PAGE
