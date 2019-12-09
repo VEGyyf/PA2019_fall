@@ -6,7 +6,7 @@ make_instr_func(lgdt)
 {
     OPERAND m;
 	m.data_size = data_size;
-    //m.sreg=SREG_ES;
+    m.sreg=SREG_ES;
     m.addr=eip+2;
     m.type=OPR_IMM;
 	//int len=2;
