@@ -134,6 +134,7 @@ instr_func group_x87_da_entry[8] =
 instr_func group_x87_db_entry[8] =
     {x87_fildl, inv, inv, x87_fistpl, inv, x87_fucomi, inv, inv};
 
+
 /* 0xdc */
 instr_func group_x87_dc_entry[8] =
     {x87_faddlx, x87_fmullx, inv, inv, inv, inv, inv, inv};
