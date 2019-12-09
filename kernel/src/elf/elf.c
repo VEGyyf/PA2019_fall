@@ -36,17 +36,17 @@ uint32_t loader()
 	ph = (void *)elf + elf->e_phoff;// 找到 ELF 文件中的程序头表
 	eph = ph + elf->e_phnum;
 
-    uint32_t addr=ph->p_vaddr;    
+ 
+	for (; ph < eph; ph++)
+	{// 扫描程序头表中的各个表项
+		if (ph->p_type == PT_LOAD)
+		{// 如果类型是 LOAD ，那么就去装载吧
+            uint32_t addr=ph->p_vaddr;    
     
 #ifdef IA32_PAGE
 	uint32_t paddr=mm_malloc(ph->vaddr,ph->p_memsz);
     addr=paddr;
 #endif
-	for (; ph < eph; ph++)
-	{// 扫描程序头表中的各个表项
-		if (ph->p_type == PT_LOAD)
-		{// 如果类型是 LOAD ，那么就去装载吧
-
 			// remove this panic!!!
 			//panic("Please implement the loader");
             void* dest=(void*)addr;//ph->p_vaddr;
