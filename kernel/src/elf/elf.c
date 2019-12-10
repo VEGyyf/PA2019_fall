@@ -48,6 +48,7 @@ uint32_t loader()
     
     addr=paddr;
 #endif
+    Log("paddr=0x%x",addr);
 			// remove this panic!!!
 			//panic("Please implement the loader");
             void* dest=(void*)addr;//ph->p_vaddr;
@@ -69,7 +70,7 @@ uint32_t loader()
 #endif
 		}
 	}
-    Log("paddr=0x%x",addr);
+    
 	volatile uint32_t entry = elf->e_entry;// 头文件中指出的 testcase 起始地址，应该是 0x60000
 
 #ifdef IA32_PAGE
