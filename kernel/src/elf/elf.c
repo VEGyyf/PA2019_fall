@@ -45,7 +45,7 @@ uint32_t loader()
     
 #ifdef IA32_PAGE
 	uint32_t paddr=mm_malloc(ph->p_vaddr,ph->p_memsz);
-    Log("paddr=0x%x",paddr);
+    
     addr=paddr;
 #endif
 			// remove this panic!!!
@@ -69,7 +69,7 @@ uint32_t loader()
 #endif
 		}
 	}
-
+    Log("paddr=0x%x",addr);
 	volatile uint32_t entry = elf->e_entry;// 头文件中指出的 testcase 起始地址，应该是 0x60000
 
 #ifdef IA32_PAGE
