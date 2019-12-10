@@ -47,7 +47,7 @@ uint32_t loader()
 	uint32_t paddr=mm_malloc(ph->p_vaddr,ph->p_memsz);
     
     addr=paddr;
-    Log("paddr=0x%x",addr);
+    Log("paddr=0x%x",paddr);
 #endif
 			// remove this panic!!!
 			//panic("Please implement the loader");
