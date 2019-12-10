@@ -48,6 +48,7 @@ uint32_t loader()
     
     addr=paddr;
     Log("paddr=0x%x",paddr);
+    Log("vaddr=0x%x",ph->p_vaddr);
 #endif
 			// remove this panic!!!
 			//panic("Please implement the loader");
