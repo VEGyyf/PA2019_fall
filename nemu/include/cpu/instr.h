@@ -63,7 +63,6 @@ extern uint8_t data_size;
 //#include "cpu/instr/ljmp.h"
 
 #include "cpu/instr/lidt.h"
-#include "cpu/instr/cli.h"
 #include "cpu/instr/sti.h"
 #include "cpu/instr/int_.h"
 #include "cpu/instr/pusha.h"
