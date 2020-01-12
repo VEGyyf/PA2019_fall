@@ -10,21 +10,21 @@ make_instr_func(pusha)
     opr_dest.addr=cpu.esp;
     opr_dest.sreg=SREG_SS;
     opr_dest.val=cpu.ax;
-    operand_write(&opr_dest);//Push(EAX);
+    operand_write(&opr_dest);//Push(AX);
     opr_dest.val=cpu.cx;
-    operand_write(&opr_dest);//Push(ECX);
+    operand_write(&opr_dest);//Push(CX);
     opr_dest.val=cpu.dx;
-    operand_write(&opr_dest);//Push(EDX);
+    operand_write(&opr_dest);//Push(DX);
     opr_dest.val=cpu.bx;
-    operand_write(&opr_dest);//Push(EBX);
+    operand_write(&opr_dest);//Push(BX);
     opr_dest.val=cpu.temp;
     operand_write(&opr_dest);//Push(Temp);
     opr_dest.val=cpu.bp;
-    operand_write(&opr_dest);//Push(EBP);
+    operand_write(&opr_dest);//Push(BP);
     opr_dest.val=cpu.si;
-    operand_write(&opr_dest);//Push(ESI);
+    operand_write(&opr_dest);//Push(SI);
     opr_dest.val=cpu.di;
-    operand_write(&opr_dest);//Push(EDI);       
+    operand_write(&opr_dest);//Push(DI);       
     }
     else if(data_size==32){
     uint32_t temp=cpu.esp;//Temp ← (ESP);
@@ -50,7 +50,7 @@ make_instr_func(pusha)
     opr_dest.val=cpu.edi;
     operand_write(&opr_dest);//Push(EDI);
     }
-
+    return 1;
     
 }
 /*IF OperandSize = 16 (* PUSHA instruction *)
