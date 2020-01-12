@@ -1,11 +1,13 @@
 #include "cpu/instr.h"
 
 make_instr_func(int_)
-{
-	
+{   uint8_t intr_no=0x80;
+	raise_intr(intr_no);
 }
 
-
+/*
+到系统执行到int $0x80 自陷指令后，即获取intr_no = 0x80 并执行raise_sw_intr()。
+*/
 /*IF PE = 0
 THEN GOTO REAL-ADDRESS-MODE;
 ELSE GOTO PROTECTED-MODE;
