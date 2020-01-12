@@ -16,6 +16,21 @@ make_instr_func(pusha)
     opr_dest.sreg=SREG_SS;
     opr_dest.val=cpu.eax;
     operand_write(&opr_dest);//Push(EAX);
+    opr_dest.val=cpu.ecx;
+    operand_write(&opr_dest);//Push(ECX);
+    opr_dest.val=cpu.ecx;
+    operand_write(&opr_dest);//Push(EDX);
+    opr_dest.val=cpu.edx;
+    operand_write(&opr_dest);//Push(EBX);
+    opr_dest.val=cpu.temp;
+    operand_write(&opr_dest);//Push(Temp);
+    opr_dest.val=cpu.ebp;
+    operand_write(&opr_dest);//Push(EBP);
+    opr_dest.val=cpu.esi;
+    operand_write(&opr_dest);//Push(ESI);
+    opr_dest.val=cpu.edi;
+    operand_write(&opr_dest);//Push(EDI);
+
 
     }
 
