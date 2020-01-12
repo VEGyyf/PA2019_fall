@@ -2,13 +2,8 @@
 
 make_instr_func(pusha)
 {
-	operand_read(&opr_src);
-	if(opr_src->data_size==16){
-
-    }
-    else if(opr_src->data_size==32){
-    
-    }
+	
+	
 }
 /*IF OperandSize = 16 (* PUSHA instruction *)
 THEN
@@ -32,4 +27,15 @@ Push(EBP);
 Push(ESI);
 Push(EDI);
 FI;
+*/
+/*
+Temp ← (SP);
+Push(AX);
+Push(CX);
+Push(DX);
+Push(BX);
+Push(Temp);
+Push(BP);
+Push(SI);
+Push(DI);
 */
