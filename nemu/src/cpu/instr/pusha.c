@@ -3,12 +3,12 @@
 make_instr_func(pusha)
 {
 	operand_read(&opr_src);
-	cpu.esp-=data_size/8;
-    opr_dest.data_size=data_size;
-    opr_dest.type=OPR_MEM;
-    opr_dest.addr=cpu.esp;
-    opr_dest.val=opr_src.val;
-    operand_write(&opr_dest);
+	if(opr_src->data_size==16){
+
+    }
+    else if(opr_src->data_size==32){
+    
+    }
 }
 /*IF OperandSize = 16 (* PUSHA instruction *)
 THEN
