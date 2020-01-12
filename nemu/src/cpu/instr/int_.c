@@ -3,6 +3,7 @@
 make_instr_func(int_)
 {   uint8_t intr_no=0x80;
 	raise_intr(intr_no);
+    //return 1;
 }
 
 /*
