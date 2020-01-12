@@ -65,6 +65,7 @@ make_instr_func(pusha)
     opr_dest.val=cpu.edi;
     operand_write(&opr_dest);//Push(EDI);
     }
+    print_asm_0("pusha", "", 1);
     return 1;
     
 }
