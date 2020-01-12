@@ -75,7 +75,8 @@ make_instr_func(popa)
     cpu.eax=opr_dest.val;
 	cpu.esp+=data_size/8;//EAX ← Pop();
     }
-    return 1 ;//the length of opr=0
+    print_asm_0("popa", "", 1);
+    return 1 ;
 }
 /*IF OperandSize = 16 (* instruction = POPA *)
 THEN
