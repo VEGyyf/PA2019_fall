@@ -11,7 +11,7 @@ make_instr_func(pusha)
     uint32_t temp=cpu.esp;//Temp ← (ESP);
 	cpu.esp-=data_size/8;
     opr_dest.data_size=data_size;
-    opr_dest.type=OPR_MEM;
+    opr_dest.type=OPR_SREG;
     opr_dest.addr=cpu.esp;
     opr_dest.val=cpu.eax;
     operand_write(&opr_dest);//Push(EAX);
