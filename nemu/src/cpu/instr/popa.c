@@ -10,27 +10,27 @@ make_instr_func(popa)
     opr_dest.sreg=SREG_SS;
 	operand_read(&opr_dest);//zhidingdezhandanyuan
     cpu.di=opr_dest.val;
-	cpu.esp+=data_size/8;//EDI ← Pop();
+	cpu.sp+=data_size/8;//DI ← Pop();
     operand_read(&opr_dest);//zhidingdezhandanyuan
     cpu.si=opr_dest.val;
-	cpu.sp+=data_size/8;//ESI ← Pop();
+	cpu.sp+=data_size/8;//SI ← Pop();
     operand_read(&opr_dest);//zhidingdezhandanyuan
-    cpu.ebp=opr_dest.val;
-	cpu.esp+=data_size/8;//EBP ← Pop();
+    cpu.bp=opr_dest.val;
+	cpu.sp+=data_size/8;//BP ← Pop();
     operand_read(&opr_dest);//zhidingdezhandanyuan
-	cpu.esp+=data_size/8;//throwaway ← Pop (); (* Skip ESP *)
+	cpu.sp+=data_size/8;//throwaway ← Pop (); (* Skip SP *)
     operand_read(&opr_dest);//zhidingdezhandanyuan
-    cpu.ebx=opr_dest.val;
-	cpu.esp+=data_size/8;//EBX ← Pop();
+    cpu.bx=opr_dest.val;
+	cpu.sp+=data_size/8;//BX ← Pop();
     operand_read(&opr_dest);//zhidingdezhandanyuan
-    cpu.edx=opr_dest.val;
-	cpu.esp+=data_size/8;//EDX ← Pop();
+    cpu.dx=opr_dest.val;
+	cpu.sp+=data_size/8;//DX ← Pop();
     operand_read(&opr_dest);//zhidingdezhandanyuan
-    cpu.ecx=opr_dest.val;
-	cpu.esp+=data_size/8;//ECX ← Pop();
+    cpu.cx=opr_dest.val;
+	cpu.sp+=data_size/8;//CX ← Pop();
     operand_read(&opr_dest);//zhidingdezhandanyuan
-    cpu.eax=opr_dest.val;
-	cpu.esp+=data_size/8;//EAX ← Pop();
+    cpu.ax=opr_dest.val;
+	cpu.sp+=data_size/8;//AX ← Pop();
     }
     else if(data_size=32){
     opr_dest.data_size=data_size;
