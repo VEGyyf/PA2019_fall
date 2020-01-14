@@ -7,8 +7,8 @@ typedef struct {
     uint32_t base :32;
    }GDTR;
 typedef struct {
-    uint32_t offset :16;
-    uint32_t selector:32;
+    uint32_t limit :16;
+    uint32_t base :32;
    }IDTR;
 typedef union {
     struct {
