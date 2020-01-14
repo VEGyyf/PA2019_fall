@@ -10,7 +10,6 @@ make_instr_func(iret)
     cpu.eip=opr_dest.val;
 	cpu.esp+=data_size/8;//eip<--pop()
     opr_dest.addr=cpu.esp;
-    opr_dest.sreg=SREG_CS;
     operand_read(&opr_dest);//zhidingdezhandanyuan
     cpu.cs=opr_dest.val;
 	cpu.esp+=data_size/8;//cs<--pop()
