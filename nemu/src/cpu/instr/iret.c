@@ -13,32 +13,11 @@ make_instr_func(iret)
     opr_dest.sreg=SREG_CS;
     operand_read(&opr_dest);//zhidingdezhandanyuan
     cpu.cs=opr_dest.val;
-	cpu.esp+=data_size/8;//cs ← Pop();
+	cpu.esp+=data_size/8;//cs<--pop()
     opr_dest.addr=cpu.esp;
     operand_read(&opr_dest);//zhidingdezhandanyuan
     cpu.eflags=opr_dest.val;
-	cpu.esp+=data_size/8;//BP ← Pop();
-    opr_dest.addr=cpu.esp;
-    operand_read(&opr_dest);//zhidingdezhandanyuan
-	cpu.esp+=data_size/8;//throwaway ← Pop (); (* Skip esp *)
-    opr_dest.addr=cpu.esp;
-    operand_read(&opr_dest);//zhidingdezhandanyuan
-    cpu.bx=opr_dest.val;
-	cpu.esp+=data_size/8;//BX ← Pop();
-    opr_dest.addr=cpu.esp;
-    operand_read(&opr_dest);//zhidingdezhandanyuan
-    cpu.dx=opr_dest.val;
-	cpu.esp+=data_size/8;//DX ← Pop();
-    opr_dest.addr=cpu.esp;
-    operand_read(&opr_dest);//zhidingdezhandanyuan
-    cpu.cx=opr_dest.val;
-	cpu.esp+=data_size/8;//CX ← Pop();
-    opr_dest.addr=cpu.esp;
-    operand_read(&opr_dest);//zhidingdezhandanyuan
-    cpu.ax=opr_dest.val;
-	cpu.esp+=data_size/8;//AX ← Pop();
-    //cs<--pop()
-    //eflags<--pop()
+	cpu.esp+=data_size/8;//eflags<--pop()
     print_asm_0("iret", "", 1);
     return 0 ;
 }
