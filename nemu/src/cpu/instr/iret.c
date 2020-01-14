@@ -4,9 +4,13 @@ make_instr_func(iret)
 {
     
     print_asm_0("iret", "", 1);
-    return 1 ;
+    return 0 ;
 }
 /*
-当使用IRET指令返回到相同保护级别的任务时，IRET会从堆栈弹出代码段选择子及指令指针分别到CS与IP寄存器，并弹出标志寄存器内容到EFLAGS寄存器。
+通过iret 指令恢复最初被保护的程序断点和状态信息，返回原程序被中断的指令（或下一条，根据保护断点时具体保存的EIP 决定）继续执行。
+eip<--pop()
+cs<--pop()
+eflags<--pop()
+
 ?16?32?va?pa?pe?
 */
