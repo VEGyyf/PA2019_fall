@@ -17,27 +17,15 @@ void raise_intr(uint8_t intr_no)
 	cpu.esp-=data_size/8;
     opr_dest.addr=cpu.esp;
     opr_dest.val=cpu.cs;
-    operand_write(&opr_dest);//Push(ECX);
+    operand_write(&opr_dest);//Push(CS);
 	cpu.esp-=data_size/8;opr_dest.addr=cpu.esp;
-    opr_dest.val=cpu.edx;
-    operand_write(&opr_dest);//Push(EDX);
-	cpu.esp-=data_size/8;opr_dest.addr=cpu.esp;
-    opr_dest.val=cpu.ebx;
-    operand_write(&opr_dest);//Push(EBX);
-	cpu.esp-=data_size/8;opr_dest.addr=cpu.esp;
-    opr_dest.val=cpu.temp;
-    operand_write(&opr_dest);//Push(Temp);
-	cpu.esp-=data_size/8;opr_dest.addr=cpu.esp;
-    opr_dest.val=cpu.ebp;
-    operand_write(&opr_dest);//Push(EBP);
-	cpu.esp-=data_size/8;opr_dest.addr=cpu.esp;
-    opr_dest.val=cpu.esi;
-    operand_write(&opr_dest);//Push(ESI);
-	cpu.esp-=data_size/8;opr_dest.addr=cpu.esp;
-    opr_dest.val=cpu.edi;
-    operand_write(&opr_dest);//Push(EDI);
+    opr_dest.val=cpu.eip;
+    operand_write(&opr_dest);//Push(EIP);
+    if()cpu.IF=0;// Clear IF if it is an interrupt
+    uint32_t entry;// Trigger an exception/interrupt with 'intr_no'
+                  // 'intr_no' is the index to the IDT
 
-
+    cpu.eip=entry;// Set EIP to the entry of the interrupt handler//跳转执行
 // Trigger an exception/interrupt with 'intr_no'
 // 'intr_no' is the index to the IDT
 // Push EFLAGS, CS, and EIP
