@@ -16,7 +16,6 @@ void raise_intr(uint8_t intr_no)
     operand_write(&opr_dest);//Push(EFLAGS);
 	cpu.esp-=data_size/8;
     opr_dest.addr=cpu.esp;
-    opr_dest.sreg=SREG_CS;
     opr_dest.val=cpu.cs;
     operand_write(&opr_dest);//Push(ECX);
 	cpu.esp-=data_size/8;opr_dest.addr=cpu.esp;
