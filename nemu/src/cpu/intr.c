@@ -23,7 +23,7 @@ void raise_intr(uint8_t intr_no)
     operand_write(&opr_dest);//Push(EIP);
     if(intr_no>=32)cpu.eflags.IF=0;// Clear IF if it is an interrupt
     uint32_t entry;// Trigger an exception/interrupt with 'intr_no'
-    IDTR temp=cpu.idtr+intr_no*8;// 'intr_no' is the index to the IDT
+    IDTR temp.base=cpu.idtr+intr_no*8;// 'intr_no' is the index to the IDT
     entry=temp.base+temp.limit;
     cpu.eip=entry;// Set EIP to the entry of the interrupt handler//跳转执行
 // Trigger an exception/interrupt with 'intr_no'
