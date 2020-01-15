@@ -22,7 +22,7 @@ make_instr_func(pusha)
     opr_dest.val=cpu.ebx;
     operand_write(&opr_dest);//Push(EBX);
 	cpu.esp-=data_size/8;opr_dest.addr=cpu.esp;
-    opr_dest.val=cpu.temp;
+    opr_dest.val=temp;
     operand_write(&opr_dest);//Push(Temp);
 	cpu.esp-=data_size/8;opr_dest.addr=cpu.esp;
     opr_dest.val=cpu.ebp;
