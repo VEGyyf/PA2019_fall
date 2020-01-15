@@ -1,5 +1,5 @@
 #include "cpu/instr.h"
-//#include "nemu/src/cpu/intr.c"
+#include "cpu/intr.c"
 
 make_instr_func(int_)
 {   uint8_t intr_no=0x80;
