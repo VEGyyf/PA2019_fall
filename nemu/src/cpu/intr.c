@@ -27,23 +27,24 @@ void raise_intr(uint8_t intr_no)
     uint32_t temp2[2];
     temp2[0]=laddr_read(cpu.gdtr.base+cpu.cs.index*8,4);
     temp2[1]=laddr_read(cpu.gdtr.base+cpu.cs.index*8+4,4);
-    uint32_t base_31_24 =temp.base_31_24;
-    uint32_t base_23_16 =temp.base_23_16 ;
-    uint32_t base_15_0=temp.base_15_0;
+    memcpy(&tmp,temp2,8);
+    uint32_t base_31_24 =tmp.base_31_24;
+    uint32_t base_23_16 =tmp.base_23_16 ;
+    uint32_t base_15_0=tmp.base_15_0;
     base_31_24<<=24;
     base_23_16<<=16;
     uint32_t bs=base_15_0|base_23_16;
     bs=bs|base_31_24;
 
-    uint32_t limit_15_0=temp.limit_15_0;
-    uint32_t limit_19_16=temp.limit_19_16;
+    uint32_t limit_15_0=tmp.limit_15_0;
+    uint32_t limit_19_16=tmp.limit_19_16;
     limit_19_16<<=16;
     uint32_t lmt=limit_19_16|limit_15_0;
     cpu.cs.base=bs;
     cpu.cs.limit=lmt;
-    cpu.cs.type=temp.type;
-    cpu.cs.privilege_level=temp.privilege_level;
-    cpu.cs.soft_use=temp.soft_use;
+    cpu.cs.type=tmp.type;
+    cpu.cs.privilege_level=tmp.privilege_level;
+    cpu.cs.soft_use=tmp.soft_use;
 
 
 
