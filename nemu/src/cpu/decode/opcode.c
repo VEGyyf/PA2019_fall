@@ -21,13 +21,13 @@ instr_func opcode_entry[256] = {
     /* 0x44 - 0x47*/ inc_r_v, inc_r_v, inc_r_v, inc_r_v,
     /* 0x48 - 0x4b*/ dec_r_v, dec_r_v, dec_r_v, dec_r_v,
     /* 0x4c - 0x4f*/ dec_r_v, dec_r_v, dec_r_v, dec_r_v,
-    /* 0x50 - 0x53*/ push_r_v, push_r_v, push_r_v, push_r_v,
-    /* 0x54 - 0x57*/ push_r_v, push_r_v, push_r_v, push_r_v,
+    /* 0x50 - 0x53*/ __ref_push_r_v, __ref_push_r_v, __ref_push_r_v, __ref_push_r_v,
+    /* 0x54 - 0x57*/ __ref_push_r_v, __ref_push_r_v, __ref_push_r_v, __ref_push_r_v,
     /* 0x58 - 0x5b*/ pop_r_v, pop_r_v, pop_r_v, pop_r_v,
     /* 0x5c - 0x5f*/ pop_r_v, pop_r_v, pop_r_v, pop_r_v,
-   /* 0x60 - 0x63*/ pusha, __ref_popa, inv, inv,
+   /* 0x60 - 0x63*/ __ref_pusha, __ref_popa, inv, inv,
     /* 0x64 - 0x67*/ inv, inv, data_size_16, inv,
-    /* 0x68 - 0x6b*/ push_i_v, imul_irm2r_v, push_i_b, imul_i8rm2r_v,
+    /* 0x68 - 0x6b*/ __ref_push_i_v, imul_irm2r_v, __ref_push_i_b, imul_i8rm2r_v,
    /* 0x6c - 0x6f*/ inv, inv, inv, inv,
     /* 0x70 - 0x73*/ __ref_jo_short_, __ref_jno_short_, __ref_jb_short_, __ref_jae_short_,
     /* 0x74 - 0x77*/ __ref_je_short_, __ref_jne_short_, __ref_jna_short_, __ref_ja_short_,
@@ -113,7 +113,7 @@ instr_func group_3_v_entry[8] =
 
 /* 0xff */
 instr_func group_5_indirect_entry[8] =
-    {__ref_inc_rm_v, __ref_dec_rm_v, __ref_call_near_indirect, inv, __ref_jmp_near_indirect, inv, push_rm_v, inv};
+    {__ref_inc_rm_v, __ref_dec_rm_v, __ref_call_near_indirect, inv, __ref_jmp_near_indirect, inv, __ref_push_rm_v, inv};
 
 instr_func group_7_entry[8] =
     {inv, inv, __ref_lgdt, __ref_lidt, inv, inv, inv, inv};
