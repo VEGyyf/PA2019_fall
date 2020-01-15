@@ -2,44 +2,6 @@
 
 make_instr_func(popa)
 {
-
-    if(data_size==16){
-    opr_dest.data_size=data_size;
-    opr_dest.type=OPR_MEM;//reg?
-    opr_dest.addr=cpu.sp;
-    opr_dest.sreg=SREG_SS;
-	operand_read(&opr_dest);//zhidingdezhandanyuan
-    cpu.di=opr_dest.val;
-	cpu.sp+=data_size/8;//DI ← Pop();
-    opr_dest.addr=cpu.sp;
-    operand_read(&opr_dest);//zhidingdezhandanyuan
-    cpu.si=opr_dest.val;
-	cpu.sp+=data_size/8;//SI ← Pop();
-    opr_dest.addr=cpu.sp;
-    operand_read(&opr_dest);//zhidingdezhandanyuan
-    cpu.bp=opr_dest.val;
-	cpu.sp+=data_size/8;//BP ← Pop();
-    opr_dest.addr=cpu.sp;
-    operand_read(&opr_dest);//zhidingdezhandanyuan
-	cpu.sp+=data_size/8;//throwaway ← Pop (); (* Skip SP *)
-    opr_dest.addr=cpu.sp;
-    operand_read(&opr_dest);//zhidingdezhandanyuan
-    cpu.bx=opr_dest.val;
-	cpu.sp+=data_size/8;//BX ← Pop();
-    opr_dest.addr=cpu.sp;
-    operand_read(&opr_dest);//zhidingdezhandanyuan
-    cpu.dx=opr_dest.val;
-	cpu.sp+=data_size/8;//DX ← Pop();
-    opr_dest.addr=cpu.sp;
-    operand_read(&opr_dest);//zhidingdezhandanyuan
-    cpu.cx=opr_dest.val;
-	cpu.sp+=data_size/8;//CX ← Pop();
-    opr_dest.addr=cpu.sp;
-    operand_read(&opr_dest);//zhidingdezhandanyuan
-    cpu.ax=opr_dest.val;
-	cpu.sp+=data_size/8;//AX ← Pop();
-    }
-    else if(data_size=32){
     opr_dest.data_size=data_size;
     opr_dest.type=OPR_MEM;//reg?
     opr_dest.addr=cpu.esp;
@@ -74,7 +36,6 @@ make_instr_func(popa)
     operand_read(&opr_dest);//zhidingdezhandanyuan
     cpu.eax=opr_dest.val;
 	cpu.esp+=data_size/8;//EAX ← Pop();
-    }
     print_asm_0("popa", "", 1);
     return 1 ;
 }
