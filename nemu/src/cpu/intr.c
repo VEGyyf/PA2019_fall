@@ -14,9 +14,19 @@ void raise_intr(uint8_t intr_no)
 	cpu.esp-=data_size/8;
     vaddr_write(cpu.esp,SREG_SS,4,cpu.eip);//Push(EIP);
 
+    GateDesc desc;// Trigger an exception/interrupt with 'intr_no','intr_no' is the index to the IDT
+    uint32_t temp[2];//little endian 
+    temp[0]=laddr_read(cpu.idtr.base+intr_no*8,4);
+    temp[1]=laddr_read(cpu.idtr.base+4+intr_no*8,4);
+    memcpy(&desc,temp,8);
 
-    SegDesc temp;// load cs
-    memcpy(&temp,hw_mem+cpu.gdtr.base+(cpu.cs.index*8),8);
+    if(desc.type==15)cpu.eflags.IF=0;// Clear IF if it is an interrupt
+
+    cpu.cs=desc.selector;
+    SegDesc tmp;// load cs
+    uint32_t temp2[2];
+    temp2[0]=laddr_read(cpu.gdtr.base+cpu.cs.index*8,4);
+    temp2[1]=laddr_read(cpu.gdtr.base+cpu.cs.index*8+4,4);
     uint32_t base_31_24 =temp.base_31_24;
     uint32_t base_23_16 =temp.base_23_16 ;
     uint32_t base_15_0=temp.base_15_0;
@@ -36,11 +46,8 @@ void raise_intr(uint8_t intr_no)
     cpu.cs.soft_use=temp.soft_use;
 
 
-    if(intr_no==15)cpu.eflags.IF=0;// Clear IF if it is an interrupt
 
-    GateDesc desc;// Trigger an exception/interrupt with 'intr_no'
-    memcpy(&desc,hw_mem+cpu.idtr.base+(intr_no*8),8);// 'intr_no' is the index to the IDT
-    cpu.cs.val=desc.selector;
+   
     cpu.eip=desc.offset_15_0|(desc.offset_31_16<<16);
 // Set EIP to the entry of the interrupt handler//跳转执行
 // Trigger an exception/interrupt with 'intr_no'
