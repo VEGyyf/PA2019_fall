@@ -26,7 +26,7 @@ void raise_intr(uint8_t intr_no)
     uint32_t temp=cpu.idtr+intr_no*8;// 'intr_no' is the index to the IDT
     uint32_t selector=temp>>16;
     uint32_t offset=temp;
-    entry=temp.base+temp.limit;
+    entry=selector+offset;
     cpu.eip=entry;// Set EIP to the entry of the interrupt handler//跳转执行
 // Trigger an exception/interrupt with 'intr_no'
 // 'intr_no' is the index to the IDT
