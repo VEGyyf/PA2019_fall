@@ -8,19 +8,11 @@ void raise_intr(uint8_t intr_no)
 	//printf("Please implement raise_intr()");
 	//assert(0);
 	cpu.esp-=data_size/8;
-    opr_dest.data_size=data_size;
-    opr_dest.type=OPR_REG;
-    opr_dest.addr=cpu.esp;
-    opr_dest.sreg=SREG_SS;
-    opr_dest.val=cpu.eflags.val;
-    operand_write(&opr_dest);//Push(EFLAGS);
+    vaddr_write(cpu.esp,SREG_SS,4,cpu.efags.val);//Push(EFLAGS);
 	cpu.esp-=data_size/8;
-    opr_dest.addr=cpu.esp;
-    opr_dest.val=cpu.cs.base;
-    operand_write(&opr_dest);//Push(CS);
-	cpu.esp-=data_size/8;opr_dest.addr=cpu.esp;
-    opr_dest.val=cpu.eip;
-    operand_write(&opr_dest);//Push(EIP);
+    vaddr_write(cpu.esp,SREG_SS,2,cpu.cs.val);//Push(CS);
+	cpu.esp-=data_size/8;
+    vaddr_write(cpu.esp,SREG_SS,4,cpu.eip);//Push(EIP);
     if(intr_no>=32)cpu.eflags.IF=0;// Clear IF if it is an interrupt
     uint32_t entry;// Trigger an exception/interrupt with 'intr_no'
     uint32_t temp=cpu.idtr.base+intr_no*8;// 'intr_no' is the index to the IDT
