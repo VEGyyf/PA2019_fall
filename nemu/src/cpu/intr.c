@@ -21,7 +21,7 @@ void raise_intr(uint8_t intr_no)
 	cpu.esp-=data_size/8;opr_dest.addr=cpu.esp;
     opr_dest.val=cpu.eip;
     operand_write(&opr_dest);//Push(EIP);
-    if(intr_no>=32)cpu.IF=0;// Clear IF if it is an interrupt
+    if(intr_no>=32)cpu.efalgs.IF=0;// Clear IF if it is an interrupt
     uint32_t entry;// Trigger an exception/interrupt with 'intr_no'
     IDTR temp=cpu.idtr+intr_no*8;// 'intr_no' is the index to the IDT
     entry=temp.base+temp.limit;
