@@ -15,7 +15,7 @@ make_instr_func(iret)
 	cpu.esp+=data_size/8;//cs<--pop()
     opr_dest.addr=cpu.esp;
     operand_read(&opr_dest);//zhidingdezhandanyuan
-    cpu.eflags=opr_dest.val;
+    cpu.eflags.val=opr_dest.val;
 	cpu.esp+=data_size/8;//eflags<--pop()
     print_asm_0("iret", "", 1);
     return 0 ;
