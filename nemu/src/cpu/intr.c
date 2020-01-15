@@ -22,7 +22,7 @@ void raise_intr(uint8_t intr_no)
 
     if(desc.type==15)cpu.eflags.IF=0;// Clear IF if it is an interrupt
 
-    cpu.cs=desc.selector;
+    cpu.cs.val=desc.selector;
     SegDesc tmp;// load cs
     uint32_t temp2[2];
     temp2[0]=laddr_read(cpu.gdtr.base+cpu.cs.index*8,4);
