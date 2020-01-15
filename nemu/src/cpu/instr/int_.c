@@ -4,7 +4,7 @@
 make_instr_func(int_)
 {	raise_intr(0x80);
     print_asm_0("int_", "", 1);
-    return 1;//?
+    return 0;//?
 }
 
 /*
