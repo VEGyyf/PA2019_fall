@@ -40,7 +40,7 @@ void raise_intr(uint8_t intr_no)
 
     GateDesc desc;// Trigger an exception/interrupt with 'intr_no'
     memcpy(&desc,hw_mem+cpu.idtr.base+(intr_no*8),8);// 'intr_no' is the index to the IDT
-    cpu.eip=desc.offset_15_0|(offset_31_16<<16);
+    cpu.eip=desc.offset_15_0|(desc.offset_31_16<<16);
 // Set EIP to the entry of the interrupt handler//跳转执行
 // Trigger an exception/interrupt with 'intr_no'
 // 'intr_no' is the index to the IDT
