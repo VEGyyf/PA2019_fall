@@ -8,7 +8,7 @@ void raise_intr(uint8_t intr_no)
 	//printf("Please implement raise_intr()");
 	//assert(0);
 	cpu.esp-=data_size/8;
-    vaddr_write(cpu.esp,SREG_SS,4,cpu.efags.val);//Push(EFLAGS);
+    vaddr_write(cpu.esp,SREG_SS,4,cpu.eflags.val);//Push(EFLAGS);
 	cpu.esp-=data_size/8;
     vaddr_write(cpu.esp,SREG_SS,2,cpu.cs.val);//Push(CS);
 	cpu.esp-=data_size/8;
