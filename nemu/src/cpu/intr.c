@@ -13,6 +13,8 @@ void raise_intr(uint8_t intr_no)
     vaddr_write(cpu.esp,SREG_SS,2,cpu.cs.val);//Push(CS);
 	cpu.esp-=data_size/8;
     vaddr_write(cpu.esp,SREG_SS,4,cpu.eip);//Push(EIP);
+    printf("esp=0x%h",cpu.esp);
+    printf("eip=0x%h",cpu.eip);
 
     GateDesc desc;// Trigger an exception/interrupt with 'intr_no','intr_no' is the index to the IDT
     uint32_t temp[2];//little endian 
