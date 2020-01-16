@@ -2,21 +2,8 @@
 
 make_instr_func(iret)
 {
-    opr_dest.data_size=data_size;
-    opr_dest.type=OPR_MEM;
-    opr_dest.addr=cpu.esp;
-    opr_dest.sreg=SREG_SS;
-	operand_read(&opr_dest);//zhidingdezhandanyuan
-    cpu.eip=opr_dest.val;
-	cpu.esp+=data_size/8;//eip<--pop()
-    opr_dest.addr=cpu.esp;
-    operand_read(&opr_dest);//zhidingdezhandanyuan
-    cpu.cs.base=opr_dest.val;
-	cpu.esp+=data_size/8;//cs<--pop()
-    opr_dest.addr=cpu.esp;
-    operand_read(&opr_dest);//zhidingdezhandanyuan
-    cpu.eflags.val=opr_dest.val;
-	cpu.esp+=data_size/8;//eflags<--pop()
+    vaddr_write(cpu.eip,SREG_SS,4,cpu.esp);//Pop()-->eip;
+	cpu.esp+=data_size/8;
     print_asm_0("iret", "", 1);
     return 0 ;
 }
@@ -29,3 +16,10 @@ eflags<--pop()
 
 ?16?32?va?pa?pe?
 */
+/*int_
+	cpu.esp-=data_size/8;
+    vaddr_write(cpu.esp,SREG_SS,4,cpu.eflags.val);//Push(EFLAGS);
+	cpu.esp-=data_size/8;
+    vaddr_write(cpu.esp,SREG_SS,2,cpu.cs.val);//Push(CS);
+	cpu.esp-=data_size/8;
+    vaddr_write(cpu.esp,SREG_SS,4,cpu.eip);//Push(EIP);*/
