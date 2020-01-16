@@ -2,12 +2,15 @@
 
 make_instr_func(popa)
 {
-    opr_dest.data_size=data_size;
-    opr_dest.type=OPR_MEM;//reg?
-    opr_dest.addr=cpu.esp;
-    opr_dest.sreg=SREG_SS;
-	operand_read(&opr_dest);//zhidingdezhandanyuan
-    cpu.edi=opr_dest.val;
+/*cpu.eip=vaddr_read(cpu.esp,SREG_SS, 4);//Pop()-->eip;
+	cpu.esp+=data_size/8;
+    cpu.cs.val=vaddr_read(cpu.esp,SREG_SS, 2);//Pop()-->cs;
+	cpu.esp+=data_size/8;
+    cpu.eflags.val=vaddr_read(cpu.esp,SREG_SS, 4);//Pop()-->eflags;
+	cpu.esp+=data_size/8;*/
+
+
+    cpu.edi=vaddr_read(cpu.esp,SREG_SS, 4);
 	cpu.esp+=data_size/8;//EDI ← Pop();
     opr_dest.addr=cpu.esp;
     operand_read(&opr_dest);//zhidingdezhandanyuan
