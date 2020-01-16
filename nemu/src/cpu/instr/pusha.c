@@ -2,28 +2,21 @@
 
 make_instr_func(pusha)
 {
+cpu.esp-=data_size/8;
+    vaddr_write(cpu.esp,SREG_SS,4,cpu.eflags.val);//Push(EFLAGS);
+
 	
     uint32_t temp=cpu.esp;//Temp ← (ESP);
 	cpu.esp-=data_size/8;
-    opr_dest.data_size=data_size;
-    opr_dest.type=OPR_REG;
-    opr_dest.addr=cpu.esp;
-    opr_dest.sreg=SREG_SS;
-    opr_dest.val=cpu.eax;
-    operand_write(&opr_dest);//Push(EAX);
+    vaddr_write(cpu.esp,SREG_SS,4,cpu.eax);//Push(EAX);
 	cpu.esp-=data_size/8;
-    opr_dest.addr=cpu.esp;
-    opr_dest.val=cpu.ecx;
-    operand_write(&opr_dest);//Push(ECX);
-	cpu.esp-=data_size/8;opr_dest.addr=cpu.esp;
-    opr_dest.val=cpu.edx;
-    operand_write(&opr_dest);//Push(EDX);
-	cpu.esp-=data_size/8;opr_dest.addr=cpu.esp;
-    opr_dest.val=cpu.ebx;
-    operand_write(&opr_dest);//Push(EBX);
-	cpu.esp-=data_size/8;opr_dest.addr=cpu.esp;
-    opr_dest.val=temp;
-    operand_write(&opr_dest);//Push(Temp);
+    vaddr_write(cpu.esp,SREG_SS,4,cpu.ecx);//Push(ECX);
+	cpu.esp-=data_size/8;
+    vaddr_write(cpu.esp,SREG_SS,4,cpu.edx);//Push(EDX);
+	cpu.esp-=data_size/8;
+    vaddr_write(cpu.esp,SREG_SS,4,cpu.ebx);//Push(EBX);
+	cpu.esp-=data_size/8;
+    vaddr_write(cpu.esp,SREG_SS,4,temp);//Push(Temp);
 	cpu.esp-=data_size/8;opr_dest.addr=cpu.esp;
     opr_dest.val=cpu.ebp;
     operand_write(&opr_dest);//Push(EBP);
