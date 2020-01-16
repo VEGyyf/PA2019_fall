@@ -2,11 +2,11 @@
 
 make_instr_func(iret)
 {
-    vaddr_write(cpu.eip,SREG_SS,4,cpu.esp);//Pop()-->eip;
+    cpu.eip=vaddr_read(cpu.esp,SREG_SS, 4);//vaddr_write(cpu.eip,SREG_SS,4,cpu.esp);//Pop()-->eip;
 	cpu.esp+=data_size/8;
-    vaddr_write(cpu.cs.val,SREG_SS,2,cpu.esp);//Pop()-->cs;
+    cpu.cs.val=vaddr_read(cpu.esp,SREG_SS, 2);//Pop()-->cs;
 	cpu.esp+=data_size/8;
-    vaddr_write(cpu.eflags.val,SREG_SS,4,cpu.esp);//Pop()-->eflags;
+     cpu.eflags.val=vaddr_read(cpu.esp,SREG_SS, 4);//Pop()-->eflags;
 	cpu.esp+=data_size/8;
     print_asm_0("iret", "", 1);
     return 0 ;
