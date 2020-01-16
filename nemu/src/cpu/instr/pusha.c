@@ -17,7 +17,7 @@ make_instr_func(pusha)
 	cpu.esp-=data_size/8;
     vaddr_write(cpu.esp,SREG_SS,4,cpu.ebp);//Push(EBP);
 	cpu.esp-=data_size/8;
-    vaddr_write(cpu.esp,SREG_SS,4,cpu.esi;//Push(ESI);
+    vaddr_write(cpu.esp,SREG_SS,4,cpu.esi);//Push(ESI);
 	cpu.esp-=data_size/8;
     vaddr_write(cpu.esp,SREG_SS,4,cpu.edi);//Push(EDI);
     print_asm_0("pusha", "", 1);
