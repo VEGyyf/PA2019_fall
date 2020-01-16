@@ -5,6 +5,7 @@
 make_instr_func(iret)
 {
     cpu.eip=vaddr_read(cpu.esp,SREG_SS, 4);//vaddr_write(cpu.eip,SREG_SS,4,cpu.esp);//Pop()-->eip;
+    printf("eip=0x%h",cpu.eip);
 	cpu.esp+=data_size/8;
     cpu.cs.val=vaddr_read(cpu.esp,SREG_SS, 2);//Pop()-->cs;
 	cpu.esp+=data_size/8;
