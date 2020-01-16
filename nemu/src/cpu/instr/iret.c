@@ -8,7 +8,7 @@ make_instr_func(iret)
 	cpu.esp+=data_size/8;
     cpu.cs.val=vaddr_read(cpu.esp,SREG_SS, 2);//Pop()-->cs;
 	cpu.esp+=data_size/8;
-     cpu.eflags.val=vaddr_read(cpu.esp,SREG_SS, 4);//Pop()-->eflags;
+    cpu.eflags.val=vaddr_read(cpu.esp,SREG_SS, 4);//Pop()-->eflags;
 	cpu.esp+=data_size/8;
     print_asm_0("iret", "", 1);
     return 1 ;
