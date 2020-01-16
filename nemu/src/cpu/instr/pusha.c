@@ -2,13 +2,10 @@
 
 make_instr_func(pusha)
 {
-cpu.esp-=data_size/8;
-    vaddr_write(cpu.esp,SREG_SS,4,cpu.eflags.val);//Push(EFLAGS);
 
-	
     uint32_t temp=cpu.esp;//Temp ← (ESP);
 	cpu.esp-=data_size/8;
-    vaddr_write(cpu.esp,SREG_SS,4,cpu.eax.val);//Push(EAX);
+    vaddr_write(cpu.esp,SREG_SS,4,cpu.eax);//Push(EAX);
 	cpu.esp-=data_size/8;
     vaddr_write(cpu.esp,SREG_SS,4,cpu.ecx);//Push(ECX);
 	cpu.esp-=data_size/8;
