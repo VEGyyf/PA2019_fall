@@ -90,7 +90,7 @@ make_instr_func(mov_c2r_l){
         dst.type=OPR_REG;
         operand_read(&src);
         dst.val=src.val;//?
-        uint8_t idx=(dst.addr&0xf);
+        uint8_t idx=(dst.addr&0xff);
         load_sreg(idx);//void load_sreg(uint8_t sreg);
         operand_write(&dst);
         print_asm_2("mov", "", len, &src, &dst);
@@ -113,7 +113,7 @@ make_instr_func(mov_r2c_l){
     temp2[0]=laddr_read(src.addr,4);
     temp2[1]=laddr_read(src.addr+4,4);
     memcpy(&tmp,temp2,8);
-        uint8_t idx=(dst.addr&0xf);
+        uint8_t idx=(dst.addr&0xff);
         load_sreg(idx);//void load_sreg(uint8_t sreg);
         operand_write(&dst);
         print_asm_2("mov", "", len, &src, &dst);
