@@ -1,5 +1,5 @@
 #include "cpu/instr.h"
-#include "memory/memory.h"
+//#include "memory/memory.h"
 
 make_instr_func(lgdt)
 {
