@@ -87,6 +87,7 @@ make_instr_func(mov_c2r_l){
         dst.sreg=SREG_CS;
         len += modrm_r_rm(eip + 1, &dst, &src);
         src.type=OPR_CREG;
+        dst.type=OPR_REG;
         operand_read(&src);
         dst.val=src.val;//?
         uint8_t idx=(dst.addr&0xf);
@@ -103,6 +104,7 @@ make_instr_func(mov_r2c_l){
         src.sreg=SREG_CS;
         dst.sreg=SREG_CS;
         len += modrm_r_rm(eip + 1, &dst, &src);
+        src.type=OPR_REG;
         dst.type=OPR_CREG;
         operand_read(&src);
         dst.val=src.val;//?
