@@ -5,8 +5,8 @@ make_instr_func(lidt)
 {
     OPERAND m;
     modrm_rm(eip+1,&m);
-    cpu.gdtr.limit=laddr_read(m.addr,2);
-    cpu.gdtr.base=laddr_read(m.addr+2,4);//bs;  
+    cpu.idtr.limit=laddr_read(m.addr,2);
+    cpu.itr.base=laddr_read(m.addr+2,4);//bs;  
 	/*m.data_size = data_size;
     m.sreg=SREG_ES;
     m.addr=eip+2;
@@ -26,6 +26,6 @@ make_instr_func(lidt)
     cpu.gdtr.base=paddr_read(m.val+16,4);//bs;   
     //assert(lmt==0xfffff);
 	print_asm_1("lgdt", "", 2+data_size/8, &m);*/
-    print_asm_1("lgdt", "", 2+data_size/8, &m);
+    print_asm_1("lidt", "", 2+data_size/8, &m);
 	return 6;
 }
