@@ -119,7 +119,7 @@ instr_func group_5_indirect_entry[8] =
 
 
 instr_func group_7_entry[8] =
-    {inv, inv, __ref_lgdt, __ref_lidt, inv, inv, inv, inv};
+    {inv, inv, lgdt, lidt, inv, inv, inv, inv};
 
 /* 0xd8 */
 instr_func group_x87_d8_entry[8] =
