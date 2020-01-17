@@ -15,7 +15,7 @@ static void instr_execute_1op()
     operand_write(&opr_dest);
 
     cpu.esp-=data_size/8;
-    vaddr_write(cpu.esp,SREG_SS,4,cpu.eflags.val);
+    vaddr_write(cpu.esp,SREG_SS,4,opr_src.val);
 }
 
 make_instr_impl_1op(push, r, v)
