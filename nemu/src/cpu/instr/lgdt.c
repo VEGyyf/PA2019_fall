@@ -28,7 +28,7 @@ make_instr_func(lgdt)
     cpu.gdtr.base=paddr_read(m.val+16,4);//bs;   
     //assert(lmt==0xfffff);
 	print_asm_1("lgdt", "", 2+data_size/8, &m);*/
-	return 2+data_size/8;
+	return 6;
 }
 
 
