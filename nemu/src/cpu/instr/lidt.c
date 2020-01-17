@@ -4,8 +4,7 @@
 make_instr_func(lidt)
 {
     OPERAND m;
-    int len=2;
-    len+=modrm_rm(eip+1,&m);
+    modrm_rm(eip+1,&m);
     cpu.gdtr.limit=laddr_read(m.addr,2);
     cpu.gdtr.base=laddr_read(m.addr+2,4);//bs;  
 	/*m.data_size = data_size;
