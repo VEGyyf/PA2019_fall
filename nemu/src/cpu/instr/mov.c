@@ -79,7 +79,22 @@ make_instr_func(mov_srm162r_l) {
 }
 
 make_instr_func(mov_c2r_l){
-        int len = 1;
+int len=1;
+	len += modrm_r_rm(eip + 1, &opr_src, &opr_dest);
+	opr_dest.data_size=32;
+	switch(opr_dest.addr){
+		case 0:
+			opr_src.val=cpu.cr0.val;
+			break;
+		case 3:
+			opr_src.val=cpu.cr3.val;
+			break;
+	}
+	opr_dest.val=opr_src.val;
+	operand_write(&opr_dest);
+        print_asm_2("mov", "", len, &opr_src, &opr_dst);
+	return len;
+        /*int len = 1;
         OPERAND src, dst;
         src.data_size = data_size;
         dst.data_size = data_size;
@@ -94,7 +109,7 @@ make_instr_func(mov_c2r_l){
         load_sreg(idx);//void load_sreg(uint8_t sreg);
         operand_write(&dst);
         print_asm_2("mov", "", len, &src, &dst);
-        return len;
+        return len;*/
 }
 make_instr_func(mov_r2c_l){
         int len = 1;
