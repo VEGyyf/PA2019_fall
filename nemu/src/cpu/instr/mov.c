@@ -110,8 +110,8 @@ make_instr_func(mov_r2c_l){
         dst.val=src.val;//?
     SegDesc tmp;// load cs
     uint32_t temp2[2];
-    temp2[0]=laddr_read(cpu.gdtr.base+cpu.cs.index*8,4);
-    temp2[1]=laddr_read(cpu.gdtr.base+cpu.cs.index*8+4,4);
+    temp2[0]=laddr_read(src.addr,4);
+    temp2[1]=laddr_read(src.addr+4,4);
     memcpy(&tmp,temp2,8);
         uint8_t idx=(dst.addr&0xf);
         load_sreg(idx);//void load_sreg(uint8_t sreg);
