@@ -83,8 +83,8 @@ make_instr_func(mov_c2r_l){
         OPERAND src, dst;
         src.data_size = data_size;
         dst.data_size = data_size;
-        src.sreg=SREG_CS;
-        dst.sreg=SREG_CS;
+        src.sreg=SREG_SS;
+        dst.sreg=SREG_SS;
         len += modrm_r_rm(eip + 1, &dst, &src);
         src.type=OPR_CREG;
         dst.type=OPR_REG;
@@ -101,8 +101,8 @@ make_instr_func(mov_r2c_l){
         OPERAND src, dst;
         src.data_size = data_size;
         dst.data_size = data_size;
-        src.sreg=SREG_CS;
-        dst.sreg=SREG_CS;
+        src.sreg=SREG_SS;
+        dst.sreg=SREG_SS;
         len += modrm_r_rm(eip + 1, &dst, &src);
         src.type=OPR_REG;
         dst.type=OPR_CREG;
