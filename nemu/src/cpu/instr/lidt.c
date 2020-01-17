@@ -6,7 +6,7 @@ make_instr_func(lidt)
     OPERAND m;
     modrm_rm(eip+1,&m);
     cpu.idtr.limit=laddr_read(m.addr,2);
-    cpu.itr.base=laddr_read(m.addr+2,4);//bs;  
+    cpu.idtr.base=laddr_read(m.addr+2,4);//bs;  
 	/*m.data_size = data_size;
     m.sreg=SREG_ES;
     m.addr=eip+2;
