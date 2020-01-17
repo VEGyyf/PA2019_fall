@@ -65,7 +65,7 @@ make_instr_func(mov_srm82r_v) {
 }
 
 make_instr_func(mov_srm162r_l) {
-        int len = 2;
+        int len = 1;
         OPERAND r, rm;
         r.data_size = 32;
         rm.data_size = 16;
@@ -79,7 +79,7 @@ make_instr_func(mov_srm162r_l) {
 }
 
 make_instr_func(mov_c2r_l){
-        int len = 2;
+        int len = 1;
         OPERAND src, dst;
         src.data_size = data_size;
         dst.data_size = data_size;
