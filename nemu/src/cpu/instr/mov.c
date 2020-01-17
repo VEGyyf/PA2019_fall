@@ -94,7 +94,7 @@ uint8_t idx=(opr_dest.addr&0xf);
         load_sreg(idx);//void load_sreg(uint8_t sreg);
 	opr_dest.val=opr_src.val;
 	operand_write(&opr_dest);
-        print_asm_2("mov", "", len, &opr_src, &opr_dst);
+        print_asm_2("mov", "", len, &opr_src, &opr_opr_dest);
 	return len;
         /*int len = 1;
         OPERAND src, dst;
@@ -129,7 +129,7 @@ int len=1;
 	}
 uint8_t idx=(opr_dest.addr&0xf);
         load_sreg(idx);
- print_asm_2("mov", "", len, &src, &dst);
+ print_asm_2("mov", "", len, &opr_src, &opr_dest);
 	return len;
         /*int len = 1;
         OPERAND src, dst;
