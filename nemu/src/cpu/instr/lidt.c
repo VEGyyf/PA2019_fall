@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "cpu/instr.h"
+#include "memory/memory.h"
 
 make_instr_func(lidt)
 {
-     OPERAND m;
+    OPERAND m;
     modrm_rm(eip+1,&m);
     cpu.gdtr.limit=laddr_read(m.addr,2);
     cpu.gdtr.base=laddr_read(m.addr+2,4);//bs;  
