@@ -105,7 +105,7 @@ make_instr_func(mov_r2c_l){//CREG
         src.type=OPR_REG;
         dst.type=OPR_CREG;
         operand_read(&src);
-        dst.val=src.val;//?*/
+        dst.val=src.val;//?
         operand_write(&dst);
         print_asm_2("mov", "", len, &src, &dst);
         return len;
