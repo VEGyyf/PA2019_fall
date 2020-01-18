@@ -79,17 +79,7 @@ make_instr_func(mov_srm162r_l) {
 }
 
 make_instr_func(mov_c2r_l){//CREG
-int len=1;
-	len += modrm_r_rm(eip + 1, &opr_src, &opr_dest);
-	opr_dest.data_size=32;
-	
-uint8_t idx=(opr_dest.addr&0xf);
-        load_sreg(idx);//void load_sreg(uint8_t sreg);
-	opr_dest.val=opr_src.val;
-	operand_write(&opr_dest);
-        print_asm_2("mov", "", len, &opr_src, &opr_dest);
-	return len;
-        /*int len = 1;
+        int len = 1;
         OPERAND src, dst;
         src.data_size = data_size;
         dst.data_size = data_size;
@@ -99,25 +89,13 @@ uint8_t idx=(opr_dest.addr&0xf);
         src.type=OPR_CREG;
         dst.type=OPR_REG;
         operand_read(&src);
-        dst.val=src.val;//?
-        uint8_t idx=(dst.addr&0xf);
-        load_sreg(idx);//void load_sreg(uint8_t sreg);
+        dst.val=src.val;
         operand_write(&dst);
         print_asm_2("mov", "", len, &src, &dst);
-        return len;*/
+        return len;
 }
 make_instr_func(mov_r2c_l){//CREG
-int len=1;
-	opr_src.data_size=32;
-	len += modrm_r_rm(eip + 1, &opr_dest, &opr_src);
-	operand_read(&opr_src);
-	opr_dest.val=opr_src.val;
-	
-uint8_t idx=(opr_dest.addr&0xf);
-        load_sreg(idx);
- print_asm_2("mov", "", len, &opr_src, &opr_dest);
-	return len;
-        /*int len = 1;
+        int len = 1;
         OPERAND src, dst;
         src.data_size = data_size;
         dst.data_size = data_size;
@@ -128,16 +106,9 @@ uint8_t idx=(opr_dest.addr&0xf);
         dst.type=OPR_CREG;
         operand_read(&src);
         dst.val=src.val;//?*/
-    /*SegDesc tmp;// load 
-    uint32_t temp2[2];
-    temp2[0]=laddr_read(src.addr,4);
-    temp2[1]=laddr_read(src.addr+4,4);
-    memcpy(&tmp,temp2,8);*/
-        /*uint8_t idx=(dst.addr&0xf);
-        load_sreg(idx);//void load_sreg(uint8_t sreg);
         operand_write(&dst);
         print_asm_2("mov", "", len, &src, &dst);
-        return len;*/
+        return len;
 }
 make_instr_func(mov_rm2s_w){//SREG
         int len = 1;
