@@ -102,7 +102,7 @@ typedef struct
 		uint32_t val;
 	} eflags;
 
-    //intr
+    //INTERRUPT PIN
     uint8_t intr;
 #ifdef IA32_SEG
 	GDTR gdtr; // GDTR, todo: define type GDTR
