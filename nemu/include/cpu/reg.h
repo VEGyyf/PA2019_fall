@@ -102,6 +102,8 @@ typedef struct
 		uint32_t val;
 	} eflags;
 
+    //intr
+    uint8_t intr;
 #ifdef IA32_SEG
 	GDTR gdtr; // GDTR, todo: define type GDTR
 	// segment registers, todo: define type SegReg
