@@ -23,8 +23,8 @@ void load_sreg(uint8_t sreg)
     //void* start=(void*)addr;
     SegDesc tmp;// load cs
     uint32_t temp[2];
-    temp[0]=laddr_read(cpu.gdtr.base+cpu.cs.index*8,4);
-    temp[1]=laddr_read(cpu.gdtr.base+cpu.cs.index*8+4,4);
+    temp[0]=laddr_read(cpu.gdtr.base+cpu.segReg[sreg].index*8,4);
+    temp[1]=laddr_read(cpu.gdtr.base+cpu.segReg[sreg].index*8+4,4);
     memcpy(&tmp,temp,8);
     uint32_t base_31_24 =temp.base_31_24;
     uint32_t base_23_16 =temp.base_23_16 ;
