@@ -122,6 +122,10 @@ instr_func group_7_entry[8] =
     {inv, inv, __ref_lgdt, __ref_lidt, inv, inv, inv, inv};
 
 /* 0xd8 */
+instr_func group_7_entry[8] =
+    {inv, inv, lgdt, lidt, inv, inv, inv, inv};
+
+/* 0xd8 */
 instr_func group_x87_d8_entry[8] =
     {x87_fadds, x87_fmuls, inv, inv, x87_fsubs, inv, x87_fdivs, inv};
 
