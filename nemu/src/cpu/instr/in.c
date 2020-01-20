@@ -15,6 +15,7 @@ make_instr_func(in_b)
         uint16_t port=src.val;
         dst.val=pio_read(port, 1);
         operand_write(&dst);
+        print_asm_2("in", "", len, &src, &dst);
       return 3;
 }
 
