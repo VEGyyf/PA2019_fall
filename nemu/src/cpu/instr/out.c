@@ -13,9 +13,9 @@ make_instr_func(out_b)
         dst.type=OPR_REG;
         operand_read(&src);
         operand_read(&dst);
-        uint8_t data=src.val;
+        uint32_t data=src.val;
         uint16_t port=dst.val;
-        out_byte(port, data);
+        pio_write(port, size_t len, data)
         return 3;
 }
 

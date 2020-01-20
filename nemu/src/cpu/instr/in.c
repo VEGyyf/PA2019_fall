@@ -13,7 +13,7 @@ make_instr_func(in_b)
         dst.type=OPR_REG;
         operand_read(&src);
         uint16_t port=src.val;
-        dst.val=pio_read(port, 8);
+        dst.val=pio_read(port, 1);
         operand_write(&dst);
       return 3;
 }
@@ -30,7 +30,7 @@ make_instr_func(in_v)
         uint16_t port=src.val;
         //if(data_size==16)dst.val=in_word(port);
        // else if(data_size==32)dst.val=in_long(port);
-        dst.val=pio_read(port, data_size);
+        dst.val=pio_read(port, data_size/8);
         operand_write(&dst);
       return 3;
 }
