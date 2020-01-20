@@ -63,13 +63,13 @@ void laddr_write(laddr_t laddr, size_t len, uint32_t data)
 {
     assert(len == 1 || len == 2 || len == 4);
     if(cpu.cr0.pg==1&&cpu.cr0.pe==1 ){//CR0 什么状态
-        if (laddr%SIZE+len>SIZE) {//data cross the page boundary
+        //if (laddr%SIZE+len>SIZE) {//data cross the page boundary
                 /* this is a special case, you can handle it later. */
                            ;//assert(0);
-        } else {
+        //} else {
         paddr_t paddr = page_translate(laddr);
         paddr_write(paddr,len,data);
-        }
+        //}
     }else {
          paddr_write(laddr,len,data);
     }
