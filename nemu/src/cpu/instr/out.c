@@ -7,6 +7,8 @@ make_instr_func(out_b)
         OPERAND src, dst;
         src.data_size = data_size;
         dst.data_size = data_size;
+        src.addr=eip+1;
+        dst.addr=eip+2;
         src.sreg=SREG_SS;
         dst.sreg=SREG_SS;
         src.type=OPR_REG;
@@ -26,6 +28,8 @@ make_instr_func(out_v)
         OPERAND src, dst;
         src.data_size = data_size;
         dst.data_size = data_size;
+        src.addr=eip+1;
+        dst.addr=eip+2;
         src.sreg=SREG_SS;
         dst.sreg=SREG_SS;
         src.type=OPR_REG;
