@@ -3,12 +3,11 @@
 #include "device/port_io.h"
 
 make_instr_func(in_b)
-{	
+{	    int len=1;
         OPERAND src, dst;
         src.data_size = data_size;
         dst.data_size = data_size;
-        src.addr=opcode & 0x7;
-        dst.addr=opcode & 0x7;;
+        len += modrm_r_rm(eip + 1, &dst, &src);
         src.sreg=SREG_SS;
         dst.sreg=SREG_SS;
         src.type=OPR_REG;
@@ -17,7 +16,7 @@ make_instr_func(in_b)
         uint16_t port=src.val;
         dst.val=pio_read(port, 1);
         operand_write(&dst);
-        print_asm_2("in", "_b", 3, &src, &dst);
+        print_asm_2("in", "_b", len, &src, &dst);
       return 3;
 }
 
