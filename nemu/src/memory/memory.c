@@ -13,8 +13,8 @@ uint8_t hw_mem[MEM_SIZE_B];
 uint32_t hw_mem_read(paddr_t paddr, size_t len)
 {
     int map_no=ismm_io(paddr);
+    uint32_t ret = 0;
     if(map_no==-1){
-	uint32_t ret = 0;
 	memcpy(&ret, hw_mem + paddr, len);
     }
     else {
@@ -25,7 +25,8 @@ uint32_t hw_mem_read(paddr_t paddr, size_t len)
 
 void hw_mem_write(paddr_t paddr, size_t len, uint32_t data)
 {
-    if(ismm_io(paddr)==-1){
+    int map_no=ismm_io(paddr);
+    if(map_no==-1){
 	memcpy(hw_mem + paddr, &data, len);
     }
      else {
