@@ -12,8 +12,8 @@ make_instr_func(out_b)
         src.type=OPR_REG;
         dst.type=OPR_REG;
         operand_read(&src);
-        uint16_t port=src.val;
-        dst.val=in_byte(port);
+        uint16_t port=dst.val;
+        out_byte(uint16_t port, uint8_t data)
         operand_write(&dst);
       return 3;
 }
