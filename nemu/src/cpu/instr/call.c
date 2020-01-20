@@ -3,7 +3,30 @@
 
 make_instr_func(call_near)
 {
-    cpu.esp-=data_size/8;
+    OPERAND rel;
+	//printf("At %x ,",cpu.eip);
+	cpu.esp-=4;
+	//printf("call begin\n");
+	vaddr_write(cpu.esp,SREG_SS,4,eip+data_size/8+1);
+	//printf("eip b4 call is %x\n",cpu.eip);
+	//uint32_t ret=vaddr_read(cpu.esp,SREG_SS,4);
+	//printf("addr is %x\n",ret);
+    rel.type = OPR_IMM;
+	rel.sreg = SREG_CS;
+    rel.data_size = data_size;
+    rel.addr = eip + 1;
+	operand_read(&rel);
+	/*if(data_size==16){
+		eip+=vaddr_read(eip+1, SREG_CS, 2)+3;
+	}
+	else{// data_size==32
+		eip+=vaddr_read(eip+1,SREG_CS,4)+5;
+	}*/
+	print_asm_1("call", "", 1, &rel);
+	cpu.eip+=rel.val+data_size/8+1;
+	//printf("calling to %x,esp is %x\n",cpu.eip,cpu.esp);
+	return 0;
+/*cpu.esp-=data_size/8;
     vaddr_write(cpu.esp,SREG_SS,data_size/8,cpu.eip);//push eip
 
 
@@ -20,12 +43,28 @@ make_instr_func(call_near)
 
         cpu.eip += offset;
 
-        return 1 + data_size / 8;//=jmp,跳转到指定地址
+        return 1 + data_size / 8;//=jmp,跳转到指定地址*/
 }
 
 make_instr_func(call_near_indirect)
 {
-    cpu.esp-=data_size/8;
+	int len=1;
+	OPERAND rel;
+	cpu.esp-=4;
+	len+=modrm_rm(eip + 1, &rel);
+    rel.data_size = data_size;
+	operand_read(&rel);
+	/*if(data_size==16){
+		eip+=vaddr_read(eip+1, SREG_CS, 2)+3;
+	}
+	else{// data_size==32
+		eip+=vaddr_read(eip+1,SREG_CS,4)+5;
+	}*/
+	print_asm_1("call", "", 1, &rel);
+	vaddr_write(cpu.esp,SREG_SS,4,eip+len);
+	cpu.eip=rel.val;
+	return 0;   
+/*cpu.esp-=data_size/8;
     vaddr_write(cpu.esp,SREG_SS,data_size/8,cpu.eip);//Push(EIP);
 
         OPERAND obj;
@@ -41,7 +80,7 @@ make_instr_func(call_near_indirect)
 
        
 
-        return 0;//=jmp,跳转到指定地址
+        return 0;//=jmp,跳转到指定地址*/
 }
 
 
