@@ -15,6 +15,8 @@ void serial_printc(char ch)
 {
 	while (!serial_idle())
 		; // wait untile serial is idle
-	// print 'ch' via out instruction here
-	HIT_BAD_TRAP;
+    uint16_t port=0x3F8;
+    int8_t data=ch;
+	out_byte(port, data);// print 'ch' via out instruction here
+	//HIT_BAD_TRAP;
 }
