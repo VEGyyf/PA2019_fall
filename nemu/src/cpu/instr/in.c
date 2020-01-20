@@ -5,7 +5,7 @@
 make_instr_func(in_b)
 {	
         OPERAND src, dst;
-        src.data_size = data_size;
+        src.data_size = 16;
         dst.data_size = 8;
         src.sreg=SREG_SS;
         dst.sreg=SREG_SS;
@@ -19,6 +19,17 @@ make_instr_func(in_b)
 }
 
 make_instr_func(in_v)
-{	
-    in_byte(uint16_t port)
+{	 OPERAND src, dst;
+        src.data_size = 16;
+        dst.data_size = data_size;
+        src.sreg=SREG_SS;
+        dst.sreg=SREG_SS;
+        src.type=OPR_REG;
+        dst.type=OPR_REG;
+        operand_read(&src);
+        uint16_t port=src.val;
+        if(data_size==16)dst.val=in_word(port);
+        else if(data_size==32)dst.val=in_long(port);
+        operand_write(&dst);
+      return 3;
 }
