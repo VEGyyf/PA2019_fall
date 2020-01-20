@@ -4,7 +4,7 @@
 make_instr_func(call_near)
 {
     cpu.esp-=data_size/8;
-    vaddr_write(cpu.esp,SREG_SS,4,cpu.eip);//push ret_addr
+    vaddr_write(cpu.esp,SREG_SS,4,cpu.eip);//push eip
 
 
         OPERAND rel;
@@ -29,7 +29,7 @@ make_instr_func(call_near_indirect)
     vaddr_write(cpu.esp,SREG_SS,4,cpu.eip);//Push(EIP);
 
         OPERAND obj;
-        obj.sreg = SREG_CS;
+        obj.sreg = SREG_SS;
         obj.data_size = data_size;
         obj.addr=eip+1;
         obj.type=OPR_MEM;
