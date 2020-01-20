@@ -12,25 +12,25 @@ uint8_t hw_mem[MEM_SIZE_B];
 
 uint32_t hw_mem_read(paddr_t paddr, size_t len)
 {
-    int map_no=ismm_io(paddr);
+    int map_no=is_mmio(paddr);
     uint32_t ret = 0;
     if(map_no==-1){
 	memcpy(&ret, hw_mem + paddr, len);
     }
     else {
-    ret= mmio_read(hw_mem + paddr, len, map_no)
+    ret= mmio_read(hw_mem + paddr, len, map_no);
     }
 	return ret;
 }
 
 void hw_mem_write(paddr_t paddr, size_t len, uint32_t data)
 {
-    int map_no=ismm_io(paddr);
+    int map_no=is_mmio(paddr);
     if(map_no==-1){
 	memcpy(hw_mem + paddr, &data, len);
     }
      else {
-    
+   mmio_write(hw_mem + paddr, len, &data, map_no);
     }
 }
 
