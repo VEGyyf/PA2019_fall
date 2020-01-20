@@ -3,9 +3,8 @@
 
 make_instr_func(call_near)
 {
-    operand_read(&opr_src);
     cpu.esp-=data_size/8;
-    vaddr_write(cpu.esp,SREG_SS,4,opr_src.val);//push ret_addr
+    vaddr_write(cpu.esp,SREG_SS,4,cpu.eip);//push ret_addr
 
 
         OPERAND rel;
@@ -26,9 +25,8 @@ make_instr_func(call_near)
 
 make_instr_func(call_near_indirect)
 {
-         operand_read(&opr_src);
     cpu.esp-=data_size/8;
-    vaddr_write(cpu.esp,SREG_SS,4,opr_src.val);//push ret_addr
+    vaddr_write(cpu.esp,SREG_SS,4,cpu.eip);//Push(EIP);
 
         OPERAND obj;
         obj.sreg = SREG_CS;
