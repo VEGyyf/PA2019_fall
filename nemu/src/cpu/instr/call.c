@@ -1,12 +1,12 @@
 #include "cpu/instr.h"
+#include "memory/memory.h"
 
 make_instr_func(call_near)
 {
-        cpu.esp-=data_size/8;
-        opr_dest.type=OPR_MEM;
-        opr_dest.addr=cpu.esp;
-        opr_dest.val=eip+5;
-        operand_write(&opr_dest);//push ret_addr
+    operand_read(&opr_src);
+    cpu.esp-=data_size/8;
+    vaddr_write(cpu.esp,SREG_SS,4,opr_src.val);//push ret_addr
+
 
         OPERAND rel;
         rel.type = OPR_IMM;
