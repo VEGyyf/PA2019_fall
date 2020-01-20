@@ -28,19 +28,10 @@ make_instr_func(call_near_indirect)
 {
      
 
-        OPERAND obj;
-        obj.sreg = SREG_CS;
-        obj.data_size = data_size;
-        int len=1;
-        len+=modrm_rm(eip+1,&obj);
+            operand_read(&opr_src);
+    cpu.esp-=data_size/8;
+    vaddr_write(cpu.esp,SREG_SS,4,opr_src.val);//push ret_addr
 
-        operand_read(&obj);
-   
-        cpu.esp-=data_size/8;
-        opr_dest.type=OPR_MEM;
-        opr_dest.addr=cpu.esp;
-        opr_dest.val=eip+len+1;
-        operand_write(&opr_dest);//push ret_addr
         //int offset = sign_ext(rel.val, data_size);
         print_asm_1("call", "", len, &obj);
 
