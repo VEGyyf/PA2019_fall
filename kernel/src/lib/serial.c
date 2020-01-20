@@ -13,8 +13,7 @@ serial_idle(void)
 
 void serial_printc(char ch)
 {
-	while (!serial_idle())
-		; // wait until serial is idle
+	while (!serial_idle()); // wait until serial is idle
     uint16_t port=0x3F8;
     uint8_t data=(int)ch;
 	out_byte(port, data);// print 'ch' via out instruction here
