@@ -145,7 +145,6 @@ instr_func group_x87_dd_entry[8] =
 /* 0xde */
 instr_func group_x87_de_entry[8] =
     {x87_faddx, inv, inv, inv, inv, inv, inv, inv};
-
 /* 0xdf */
 instr_func group_x87_df_entry[8] =
     {inv, inv, inv, inv, x87_fnstsw, x87_fucomip, inv, inv};
