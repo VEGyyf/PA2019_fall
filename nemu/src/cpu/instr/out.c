@@ -4,11 +4,11 @@
 
 make_instr_func(out_b)
 {	
+        int len=1;
         OPERAND src, dst;
         src.data_size = data_size;
         dst.data_size = data_size;
-        src.addr=eip+1;
-        dst.addr=eip+2;
+        len += modrm_r_rm(eip + 1, &dst, &src);
         src.sreg=SREG_SS;
         dst.sreg=SREG_SS;
         src.type=OPR_REG;
@@ -18,18 +18,17 @@ make_instr_func(out_b)
         uint32_t data=src.val;
         uint16_t port=dst.val;
         pio_write(port, 1, data);
-        print_asm_2("out", "_b", 3, &src, &dst);
-        return 3;
+        print_asm_2("out", "_b", len, &src, &dst);
+        return len;
 }
 
 make_instr_func(out_v)
 {	
-       
+        int len=1;
         OPERAND src, dst;
         src.data_size = data_size;
         dst.data_size = data_size;
-        src.addr=eip+1;
-        dst.addr=eip+2;
+        len += modrm_r_rm(eip + 1, &dst, &src);
         src.sreg=SREG_SS;
         dst.sreg=SREG_SS;
         src.type=OPR_REG;
@@ -47,6 +46,6 @@ make_instr_func(out_v)
         out_byte(port, data);
         }*/
         pio_write(port, data_size/8, data);
-        print_asm_2("out", "_v", 3, &src, &dst);
-        return 3;
+        print_asm_2("out", "_v", len, &src, &dst);
+        return len;
 }
