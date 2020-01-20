@@ -16,6 +16,7 @@ make_instr_func(out_b)
         uint32_t data=src.val;
         uint16_t port=dst.val;
         pio_write(port, 1, data);
+        print_asm_2("out", "_b", 3, &src, &dst);
         return 3;
 }
 
@@ -42,5 +43,6 @@ make_instr_func(out_v)
         out_byte(port, data);
         }*/
         pio_write(port, data_size/8, data);
+        print_asm_2("out", "_v", 3, &src, &dst);
         return 3;
 }

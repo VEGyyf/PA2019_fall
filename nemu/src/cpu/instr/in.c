@@ -15,7 +15,7 @@ make_instr_func(in_b)
         uint16_t port=src.val;
         dst.val=pio_read(port, 1);
         operand_write(&dst);
-        print_asm_2("in", "", len, &src, &dst);
+        print_asm_2("in", "_b", 3, &src, &dst);
       return 3;
 }
 
@@ -33,5 +33,6 @@ make_instr_func(in_v)
        // else if(data_size==32)dst.val=in_long(port);
         dst.val=pio_read(port, data_size/8);
         operand_write(&dst);
+        print_asm_2("in", "_v", 3, &src, &dst);
       return 3;
 }
