@@ -32,6 +32,7 @@ make_instr_func(call_near_indirect)
         obj.sreg = SREG_CS;
         obj.data_size = data_size;
         obj.addr=eip+1;
+        obj.type=OPR_MEM;
         operand_read(&obj);
         cpu.eip =obj.val;
       
