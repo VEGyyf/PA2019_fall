@@ -6,7 +6,7 @@ make_instr_func(in_b)
 {	
         OPERAND src, dst;
         src.data_size = data_size;
-        dst.data_size = 8;
+        dst.data_size = data_size;
         src.sreg=SREG_SS;
         dst.sreg=SREG_SS;
         src.type=OPR_REG;
