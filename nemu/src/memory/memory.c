@@ -18,7 +18,7 @@ uint32_t hw_mem_read(paddr_t paddr, size_t len)
 	memcpy(&ret, hw_mem + paddr, len);
     }
     else {
-    ret= mmio_read(hw_mem + paddr, len, map_no);
+    ret= mmio_read(paddr, len, map_no);
     }
 	return ret;
 }
@@ -30,7 +30,7 @@ void hw_mem_write(paddr_t paddr, size_t len, uint32_t data)
 	memcpy(hw_mem + paddr, &data, len);
     }
      else {
-   mmio_write(hw_mem + paddr, len, &data, map_no);
+   mmio_write(paddr, len, data, map_no);
     }
 }
 
