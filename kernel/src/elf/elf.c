@@ -51,7 +51,7 @@ uint32_t loader()
 /* TODO: copy the segment from the ELF file to its proper memory area */
            // memcpy(dest, src, ph->p_filesz);
 /* TODO: zero the memory area [vaddr + file_sz, vaddr + mem_sz) */
-            void* dest_set=(void*)(addr+ph->p_filesz);//(ph->p_vaddr+ph->p_filesz);
+            void* dest_set=(void*)(paddr+ph->p_filesz);//(ph->p_vaddr+ph->p_filesz);
             memset(dest_set,0,ph->p_memsz-ph->p_filesz);
 #ifdef IA32_PAGE
 			/* Record the program break for future use */
